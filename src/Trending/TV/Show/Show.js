@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import About from './About/About';
 
 
 const Show = ( { id, name, airDate, posterPath } ) => {
@@ -34,6 +35,10 @@ const Show = ( { id, name, airDate, posterPath } ) => {
                     <p>Air Date: { airDate }</p>
                 </div>
             </div>
+
+            {
+                Object.keys( showMetaData ).length === 0 ? null : <About genres={ showMetaData.genres } overview={ showMetaData.overview } />
+            }
 
         </div>
     )
