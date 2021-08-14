@@ -36,8 +36,11 @@ const Movie = ( { title, releaseDate, posterPath, id } ) => {
                         title={ title }
                         description={ movieMetaData.overview }
                         runtime={ movieMetaData.runtime }
-                        genres={ movieMetaData.genres } 
-                        status={movieMetaData.status}/>
+                        genres={ movieMetaData.genres }
+                        status={ movieMetaData.status }
+                        language={ movieMetaData.original_language } 
+                        productionCountries = {movieMetaData.production_countries}
+                        />
             }
         </div>
     )
