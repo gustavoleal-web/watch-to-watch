@@ -36,7 +36,8 @@ const Movie = ( { title, releaseDate, posterPath, id } ) => {
                         title={ title }
                         description={ movieMetaData.overview }
                         runtime={ movieMetaData.runtime }
-                        genres={ movieMetaData.genres } />
+                        genres={ movieMetaData.genres } 
+                        status={movieMetaData.status}/>
             }
         </div>
     )
