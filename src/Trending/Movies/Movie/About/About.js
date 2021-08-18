@@ -1,13 +1,16 @@
 import React from 'react'
+import Card from 'react-bootstrap/Card';
 
 const About = ( { title, description, runtime, genres, status, language, productionCountries } ) => {
     return (
         <div>
-            <div style={ { display: 'grid', gridTemplateColumns: '1fr 1fr 3fr 2fr' } }>
+            <Card style={ { display: 'grid', gridTemplateColumns: '1fr 1fr 3fr 2fr', } }>
+
                 <p>Type</p>
                 <p>Lang</p>
                 <p>Produced In</p>
                 <p>Runtime</p>
+
 
                 <p style={ { margin: '0' } }>Movie</p>
                 <p style={ { margin: '0' } }> { language.toUpperCase() }</p>
@@ -16,24 +19,22 @@ const About = ( { title, description, runtime, genres, status, language, product
                 }
                 <p style={ { margin: '0' } }> { runtime } min.</p>
 
-            </div>
-
+            </Card>
 
             <p>{ description }</p>
 
-            <div style={ { display: 'grid', gridTemplateColumns: '1fr 1fr' } }>
-                <h4 style={ { margin: '0' } }>Status</h4>
-                <h4 style={ { margin: '0' } }>Genres</h4>
-                <p>{ status }</p>
+            <Card style={ { display: 'grid', gridTemplateColumns: '1fr 1fr' } }>
+                <Card.Title style={ { marginLeft: '10px' } }>Status</Card.Title>
+                <Card.Title>Genres</Card.Title>
+
+                <p style={ { marginLeft: '10px' } }>{ status }</p>
                 <ul style={ { listStyle: 'none', display: 'flex', flexWrap: 'wrap', paddingLeft: '0' } }>
 
                     {
                         genres.map( genre => <li key={ genre.id } style={ { marginRight: '10px' } }>{ genre.name }.</li> )
                     }
                 </ul>
-            </div>
-
-
+            </Card>
         </div>
     )
 }
