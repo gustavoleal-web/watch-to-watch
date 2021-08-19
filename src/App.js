@@ -1,12 +1,34 @@
 import React from 'react'
-import './App.css';
-import Trending from './Trending/Trending';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+} from "react-router-dom";
+
+import NavigationHeader from './Header/NavigationHeader';
+import Movies from './Trending/Movies/Movies';
+import Shows from './Trending/TV/Shows';
+
 
 const App = () => {
   return (
-    <div className="App">
-      <Trending />
-    </div>
+    <Router>
+      <div>
+        <NavigationHeader />
+
+        <main>
+          <Switch>
+            <Route path='/shows'>
+              <Shows />
+            </Route>
+            <Route path='/'>
+              <Movies />
+            </Route>
+          </Switch>
+        </main>
+
+      </div>
+    </Router>
   );
 }
 
