@@ -1,16 +1,17 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
+import styles from './CSS/header.module.css'
 
 const NavigationHeader = () => {
     return (
         <header>
             <nav>
-                <ul style={ { display: 'flex', justifyContent: 'space-evenly', listStyle: 'none', padding: '0' } }>
+                <ul className={ styles.header } >
                     <li>
-                        <Link to='/' style={ { textDecoration: 'none' } }>Movies</Link>
+                        <NavLink to='/' className={ styles.link }>Movies</NavLink>
                     </li>
                     <li>
-                        <Link to='/shows' style={ { textDecoration: 'none' } }>Shows</Link>
+                        <NavLink to='/shows' className={ styles.link }>Shows</NavLink>
                     </li>
                 </ul>
             </nav>
