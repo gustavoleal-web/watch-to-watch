@@ -1,0 +1,14 @@
+.movieContainer {
+    border      : 1px solid red;
+    margin-top  : 20px;
+    margin-left : 10px;
+    margin-right: 10px;
+}
+
+.movieDisplay {
+    display: flex;
+}
+
+.movieMain {
+    margin: auto;
+}

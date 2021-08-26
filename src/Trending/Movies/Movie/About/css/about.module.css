@@ -1,0 +1,57 @@
+:root {
+    --card-margin-top: 20px
+}
+
+.mainContainer {
+    padding-left : 10px;
+    padding-right: 10px;
+}
+
+.imgContainer {
+    display: flex;
+}
+
+.card {
+    display              : grid;
+    grid-template-columns: 1fr 1fr 3fr 2fr;
+    border               : 1px solid rgba(0, 0, 0, .125);
+    border-radius        : .25rem;
+    margin-top           : var(--card-margin-top);
+}
+
+.title {
+    margin: 0;
+}
+
+.cardOverview {
+    border       : 1px solid rgba(0, 0, 0, .125);
+    border-radius: .25rem;
+    margin-top   : var(--card-margin-top);
+}
+
+.statsGenres {
+    display              : grid;
+    grid-template-columns: 1fr 1fr;
+    border               : 1px solid rgba(0, 0, 0, .125);
+    border-radius        : .25rem;
+    margin-top           : var(--card-margin-top);
+}
+
+.statsGenresMargin {
+    margin-left: 10px;
+}
+
+/* .card3p {
+    margin-left: 20px;
+} */
+
+.statsGenresUl {
+    list-style  : none;
+    display     : flex;
+    flex-wrap   : wrap;
+    padding-left: 0;
+}
+
+.genreName {
+    margin-right: 10px;
+}
