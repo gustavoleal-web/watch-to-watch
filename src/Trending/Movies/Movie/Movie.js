@@ -1,12 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
-import About from './About/About';
 
 const Movie = ( { title, releaseDate, posterPath, movieId } ) => {
-    const [ movieMetaData, setMovieMetaData ] = useState( {} );
-
-
+   
     return (
 
         <div style={ { border: '1px solid black', marginBottom: '20px', marginLeft: '10px', marginRight: '10px' } }>
