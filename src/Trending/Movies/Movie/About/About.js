@@ -1,7 +1,10 @@
 import React, { useEffect, useState, Fragment } from 'react'
-import axios from 'axios';
 import { useParams } from 'react-router';
+import Title from './Titles/Titles';
+import styles from './css/about.module.css';
+import axios from 'axios';
 import Card from 'react-bootstrap/Card';
+
 
 const About = () => {
     const params = useParams();
@@ -25,53 +28,72 @@ const About = () => {
     }, [ params.movieId ] );
 
     return (
-        <Fragment>
+        <div className={ styles.mainContainer }>
             {
                 Object.keys( state ).length === 0 ? null
-                    : <div>
-                        <img src={ `https://image.tmdb.org/t/p/w300/${ state.poster_path }` } alt='poster' style={ { height: '200px' } } />
-                        <h3>{ state.original_title }</h3>
-                        <Card style={ { display: 'grid', gridTemplateColumns: '1fr 1fr 3fr 2fr', } }>
+                    : <Fragment>
+                        <div className={ styles.imgContainer }>
+                            <img
+                                src={ `https://image.tmdb.org/t/p/w300/${ state.poster_path }` }
+                                alt='poster'
+                                style={ { height: '200px' } }
+                            />
+                            <h3>{ state.original_title }</h3>
+                        </div>
 
-                            <p>Type</p>
-                            <p>Lang</p>
-                            <p>Produced In</p>
-                            <p>Runtime</p>
 
+                        <Card bsPrefix={ styles.card }>
 
-                            <p style={ { margin: '0' } }>Movie</p>
+                            <Title name='Type' />
+                            <Title name='Lang' />
+                            <Title name='Produced In' />
+                            <Title name='Runtime' />
+
+                            <p className={ styles.title }>Movie</p>
+                            <p className={ styles.title }> { state.original_language.toUpperCase() }</p>
+
                             {
-                                <p style={ { margin: '0' } }> { state.original_language.toUpperCase() }</p>
+                                state.production_countries.map( company =>
+                                    <p key={ company.name }
+                                        className={ styles.title }>
+                                        { company.iso_3166_1 }
+                                    </p> )
                             }
-                            {
-                                state.production_countries.map( company => <p key={ company.name } style={ { margin: '0' } }>{ company.iso_3166_1 }</p> )
-                            }
-                            <p style={ { margin: '0' } }> { state.runtime } min.</p>
+                            <p className={ styles.title }> { state.runtime } min.</p>
 
                         </Card>
 
-                        <p>{ state.overview }</p>
+                        <Card bsPrefix={ styles.cardOverview }>
+                            <Card.Body>
+                                { state.overview }
+                            </Card.Body>
+                        </Card>
 
-                        <Card style={ { display: 'grid', gridTemplateColumns: '1fr 1fr' } }>
-                            <Card.Title style={ { marginLeft: '10px' } }>Status</Card.Title>
+
+                        <Card bsPrefix={ styles.statsGenres }>
+                            <Card.Title className={ styles.statsGenresMargin }>Status</Card.Title>
                             <Card.Title>Genres</Card.Title>
 
-                            <p style={ { marginLeft: '10px' } }>{ state.status }</p>
-                            <ul style={ { listStyle: 'none', display: 'flex', flexWrap: 'wrap', paddingLeft: '0' } }>
+                            <p className={ styles.statsGenresMargin } >{ state.status }</p>
+                            <ul className={ styles.statsGenresUl }>
 
                                 {
-                                    state.genres.map( genre => <li key={ genre.id } style={ { marginRight: '10px' } }>{ genre.name }.</li> )
+                                    state.genres.map( genre =>
+                                        <li key={ genre.id }
+                                            className={ styles.genre }>
+                                            { genre.name }.
+                                        </li>
+                                    )
                                 }
                             </ul>
                         </Card>
 
                         <Card>
                             <img src={ `https://image.tmdb.org/t/p/w300/${ state.backdrop_path }` } alt='poster' />
-
                         </Card>
-                    </div>
+                    </Fragment>
             }
-        </Fragment>
+        </div>
     )
 }
 
