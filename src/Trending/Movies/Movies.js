@@ -10,6 +10,7 @@ import FormControl from 'react-bootstrap/FormControl';
 
 const Movies = () => {
     const [ movies, setMovies ] = useState( [] );
+    const [ searchName, setsearchName ] = useState( '' )
 
     useEffect( () => {
         const fetchShows = async () => {
@@ -18,7 +19,6 @@ const Movies = () => {
             try {
                 let response = await axios.get( url );
                 setMovies( response.data.results.results )
-                console.log()
             }
             catch {
                 console.log( 'error' )
@@ -27,8 +27,26 @@ const Movies = () => {
         fetchShows();
     }, [] );
 
+
+
     const onChangeHandler = ( e ) => {
-        console.log( e.target.value )
+        setsearchName( e.target.value );
+    }
+
+    const onClickHandler = async () => {
+        if ( searchName.length > 3 ) {
+            let url = `/search/movies/?movieName=${ searchName }`;
+
+            try {
+                let response = await axios.get( url );
+                setMovies( response.data.results.results )
+            }
+            catch ( e ) {
+                console.log( e )
+            }
+
+        }
+
     }
 
     if ( movies.length === 0 ) {
@@ -40,14 +58,15 @@ const Movies = () => {
         return (
             <div>
 
-                <InputGroup  className={ styles.search }>
+                <InputGroup className={ styles.search }>
                     <FormControl
                         placeholder='Search movies'
                         aria-label='Search movies'
                         aria-describedby="basic-addon2"
+                        value={ searchName }
                         onChange={ onChangeHandler }
                     />
-                    <Button variant='outline-secondary' id='button-addon2'>
+                    <Button variant='outline-secondary' id='button-addon2' onClick={ onClickHandler }>
                         Button
                     </Button>
                 </InputGroup>
