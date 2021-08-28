@@ -12,3 +12,8 @@
 .movieMain {
     margin: auto;
 }
+
+.movieMain h4,
+p {
+    text-align: center;
+}
