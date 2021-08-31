@@ -10,6 +10,7 @@ import NavigationHeader from './Header/NavigationHeader';
 import Movies from './Trending/Movies/Movies';
 import Shows from './Trending/TV/Shows';
 import About from './Trending/Movies/Movie/About/About';
+import AboutTv from './Trending/TV/Show/About/About';
 
 const App = () => {
   return (
@@ -35,13 +36,14 @@ const App = () => {
             </Route>
 
 
+            <Route path='/shows/:showId'>
+              <AboutTv />
+            </Route>
 
 
             <Route path='/shows'>
               <Shows />
             </Route>
-
-
 
           </Switch>
         </main>
