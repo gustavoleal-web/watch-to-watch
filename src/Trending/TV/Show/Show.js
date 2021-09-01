@@ -1,12 +1,9 @@
-import React, { useState } from 'react';
-import axios from 'axios';
-import About from './About/About';
+import React from 'react';
+import { Link } from 'react-router-dom';
 import noImage from '../../../Images/No-Image-Placeholder.png';
 
 
-const Show = ( { id, name, airDate, posterPath, backdropPath } ) => {
-    const [ showMetaData, setShowMetaData ] = useState( {} );
-
+const Show = ( { showId, name, airDate, posterPath, backdropPath } ) => {
     let posterImg = null;
     if ( posterPath === null ) {
         console.log( 'undefined' )
@@ -23,27 +20,9 @@ const Show = ( { id, name, airDate, posterPath, backdropPath } ) => {
         posterImg = <img src={ `https://image.tmdb.org/t/p/w300/${ posterPath }` } alt='poster' style={ { height: '200px' } } />
     }
 
-    const onClickHandler = async () => {
-        let response = await axios.get( `trending/show/?TVid=${ id }` );
-
-        if ( response.status === 200 ) {
-            setShowMetaData( response.data.results );
-            //props to pass About component
-            //genres
-            //first_air_date
-            //last_air_date
-            //last_episode_to_air
-            //next_episode_to_air (if any)
-            //number_of_episodes
-            //number_of_seasons
-            //seasons
-            //overview
-        }
-
-    }
 
     return (
-        <div style={ { border: '1px solid black', marginBottom: '20px', marginLeft: '10px', marginRight: '10px' } } onClick={ onClickHandler }>
+        <div style={ { border: '1px solid black', marginBottom: '20px', marginLeft: '10px', marginRight: '10px' } }>
 
             <div style={ { display: 'flex' } }>
                 { posterImg }
@@ -53,8 +32,10 @@ const Show = ( { id, name, airDate, posterPath, backdropPath } ) => {
                 </div>
             </div>
 
+            <Link to={ `shows/${ showId }` }>Load more show info</Link>
+
             {
-                Object.keys( showMetaData ).length === 0 ? null : <About genres={ showMetaData.genres } overview={ showMetaData.overview } />
+                // Object.keys( showMetaData ).length === 0 ? null : <About genres={ showMetaData.genres } overview={ showMetaData.overview } />
             }
 
         </div>
