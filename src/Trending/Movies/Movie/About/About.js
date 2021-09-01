@@ -1,5 +1,5 @@
 import React, { useEffect, useState, Fragment } from 'react'
-import { useParams } from 'react-router';
+import { useParams } from 'react-router-dom';
 import Title from './Titles/Titles';
 import styles from './css/about.module.css';
 import axios from 'axios';
@@ -16,7 +16,6 @@ const About = () => {
             try {
                 let response = await axios.get( `/trending/movies/?movieId=${ params.movieId }` );
                 setState( response.data.results )
-                console.log( response.data.results );
             }
             catch ( e ) {
                 console.log( e )
