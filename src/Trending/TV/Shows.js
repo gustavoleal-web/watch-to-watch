@@ -69,7 +69,7 @@ const Shows = () => {
                 <h2>Trending TV Shows</h2>
                 {
                     tvShows.map( show =>
-                        <Show id={ show.id }
+                        <Show showId={ show.id }
                             name={ show.name }
                             airDate={ show.first_air_date }
                             posterPath={ show.poster_path }
