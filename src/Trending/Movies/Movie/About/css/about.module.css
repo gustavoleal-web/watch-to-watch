@@ -41,9 +41,6 @@
     margin-left: 10px;
 }
 
-/* .card3p {
-    margin-left: 20px;
-} */
 
 .statsGenresUl {
     list-style  : none;
@@ -52,6 +49,3 @@
     padding-left: 0;
 }
 
-.genreName {
-    margin-right: 10px;
-}
