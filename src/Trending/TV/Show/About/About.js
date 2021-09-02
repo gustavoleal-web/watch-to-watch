@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import Card from 'react-bootstrap/Card'
 import styles from './about.module.css';
+import OffCanvasExample from './OfCanvas';
 
 const About = () => {
     const [ state, setState ] = useState( {} )
@@ -96,7 +97,16 @@ const About = () => {
                             </ul>
                         </Card>
 
+
                         <Card>
+                            { state.seasons.map( season =>
+                                <Fragment key={ season.season_number }>
+                                    <img src={ `https://image.tmdb.org/t/p/w300${ season.poster_path }` } alt='poster' style={ { height: '200px', width: '135px' } } />
+                                    <p>{ season.name }</p>
+                                    <p>{ season.episode_count }</p>
+                                    <OffCanvasExample overview={ season.overview } />
+                                </Fragment>
+                            ) }
 
                         </Card>
 
