@@ -7,7 +7,7 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import Container from 'react-bootstrap/Container';
 import styles from './css/navBar.module.css';
 
-const NavBarMenu = ( { type, fetchNavSelection } ) => {
+const NavBarMenu = ( { type } ) => {
     const [ genres, setGenres ] = useState( [] );
 
     let navOptions = [];
@@ -37,30 +37,24 @@ const NavBarMenu = ( { type, fetchNavSelection } ) => {
     }, [ type ] );
 
 
-    const onClickHandler = async ( option ) => {
-        let optionNoSpaces = option.split( ' ' ).join( '' )
-        let response = await axios.get( `/${ type }/${ optionNoSpaces }` );
-        fetchNavSelection( option, response.data.results.results );
-
-    }
-
-
     return <Navbar collapseOnSelect expand='lg' bg='dark' variant='dark' fixed='top'>
         <Container>
             <Navbar.Brand href='#home'>What to watch</Navbar.Brand>
             <Navbar.Toggle aria-controls='responsive-navbar-nav' />
             <Navbar.Collapse id='responsive-navbar-nav'>
                 <Nav className='me-auto' navbarScroll>
-                    <NavLink
-                        to={ `/movies/upcoming` }
-                        className={ styles.navLink } >
-                        upcoming
-                    </NavLink>
 
                     {
-                        navOptions.map( option => <Nav.Link key={ option } onClick={ () => onClickHandler( option ) }>
-                            { option } </Nav.Link> )
+                        navOptions.map( option => {
+                            let optionNoSpaces = option.split( ' ' ).join( '' );
+
+                            return (
+                                <NavLink to={ `/movies/${ optionNoSpaces }` } key={ optionNoSpaces } className={ styles.navLink }>
+                                    { option }
+                                </NavLink> )
+                        } )
                     }
+
                     <NavDropdown title='Genres' id='collasible-nav-dropdown'>
                         {
                             genres.length === 0 ? null : genres.map( genre => <NavDropdown.Item key={ genre.name }>
