@@ -14,7 +14,7 @@ const About = () => {
         const fetchShows = async () => {
 
             try {
-                let response = await axios.get( `/trending/movies/?movieId=${ params.movieId }` );
+                let response = await axios.get( `/trending/movie/?movieId=${ params.movieId }` );
                 setState( response.data.results )
             }
             catch ( e ) {

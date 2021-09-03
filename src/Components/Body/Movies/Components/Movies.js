@@ -14,7 +14,7 @@ const Movies = () => {
 
     useEffect( () => {
         const fetchShows = async () => {
-            let url = `http://localhost:3001/trending`;
+            let url = `http://localhost:3001/trending/movies`;
 
             try {
                 let response = await axios.get( url );
