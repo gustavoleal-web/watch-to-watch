@@ -11,16 +11,15 @@ import OfCanvas from '../TV/OfCanvas'
 import Carousel from './Carousel';
 
 
-const About = ( { type } ) => {
+const About = () => {
     const params = useParams();
     const [ state, setState ] = useState( {} );
     const [ recommended, setRecommended ] = useState( [] );
 
     useEffect( () => {
         const fetchShows = async () => {
-
             try {
-                let response = await axios.get( `/${ type }/movie/?movieId=${ params.movieId }` );
+                let response = await axios.get( `/${ params.navOption }/movie/?movieId=${ params.movieId }` );
                 setState( response.data.results )
             }
             catch ( e ) {
@@ -29,7 +28,7 @@ const About = ( { type } ) => {
         }
 
         fetchShows();
-    }, [ params.movieId, type ] );
+    }, [ params.movieId, params.navOption ] );
 
     useEffect( () => {
         const fetchShows = async () => {
