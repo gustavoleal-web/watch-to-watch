@@ -36,6 +36,17 @@ const About = () => {
         fetchShows();
     }, [ params.showId ] );
 
+
+
+    let nextEpisodeDate = null;
+
+    if ( Object.keys( state ).length !== 0 ) {
+        if ( state.next_episode_to_air.air_date !== null ) {
+            nextEpisodeDate = state.next_episode_to_air.air_date.replaceAll( '-', '/' );
+        }
+
+    }
+
     return (
         <div className={ styles.mainContainer }>
             {
@@ -50,8 +61,9 @@ const About = () => {
 
                             <div style={ { margin: 'auto' } }>
                                 <h1 style={ { textAlign: 'center' } }>{ state.original_name }</h1>
+
                                 <p>Air Date: { state.first_air_date.replaceAll( '-', '/' ) }</p>
-                                <p>Next Ep: { state.next_episode_to_air.air_date.replaceAll( '-', '/' ) }</p>
+                                <p>Next Ep: { nextEpisodeDate }</p>
                             </div>
 
 
