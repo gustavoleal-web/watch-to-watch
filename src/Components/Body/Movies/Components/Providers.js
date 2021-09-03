@@ -52,9 +52,9 @@ const Providers = ( { movieId } ) => {
     return <Fragment>
         <p>Source:JustWatch</p>
 
-        <Provider service={ state.stream } />
-        <Provider service={ state.buy } />
-        <Provider service={ state.rent } />
+        <Provider service={ state.stream } serviceName='Stream'/>
+        <Provider service={ state.buy } serviceName='Buy'/>
+        <Provider service={ state.rent } serviceName='Rent'/>
         
 
     </Fragment>
