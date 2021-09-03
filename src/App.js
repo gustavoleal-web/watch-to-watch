@@ -6,11 +6,11 @@ import {
   Redirect
 } from "react-router-dom";
 
-import NavigationHeader from './Header/NavigationHeader';
-import Movies from './Trending/Movies/Movies';
-import Shows from './Trending/TV/Shows';
-import About from './Trending/Movies/Movie/About/About';
-import AboutTv from './Trending/TV/Show/About/About';
+import NavigationHeader from './Components/Header/NavigationHeader';
+import Movies from './Components/Body/Movies/Components/Movies';
+import Shows from './Components/Body/TV/Components/Shows';
+import AboutMovie from './Components/Body/Movies/Components/About';
+import AboutTv from './Components/Body/TV/Components/About';
 
 const App = () => {
   return (
@@ -32,7 +32,7 @@ const App = () => {
 
 
             <Route path='/movies/:movieId'>
-              <About />
+              <AboutMovie />
             </Route>
 
 
