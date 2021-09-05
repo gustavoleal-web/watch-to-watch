@@ -1,9 +1,11 @@
 import React, { useEffect, useState, Fragment } from 'react'
 import { useParams } from 'react-router-dom';
+import Providers from './Providers';
 import Title from './Titles';
 import styles from '../CSS/about.module.css';
 import axios from 'axios';
 import Card from 'react-bootstrap/Card';
+import OfCanvas from '../../TV/Components/OfCanvas'
 
 
 const About = () => {
@@ -37,7 +39,7 @@ const About = () => {
                                 alt='poster'
                                 style={ { height: '200px' } }
                             />
-                            <h3>{ state.original_title }</h3>
+                            <h3 className={ styles.MovieTitle }>{ state.original_title }</h3>
                         </div>
 
 
@@ -51,21 +53,22 @@ const About = () => {
                             <p className={ styles.title }>Movie</p>
                             <p className={ styles.title }> { state.original_language.toUpperCase() }</p>
 
-                            {
-                                state.production_countries.map( company =>
-                                    <p key={ company.name }
-                                        className={ styles.title }>
-                                        { company.iso_3166_1 }
-                                    </p> )
-                            }
+                            <ul>
+                                {
+                                    state.production_countries.map( company =>
+                                        <li key={ company.name }
+                                            className={ styles.title }>
+                                            { company.iso_3166_1 }
+                                        </li> )
+                                }
+                            </ul>
+
                             <p className={ styles.title }> { state.runtime } min.</p>
 
                         </Card>
 
                         <Card bsPrefix={ styles.cardOverview }>
-                            <Card.Body>
-                                { state.overview }
-                            </Card.Body>
+                            <OfCanvas overview={ state.overview } />
                         </Card>
 
 
@@ -85,6 +88,10 @@ const About = () => {
                                     )
                                 }
                             </ul>
+                        </Card>
+
+                        <Card>
+                            <Providers movieId={ params.movieId } />
                         </Card>
 
                         <Card>
