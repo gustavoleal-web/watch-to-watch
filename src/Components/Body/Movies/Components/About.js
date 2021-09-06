@@ -58,9 +58,8 @@ const About = () => {
                                 alt='poster'
                                 style={ { height: '200px' } }
                             />
-                            <h3 className={ styles.MovieTitle }>{ state.original_title }</h3>
+                            <h3 className={ styles.MovieTitle }>{ state.title }</h3>
                         </div>
-
 
                         <Card bsPrefix={ styles.card }>
 
@@ -113,17 +112,16 @@ const About = () => {
                             <Providers movieId={ params.movieId } />
                         </Card>
 
-                        <Card >
+                       
                             {
                                 //<img src={ `https://image.tmdb.org/t/p/w300/${ state.backdrop_path }` } alt='poster' />
                             }
-                        </Card>
+                      
                         {
                             Object.keys( recommended ).length === 0
                                 ? null
-                                : <Card>
-                                    <Carousel img={ recommended[ 0 ].poster_path } />
-                                </Card>
+                                : <Carousel recommendations={ recommended } />
+
                         }
 
 
