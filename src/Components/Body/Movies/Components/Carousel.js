@@ -1,46 +1,27 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import Carousel from 'react-bootstrap/Carousel';
+import { Link } from 'react-router-dom'
 
-const CarouselComp = ( { img } ) => {
-    return <Carousel >
-        <Carousel.Item interval={ 10000 }>
-            <img
-                className="d-block w-100"
-                src={ `https://image.tmdb.org/t/p/w300/${ img }` }
-                alt="First slide"
-            />
-            <Carousel.Caption>
-                <h3>Movie Title</h3>
-             
-            </Carousel.Caption>
-        </Carousel.Item>
+const CarouselComp = ( { recommendations } ) => {
 
-        <Carousel.Item interval={ 10000 }>
-            <img
-                className="d-block w-100"
-                src={ `https://image.tmdb.org/t/p/w300/${ img }` }
-                alt="Second slide"
-            />
+    return <Fragment>
+        <Carousel style={ { backgroundColor: 'black' } }>
+            {
+                recommendations.map( movie =>
+                    <Carousel.Item interval={ 100000 } key={ movie.id }>
+                        <Link to={ `/movies/${ movie.id }` }>
+                            <img
+                                src={ `https://image.tmdb.org/t/p/w300/${ movie.poster_path }` }
+                                alt="First slide"
+                                style={ { width: '200px', marginLeft: '70px' } }
+                            />
+                        </Link>
+                    </Carousel.Item>
+                )
+            }
 
-            <Carousel.Caption>
-                <h3>Movie Title</h3>
-            
-            </Carousel.Caption>
-        </Carousel.Item>
-
-        <Carousel.Item interval={ 10000 }>
-            <img
-                className="d-block w-100"
-                src={ `https://image.tmdb.org/t/p/w300/${ img }` }
-                alt="Third slide"
-            />
-
-            <Carousel.Caption>
-                <h3>Movie Title</h3>
-            </Carousel.Caption>
-        </Carousel.Item>
-    </Carousel>
-
+        </Carousel>
+    </Fragment>
 }
 
 export default CarouselComp;
