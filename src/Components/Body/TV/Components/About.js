@@ -17,15 +17,9 @@ const About = () => {
                 setState( response.data.results );
 
                 //props to pass About component
-                //genres
-                //first_air_date
                 //last_air_date
                 //last_episode_to_air
-                //next_episode_to_air (if any)
-                //number_of_episodes
                 //number_of_seasons
-                //seasons
-                //overview
             }
             catch ( e ) {
                 console.log( e )
@@ -37,12 +31,17 @@ const About = () => {
     }, [ params.showId ] );
 
 
+    if ( Object.keys( state ).length !== 0 ) {
+        console.log( state )
+    }
+
 
     let nextEpisodeDate = null;
-
+    //shows that have finished airing have a next_episode_to_air value set to null
+    //so only the shows with a next episode will render
     if ( Object.keys( state ).length !== 0 ) {
-        if ( state.next_episode_to_air.air_date !== null ) {
-            nextEpisodeDate = state.next_episode_to_air.air_date.replaceAll( '-', '/' );
+        if ( state.next_episode_to_air !== null ) {
+            nextEpisodeDate = <p>Next Ep: { state.next_episode_to_air.air_date.replaceAll( '-', '/' ) }</p>
         }
 
     }
@@ -63,7 +62,7 @@ const About = () => {
                                 <h1 style={ { textAlign: 'center' } }>{ state.original_name }</h1>
 
                                 <p>Air Date: { state.first_air_date.replaceAll( '-', '/' ) }</p>
-                                <p>Next Ep: { nextEpisodeDate }</p>
+                                { nextEpisodeDate }
                             </div>
 
 
