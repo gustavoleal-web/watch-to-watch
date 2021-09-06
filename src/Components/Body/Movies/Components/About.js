@@ -5,12 +5,14 @@ import Title from './Titles';
 import styles from '../CSS/about.module.css';
 import axios from 'axios';
 import Card from 'react-bootstrap/Card';
-import OfCanvas from '../../TV/Components/OfCanvas'
+import OfCanvas from '../../TV/Components/OfCanvas';
+import Carousel from './Carousel';
 
 
 const About = () => {
     const params = useParams();
-    const [ state, setState ] = useState( {} )
+    const [ state, setState ] = useState( {} );
+    const [ recommended, setRecommended ] = useState( [] );
 
     useEffect( () => {
         const fetchShows = async () => {
@@ -18,6 +20,23 @@ const About = () => {
             try {
                 let response = await axios.get( `/trending/movie/?movieId=${ params.movieId }` );
                 setState( response.data.results )
+            }
+            catch ( e ) {
+                console.log( e )
+            }
+
+
+        }
+        fetchShows();
+    }, [ params.movieId ] );
+
+    useEffect( () => {
+        const fetchShows = async () => {
+
+            try {
+                let response = await axios.get( `/movie/recommendations/?movieId=${ params.movieId }` );
+                let recommended = response.data.results.results.slice( 9 );
+                setRecommended( recommended )
             }
             catch ( e ) {
                 console.log( e )
@@ -90,13 +109,24 @@ const About = () => {
                             </ul>
                         </Card>
 
-                        <Card>
+                        <Card style={ { marginTop: '20px', marginBottom: '20px' } }>
                             <Providers movieId={ params.movieId } />
                         </Card>
 
-                        <Card>
-                            <img src={ `https://image.tmdb.org/t/p/w300/${ state.backdrop_path }` } alt='poster' />
+                        <Card >
+                            {
+                                //<img src={ `https://image.tmdb.org/t/p/w300/${ state.backdrop_path }` } alt='poster' />
+                            }
                         </Card>
+                        {
+                            Object.keys( recommended ).length === 0
+                                ? null
+                                : <Card>
+                                    <Carousel img={ recommended[ 0 ].poster_path } />
+                                </Card>
+                        }
+
+
                     </Fragment>
             }
         </div>
