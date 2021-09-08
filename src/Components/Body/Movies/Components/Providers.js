@@ -14,6 +14,8 @@ const Providers = ( { movieId } ) => {
         buy: []
     } );
 
+    const [ noProviers, setNoProviders ] = useState( false );
+
 
     //returns obj
     //US
@@ -28,13 +30,20 @@ const Providers = ( { movieId } ) => {
             try {
                 let response = await axios.get( `/movie/providers/?movieId=${ movieId }` );
                 let stateCopy = { ...state };
-                let results = response.data.results.results.US;
+                let results
 
-                stateCopy.link = results.link;
-                stateCopy.stream = results.flatrate !== undefined ? results.flatrate : [];
-                stateCopy.buy = results.buy !== undefined ? results.buy : [];
-                stateCopy.rent = results.rent !== undefined ? results.rent : [];
-                setState( stateCopy );
+                if ( Object.keys( response.data.results.results ).includes( 'US' ) ) {
+                    results = response.data.results.results.US;
+                    stateCopy.link = results.link !== undefined ? results.link : '';
+                    stateCopy.stream = results.flatrate !== undefined ? results.flatrate : [];
+                    stateCopy.buy = results.buy !== undefined ? results.buy : [];
+                    stateCopy.rent = results.rent !== undefined ? results.rent : [];
+                    setState( stateCopy );
+                }
+
+                else {
+                    setNoProviders( true )
+                }
 
             }
             catch ( e ) {
@@ -44,20 +53,24 @@ const Providers = ( { movieId } ) => {
 
         }
         fetchShows();
+        // eslint-disable-next-line
     }, [ movieId ] );
 
 
+    if ( noProviers ) {
+        return <p>No servies at this time.</p>
+    }
 
+    else {
+        return <Fragment>
+            <p>Source:JustWatch</p>
 
-    return <Fragment>
-        <p>Source:JustWatch</p>
+            <Provider service={ state.stream } serviceName='Stream' />
+            <Provider service={ state.buy } serviceName='Buy' />
+            <Provider service={ state.rent } serviceName='Rent' />
 
-        <Provider service={ state.stream } serviceName='Stream'/>
-        <Provider service={ state.buy } serviceName='Buy'/>
-        <Provider service={ state.rent } serviceName='Rent'/>
-        
-
-    </Fragment>
+        </Fragment>
+    }
 }
 
 export default Providers;
