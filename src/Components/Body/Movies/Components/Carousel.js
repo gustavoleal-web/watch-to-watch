@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom'
 const CarouselComp = ( { recommendations } ) => {
 
     return <Fragment>
+        <h5>Recommendations</h5>
         <Carousel style={ { backgroundColor: 'black' } }>
             {
                 recommendations.map( movie =>
