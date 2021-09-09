@@ -1,11 +1,11 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import {
   BrowserRouter as Router,
   Switch,
   Route,
   Redirect
 } from "react-router-dom";
-
+import NavBarMenu from './Components/Header/NavBar';
 import NavigationHeader from './Components/Header/NavigationHeader';
 import Movies from './Components/Body/Movies/Components/Movies';
 import Shows from './Components/Body/TV/Components/Shows';
@@ -16,8 +16,6 @@ const App = () => {
   return (
     <Router>
       <div>
-        <NavigationHeader />
-
         <main>
           <Switch>
 
@@ -27,14 +25,17 @@ const App = () => {
             </Route>
 
             <Route path='/movies' exact>
-              <Movies />
-            </Route>
+              <Fragment>
+                <NavBarMenu type='movies' />
+                <NavigationHeader />
+                <Movies />
+              </Fragment>
 
+            </Route>
 
             <Route path='/movies/:movieId'>
               <AboutMovie />
             </Route>
-
 
             <Route path='/shows/:showId'>
               <AboutTv />
@@ -42,7 +43,14 @@ const App = () => {
 
 
             <Route path='/shows'>
-              <Shows />
+              <Fragment>
+                <NavBarMenu type='tv' />
+                <NavigationHeader />
+                <Shows />
+
+              </Fragment>
+
+
             </Route>
 
           </Switch>
