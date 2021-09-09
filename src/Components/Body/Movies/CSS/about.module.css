@@ -19,6 +19,11 @@
     margin-top           : var(--card-margin-top);
 }
 
+.MovieTitle {
+    margin    : auto;
+    text-align: center;
+}
+
 .title {
     margin: 0;
 }
