@@ -14,8 +14,7 @@ const NavBarMenu = ( { type } ) => {
             try {
                 let response = await axios.get( `/${ type }/genres` );
                 let results = response.data.results.genres;
-                console.log( results )
-                //setGenres( results )
+                setGenres( results );
             }
             catch ( e ) {
                 console.log( e )
@@ -24,7 +23,7 @@ const NavBarMenu = ( { type } ) => {
 
         }
         fetchShows();
-    }, [] );
+    }, [type] );
 
 
 
@@ -34,12 +33,13 @@ const NavBarMenu = ( { type } ) => {
             <Navbar.Toggle aria-controls='responsive-navbar-nav' />
             <Navbar.Collapse id='responsive-navbar-nav'>
                 <Nav className='me-auto' navbarScroll>
-                    <Nav.Link href='#features'>Item 1</Nav.Link>
-                    <Nav.Link href='#features'>Item 2</Nav.Link>
-                    <NavDropdown title='Movies' id='collasible-nav-dropdown'>
-                        <NavDropdown.Item href='#action/3.1'>Upcoming</NavDropdown.Item>
-                        <NavDropdown.Item href='#action/3.2'>Now Playing</NavDropdown.Item>
-                        <NavDropdown.Item href='#action/3.3'>Top Rated</NavDropdown.Item>
+                    <Nav.Link href='#features'>Upcoming</Nav.Link>
+                    <Nav.Link href='#features'>Now Playing</Nav.Link>
+                    <Nav.Link href='#features'>Top rated</Nav.Link>
+                    <NavDropdown title='Genres' id='collasible-nav-dropdown'>
+                        {
+                            genres.length === 0 ? null : genres.map(genre =>  <NavDropdown.Item href='#action/3.1'>{genre.name}</NavDropdown.Item>)
+                        }
                     </NavDropdown>
                 </Nav>
             </Navbar.Collapse>
