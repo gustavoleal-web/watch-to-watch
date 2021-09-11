@@ -23,7 +23,7 @@ const NavBarMenu = ( { type } ) => {
 
         }
         fetchShows();
-    }, [type] );
+    }, [ type ] );
 
 
 
@@ -38,7 +38,8 @@ const NavBarMenu = ( { type } ) => {
                     <Nav.Link href='#features'>Top rated</Nav.Link>
                     <NavDropdown title='Genres' id='collasible-nav-dropdown'>
                         {
-                            genres.length === 0 ? null : genres.map(genre =>  <NavDropdown.Item href='#action/3.1'>{genre.name}</NavDropdown.Item>)
+                            genres.length === 0 ? null : genres.map( genre =>
+                                <NavDropdown.Item href='#action/3.1' key={ genre.name }>{ genre.name }</NavDropdown.Item> )
                         }
                     </NavDropdown>
                 </Nav>
