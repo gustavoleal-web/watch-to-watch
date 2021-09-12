@@ -21,7 +21,6 @@ const App = () => {
 
             <Route path='/' exact>
               <Redirect to='/movies' />
-
             </Route>
 
             <Route path='/movies' exact>
@@ -30,15 +29,20 @@ const App = () => {
                 <NavigationHeader />
                 <Movies />
               </Fragment>
-
             </Route>
 
             <Route path='/movies/:movieId'>
-              <AboutMovie />
+              <Fragment>
+                <NavBarMenu type='movies' />
+                <AboutMovie />
+              </Fragment>
             </Route>
 
             <Route path='/shows/:showId'>
-              <AboutTv />
+              <Fragment>
+                <NavBarMenu type='tv' />
+                <AboutTv />
+              </Fragment>
             </Route>
 
 
@@ -47,10 +51,7 @@ const App = () => {
                 <NavBarMenu type='tv' />
                 <NavigationHeader />
                 <Shows />
-
               </Fragment>
-
-
             </Route>
 
           </Switch>
