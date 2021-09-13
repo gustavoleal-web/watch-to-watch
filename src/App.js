@@ -11,12 +11,14 @@ import Movies from './Components/Body/Movies/Components/Movies';
 import Shows from './Components/Body/TV/Components/Shows';
 import AboutMovie from './Components/Body/Movies/Components/About';
 import AboutTv from './Components/Body/TV/Components/About';
+//import MenuOfCanvas from './Components/Header/menuOfCanvas';
 
 const App = () => {
   return (
     <Router>
       <div>
-        <main>
+        <main style={ { backgroundColor: 'rgb(180, 186, 210)' } }>
+        
           <Switch>
 
             <Route path='/' exact>
@@ -63,3 +65,5 @@ const App = () => {
 }
 
 export default App;
+
+// for the burger menu <div>Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
