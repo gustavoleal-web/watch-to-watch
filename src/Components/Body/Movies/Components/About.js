@@ -71,7 +71,7 @@ const About = () => {
                             <p className={ styles.title }>Movie</p>
                             <p className={ styles.title }> { state.original_language.toUpperCase() }</p>
 
-                            <ul>
+                            <ul className={ styles.productionCountries }>
                                 {
                                     state.production_countries.map( company =>
                                         <li key={ company.name }
@@ -92,7 +92,7 @@ const About = () => {
 
                         <Card bsPrefix={ styles.statsGenres }>
                             <Card.Title className={ styles.statsGenresMargin }>Status</Card.Title>
-                            <Card.Title>Genres</Card.Title>
+                            <Card.Title style={ { textAlign: 'center' } }>Genres</Card.Title>
 
                             <p className={ styles.statsGenresMargin } >{ state.status }</p>
                             <ul className={ styles.statsGenresUl }>
@@ -101,7 +101,7 @@ const About = () => {
                                     state.genres.map( genre =>
                                         <li key={ genre.id }
                                             className={ styles.genre }>
-                                            { genre.name }.
+                                            { genre.name }
                                         </li>
                                     )
                                 }
@@ -112,11 +112,11 @@ const About = () => {
                             <Providers movieId={ params.movieId } />
                         </Card>
 
-                       
-                            {
-                                //<img src={ `https://image.tmdb.org/t/p/w300/${ state.backdrop_path }` } alt='poster' />
-                            }
-                      
+
+                        {
+                            //<img src={ `https://image.tmdb.org/t/p/w300/${ state.backdrop_path }` } alt='poster' />
+                        }
+
                         {
                             Object.keys( recommended ).length === 0
                                 ? null
