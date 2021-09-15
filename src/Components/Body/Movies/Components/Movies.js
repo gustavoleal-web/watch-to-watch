@@ -56,7 +56,7 @@ const Movies = () => {
     else {
 
         return (
-            <div>
+            <div className={ styles.mainContainer }>
 
                 <InputGroup className={ styles.search }>
                     <FormControl
@@ -72,6 +72,7 @@ const Movies = () => {
                 </InputGroup>
 
                 <h2>Trending Movies</h2>
+
                 {
                     movies.map( movie =>
                         <Movie
@@ -81,6 +82,7 @@ const Movies = () => {
                             key={ movie.id }
                             movieId={ movie.id } /> )
                 }
+
             </div>
         )
     }
