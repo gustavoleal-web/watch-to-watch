@@ -34,16 +34,25 @@
     margin-top   : var(--card-margin-top);
 }
 
+.productionCountries {
+    list-style     : none;
+    padding-left   : 0;
+    display        : flex;
+    justify-content: space-evenly;
+}
+
+
 .statsGenres {
     display              : grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 2fr;
     border               : 1px solid rgba(0, 0, 0, .125);
     border-radius        : .25rem;
     margin-top           : var(--card-margin-top);
 }
 
 .statsGenresMargin {
-    margin-left: 10px;
+    /* margin-left: 10px; */
+    text-align: center;
 }
 
 
@@ -54,3 +63,6 @@
     padding-left: 0;
 }
 
+.statsGenresUl li {
+    width: 28%;
+}
