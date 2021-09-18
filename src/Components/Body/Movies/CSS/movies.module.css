@@ -1,5 +1,10 @@
+.mainContainer {
+    max-width: 900px;
+    margin   : auto;
+}
+
 .search {
     max-width: 97%;
     margin   : auto;
-  
+
 }
