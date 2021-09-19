@@ -11,7 +11,10 @@ const OffCanvasExample = ( { overview } ) => {
 
     return (
         <>
-            <Button variant='outline-dark' onClick={ handleShow } style={ { height: '30px', width: '100%', padding: '0' } }>
+            <Button variant='outline-dark' onClick={ handleShow } style={ {
+                height: '30px', width: '100%', padding: '0', backgroundColor: 'rgb(55, 58, 71)',
+                color: 'white'
+            } }>
                 Synopsis
             </Button>
 
