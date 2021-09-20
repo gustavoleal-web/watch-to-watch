@@ -51,7 +51,7 @@ const Shows = () => {
 
     else {
         return (
-            <div>
+            <div style={ { maxWidth: '900px', margin: 'auto' } }>
 
                 <InputGroup >
                     <FormControl
@@ -73,7 +73,7 @@ const Shows = () => {
                             name={ show.name }
                             airDate={ show.first_air_date }
                             posterPath={ show.poster_path }
-                            backdropPath ={show.backdrop_path}
+                            backdropPath={ show.backdrop_path }
                             key={ show.id }
                         /> )
                 }
