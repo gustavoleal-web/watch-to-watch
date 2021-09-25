@@ -7,10 +7,10 @@ import {
 } from "react-router-dom";
 import NavBarMenu from './Components/Header/NavBar';
 import NavigationHeader from './Components/Header/NavigationHeader';
-import Movies from './Components/Body/Movies/Components/Movies';
-import Shows from './Components/Body/TV/Components/Shows';
-import AboutMovie from './Components/Body/Movies/Components/About';
-import AboutTv from './Components/Body/TV/Components/About';
+import Movies from './Components/Movies/Movies';
+import Shows from './Components/TV/Shows';
+import AboutMovie from './Components/Movies/About';
+import AboutTv from './Components/TV/About';
 //import MenuOfCanvas from './Components/Header/menuOfCanvas';
 
 const App = () => {
