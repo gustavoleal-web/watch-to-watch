@@ -5,8 +5,8 @@ import {
   Route,
   Redirect
 } from "react-router-dom";
-import NavBarMenu from './Components/Header/NavBar';
-import NavigationHeader from './Components/Header/NavigationHeader';
+//import NavBarMenu from './Components/Header/NavBar';
+//import NavigationHeader from './Components/Header/NavigationHeader';
 import Movies from './Components/Movies/Movies';
 import Shows from './Components/TV/Shows';
 import AboutMovie from './Components/Movies/About';
@@ -18,7 +18,7 @@ const App = () => {
     <Router>
       <div>
         <main style={ { backgroundColor: 'rgb(180, 186, 210)' } }>
-        
+
           <Switch>
 
             <Route path='/' exact>
@@ -27,22 +27,18 @@ const App = () => {
 
             <Route path='/movies' exact>
               <Fragment>
-                <NavBarMenu type='movies' />
-                <NavigationHeader />
                 <Movies />
               </Fragment>
             </Route>
 
             <Route path='/movies/:movieId'>
               <Fragment>
-                <NavBarMenu type='movies' />
                 <AboutMovie />
               </Fragment>
             </Route>
 
             <Route path='/shows/:showId'>
               <Fragment>
-                <NavBarMenu type='tv' />
                 <AboutTv />
               </Fragment>
             </Route>
@@ -50,8 +46,6 @@ const App = () => {
 
             <Route path='/shows'>
               <Fragment>
-                <NavBarMenu type='tv' />
-                <NavigationHeader />
                 <Shows />
               </Fragment>
             </Route>
