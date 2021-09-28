@@ -1,16 +1,29 @@
 import React, { useEffect, useState } from 'react';
+import { NavLink } from 'react-router-dom';
 import axios from 'axios';
 import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import Container from 'react-bootstrap/Container';
+import styles from './css/navBar.module.css';
 
 const NavBarMenu = ( { type } ) => {
     const [ genres, setGenres ] = useState( [] );
 
+    let navOptions = [];
+    let linkTo = '';
+
+    if ( type === 'movies' ) {
+        navOptions = [ 'upcoming', 'now playing', 'top rated' ];
+        linkTo = 'shows'
+    }
+    else if ( type === 'shows' ) {
+        navOptions = [ 'get lastest', 'get tv airing today', 'top rated' ];
+        linkTo = 'movies'
+    }
+
     useEffect( () => {
         const fetchShows = async () => {
-
             try {
                 let response = await axios.get( `/${ type }/genres` );
                 let results = response.data.results.genres;
@@ -19,34 +32,51 @@ const NavBarMenu = ( { type } ) => {
             catch ( e ) {
                 console.log( e )
             }
-
-
         }
         fetchShows();
     }, [ type ] );
 
 
 
-    return <Navbar collapseOnSelect expand='lg' bg='dark' variant='dark'>
+    return <Navbar collapseOnSelect expand='lg' bg='dark' variant='dark' fixed='top'>
         <Container>
             <Navbar.Brand href='#home'>What to watch</Navbar.Brand>
             <Navbar.Toggle aria-controls='responsive-navbar-nav' />
             <Navbar.Collapse id='responsive-navbar-nav'>
                 <Nav className='me-auto' navbarScroll>
-                    <Nav.Link href='#features'>Upcoming</Nav.Link>
-                    <Nav.Link href='#features'>Now Playing</Nav.Link>
-                    <Nav.Link href='#features'>Top rated</Nav.Link>
+                    {
+                        navOptions.map( option => <Nav.Link key={ option }>
+                            { option } </Nav.Link> )
+                    }
                     <NavDropdown title='Genres' id='collasible-nav-dropdown'>
                         {
-                            genres.length === 0 ? null : genres.map( genre =>
-                                <NavDropdown.Item href='#action/3.1' key={ genre.name }>{ genre.name }</NavDropdown.Item> )
+                            genres.length === 0 ? null : genres.map( genre => <NavDropdown.Item key={ genre.name }>
+                                { genre.name }</NavDropdown.Item> )
                         }
                     </NavDropdown>
+
+                    <NavLink
+                        to={ `/${ linkTo }` }
+                        className={ styles.navLink } >
+                        { linkTo }
+                    </NavLink>
                 </Nav>
             </Navbar.Collapse>
+
         </Container>
     </Navbar>
 }
 
 export default NavBarMenu;
 
+//movies:
+    //upcoming
+    //now playing
+    //top rated
+    //genres
+
+//TV:
+    //get lastest
+    //get tv airing today
+    //top rated or get popular
+    //genres
