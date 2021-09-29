@@ -1,6 +1,6 @@
 .mainContainer {
-    max-width: 900px;
-    margin   : auto;
+    max-width  : 900px;
+    margin     : auto;
     padding-top: 70px;
 }
 
@@ -8,4 +8,10 @@
     max-width: 97%;
     margin   : auto;
 
+}
+
+.title {
+    color     : white;
+    text-align: center;
+    margin-top: 15px;
 }
