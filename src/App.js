@@ -17,7 +17,7 @@ const App = () => {
   return (
     <Router>
       <div>
-        <main style={ { backgroundColor: 'rgb(180, 186, 210)' } }>
+        <main style={ { backgroundColor: 'rgb(55, 58, 71)' } }>
 
           <Switch>
 
