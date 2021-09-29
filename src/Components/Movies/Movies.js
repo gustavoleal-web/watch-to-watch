@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Fragment } from 'react';
 import styles from './css/movies.module.css';
 import axios from 'axios';
 import Movie from './Movie';
 import Button from 'react-bootstrap/Button';
 import InputGroup from 'react-bootstrap/InputGroup'
 import FormControl from 'react-bootstrap/FormControl';
+import NavBar from '../Header/NavBar';
 // import { v4 as uuidv4 } from 'uuid';  maybe uninstall this
 
 
@@ -26,7 +27,6 @@ const Movies = () => {
         }
         fetchShows();
     }, [] );
-
 
 
     const onChangeHandler = ( e ) => {
@@ -54,36 +54,38 @@ const Movies = () => {
     }
 
     else {
-
         return (
-            <div className={ styles.mainContainer }>
+            <Fragment>
+                <NavBar type='movies' />
+                <div className={ styles.mainContainer }>
 
-                <InputGroup className={ styles.search }>
-                    <FormControl
-                        placeholder='Search movies'
-                        aria-label='Search movies'
-                        aria-describedby="basic-addon2"
-                        value={ searchName }
-                        onChange={ onChangeHandler }
-                    />
-                    <Button variant='outline-secondary' id='button-addon2' onClick={ onClickHandler }>
-                        Button
-                    </Button>
-                </InputGroup>
+                    <InputGroup className={ styles.search }>
+                        <FormControl
+                            placeholder='Search movies'
+                            aria-label='Search movies'
+                            aria-describedby="basic-addon2"
+                            value={ searchName }
+                            onChange={ onChangeHandler }
+                        />
+                        <Button variant='outline-secondary' id='button-addon2' onClick={ onClickHandler }>
+                            Button
+                        </Button>
+                    </InputGroup>
 
-                <h2>Trending Movies</h2>
+                    <h2>Trending Movies</h2>
 
-                {
-                    movies.map( movie =>
-                        <Movie
-                            title={ movie.title }
-                            releaseDate={ movie.release_date }
-                            posterPath={ movie.poster_path }
-                            key={ movie.id }
-                            movieId={ movie.id } /> )
-                }
+                    {
+                        movies.map( movie =>
+                            <Movie
+                                title={ movie.title }
+                                releaseDate={ movie.release_date }
+                                posterPath={ movie.poster_path }
+                                key={ movie.id }
+                                movieId={ movie.id } /> )
+                    }
 
-            </div>
+                </div>
+            </Fragment>
         )
     }
 

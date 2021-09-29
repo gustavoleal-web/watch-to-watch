@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, Fragment } from 'react';
 import axios from 'axios';
 import Show from './Show';
 import Button from 'react-bootstrap/Button';
 import InputGroup from 'react-bootstrap/InputGroup'
 import FormControl from 'react-bootstrap/FormControl';
+import NavBar from '../Header/NavBar';
 
 const Shows = () => {
     const [ tvShows, setTvShows ] = useState( [] );
@@ -51,33 +52,36 @@ const Shows = () => {
 
     else {
         return (
-            <div style={ { maxWidth: '900px', margin: 'auto' } }>
+            <Fragment>
+                <NavBar type='shows' />
+                <div style={ { maxWidth: '900px', margin: 'auto' } }>
 
-                <InputGroup >
-                    <FormControl
-                        placeholder='Search TV Shows'
-                        aria-label='Search TV Shows'
-                        aria-describedby="basic-addon2"
-                        value={ searchName }
-                        onChange={ onChangeHandler }
-                    />
-                    <Button variant='outline-secondary' id='button-addon2' onClick={ onClickHandler }>
-                        Button
-                    </Button>
-                </InputGroup>
+                    <InputGroup >
+                        <FormControl
+                            placeholder='Search TV Shows'
+                            aria-label='Search TV Shows'
+                            aria-describedby="basic-addon2"
+                            value={ searchName }
+                            onChange={ onChangeHandler }
+                        />
+                        <Button variant='outline-secondary' id='button-addon2' onClick={ onClickHandler }>
+                            Button
+                        </Button>
+                    </InputGroup>
 
-                <h2>Trending TV Shows</h2>
-                {
-                    tvShows.map( show =>
-                        <Show showId={ show.id }
-                            name={ show.name }
-                            airDate={ show.first_air_date }
-                            posterPath={ show.poster_path }
-                            backdropPath={ show.backdrop_path }
-                            key={ show.id }
-                        /> )
-                }
-            </div>
+                    <h2>Trending TV Shows</h2>
+                    {
+                        tvShows.map( show =>
+                            <Show showId={ show.id }
+                                name={ show.name }
+                                airDate={ show.first_air_date }
+                                posterPath={ show.poster_path }
+                                backdropPath={ show.backdrop_path }
+                                key={ show.id }
+                            /> )
+                    }
+                </div>
+            </Fragment>
         )
     }
 }
