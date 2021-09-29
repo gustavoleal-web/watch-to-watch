@@ -15,11 +15,11 @@ const NavBarMenu = ( { type } ) => {
 
     if ( type === 'movies' ) {
         navOptions = [ 'upcoming', 'now playing', 'top rated' ];
-        linkTo = 'shows'
+        linkTo = 'shows';
     }
     else if ( type === 'shows' ) {
-        navOptions = [ 'get lastest', 'get tv airing today', 'top rated' ];
-        linkTo = 'movies'
+        navOptions = [ 'lastest', 'airing today', 'top rated' ];
+        linkTo = 'movies';
     }
 
     useEffect( () => {
@@ -37,6 +37,12 @@ const NavBarMenu = ( { type } ) => {
     }, [ type ] );
 
 
+    const onClickHander = async ( option ) => {
+        let optionNoSpaces = option.split( ' ' ).join( '' )
+        let response = await axios.get( `/${ type }/${ optionNoSpaces }` );
+        console.log( response.data.results )
+    }
+
 
     return <Navbar collapseOnSelect expand='lg' bg='dark' variant='dark' fixed='top'>
         <Container>
@@ -45,7 +51,7 @@ const NavBarMenu = ( { type } ) => {
             <Navbar.Collapse id='responsive-navbar-nav'>
                 <Nav className='me-auto' navbarScroll>
                     {
-                        navOptions.map( option => <Nav.Link key={ option }>
+                        navOptions.map( option => <Nav.Link key={ option } onClick={ () => onClickHander( option ) }>
                             { option } </Nav.Link> )
                     }
                     <NavDropdown title='Genres' id='collasible-nav-dropdown'>
