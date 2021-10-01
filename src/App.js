@@ -25,17 +25,32 @@ const App = () => {
               <Redirect to='/movies' />
             </Route>
 
+            <Route path='/movies/upcoming/:movieId'>
+              <Fragment>
+                <AboutMovie type='upcoming' />
+              </Fragment>
+            </Route>
+            
             <Route path='/movies' exact>
               <Fragment>
-                <Movies />
+                <Movies path='trending' />
               </Fragment>
             </Route>
 
-            <Route path='/movies/:movieId'>
+            <Route path='/movies/upcoming'>
               <Fragment>
-                <AboutMovie />
+                <Movies path='upcoming' />
               </Fragment>
             </Route>
+
+
+            <Route path='/movies/:movieId'>
+              <Fragment>
+                <AboutMovie type='trending' />
+              </Fragment>
+            </Route>
+
+
 
             <Route path='/shows/:showId'>
               <Fragment>
