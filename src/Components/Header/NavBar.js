@@ -7,7 +7,7 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import Container from 'react-bootstrap/Container';
 import styles from './css/navBar.module.css';
 
-const NavBarMenu = ( { type } ) => {
+const NavBarMenu = ( { type, fetchNavSelection } ) => {
     const [ genres, setGenres ] = useState( [] );
 
     let navOptions = [];
@@ -37,10 +37,11 @@ const NavBarMenu = ( { type } ) => {
     }, [ type ] );
 
 
-    const onClickHander = async ( option ) => {
+    const onClickHandler = async ( option ) => {
         let optionNoSpaces = option.split( ' ' ).join( '' )
         let response = await axios.get( `/${ type }/${ optionNoSpaces }` );
-        console.log( response.data.results )
+        fetchNavSelection( option, response.data.results.results );
+
     }
 
 
@@ -50,8 +51,14 @@ const NavBarMenu = ( { type } ) => {
             <Navbar.Toggle aria-controls='responsive-navbar-nav' />
             <Navbar.Collapse id='responsive-navbar-nav'>
                 <Nav className='me-auto' navbarScroll>
+                    <NavLink
+                        to={ `/movies/upcoming` }
+                        className={ styles.navLink } >
+                        upcoming
+                    </NavLink>
+
                     {
-                        navOptions.map( option => <Nav.Link key={ option } onClick={ () => onClickHander( option ) }>
+                        navOptions.map( option => <Nav.Link key={ option } onClick={ () => onClickHandler( option ) }>
                             { option } </Nav.Link> )
                     }
                     <NavDropdown title='Genres' id='collasible-nav-dropdown'>
