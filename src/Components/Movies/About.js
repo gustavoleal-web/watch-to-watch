@@ -11,7 +11,7 @@ import OfCanvas from '../TV/OfCanvas'
 import Carousel from './Carousel';
 
 
-const About = () => {
+const About = ( { type } ) => {
     const params = useParams();
     const [ state, setState ] = useState( {} );
     const [ recommended, setRecommended ] = useState( [] );
@@ -20,17 +20,16 @@ const About = () => {
         const fetchShows = async () => {
 
             try {
-                let response = await axios.get( `/trending/movie/?movieId=${ params.movieId }` );
+                let response = await axios.get( `/${ type }/movie/?movieId=${ params.movieId }` );
                 setState( response.data.results )
             }
             catch ( e ) {
                 console.log( e )
             }
-
-
         }
+
         fetchShows();
-    }, [ params.movieId ] );
+    }, [ params.movieId, type ] );
 
     useEffect( () => {
         const fetchShows = async () => {
@@ -73,7 +72,7 @@ const About = () => {
                                 <Title name='Runtime' />
 
                                 <p className={ styles.title }>Movie</p>
-                                <p className={ styles.title }> { state.original_language.toUpperCase() }</p>
+                                <p className={ styles.title }> { state.original_language }</p>
 
                                 <ul className={ styles.productionCountries }>
                                     {
