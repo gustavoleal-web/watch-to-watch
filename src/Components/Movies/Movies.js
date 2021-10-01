@@ -9,24 +9,28 @@ import NavBar from '../Header/NavBar';
 // import { v4 as uuidv4 } from 'uuid';  maybe uninstall this
 
 
-const Movies = () => {
-    const [ movies, setMovies ] = useState( [] );
-    const [ searchName, setsearchName ] = useState( '' )
+const Movies = ( { path } ) => {
+    const [ movies, setMovies ] = useState( {
+        title: '',
+        movieList: []
+    } );
+    const [ searchName, setsearchName ] = useState( '' );
+
 
     useEffect( () => {
         const fetchShows = async () => {
-            let url = `http://localhost:3001/trending/movies`;
-
             try {
-                let response = await axios.get( url );
-                setMovies( response.data.results.results )
+                let response = await axios.get( `/${ path }/movies` );
+                setMovies( { title: 'Trending Movies', movieList: response.data.results.results } );
+
+                //console.log( response.data.results.results )
             }
             catch {
                 console.log( 'error' )
             }
         }
         fetchShows();
-    }, [] );
+    }, [ path ] );
 
 
     const onChangeHandler = ( e ) => {
@@ -39,7 +43,7 @@ const Movies = () => {
 
             try {
                 let response = await axios.get( url );
-                setMovies( response.data.results.results )
+                setMovies( { title: 'Results', movieList: response.data.results.results } )
             }
             catch ( e ) {
                 console.log( e )
@@ -49,14 +53,20 @@ const Movies = () => {
 
     }
 
-    if ( movies.length === 0 ) {
+    const fetchNavSelection = ( option, results ) => {
+        //console.log( results );
+        setMovies( { title: option, movieList: results } );
+        //setMovies( results )
+    }
+
+    if ( movies.movieList.length === 0 ) {
         return <h2>...Loading please wait.</h2>
     }
 
     else {
         return (
             <Fragment>
-                <NavBar type='movies' />
+                <NavBar type='movies' fetchNavSelection={ fetchNavSelection } />
                 <div className={ styles.mainContainer }>
 
                     <InputGroup className={ styles.search }>
@@ -72,16 +82,17 @@ const Movies = () => {
                         </Button>
                     </InputGroup>
 
-                    <h2>Trending Movies</h2>
+                    <h2 className={ styles.title }>{ movies.title }</h2>
 
                     {
-                        movies.map( movie =>
+                        movies.movieList.map( movie =>
                             <Movie
                                 title={ movie.title }
                                 releaseDate={ movie.release_date }
                                 posterPath={ movie.poster_path }
                                 key={ movie.id }
-                                movieId={ movie.id } /> )
+                                movieId={ movie.id }
+                                path={ path } /> )
                     }
 
                 </div>
