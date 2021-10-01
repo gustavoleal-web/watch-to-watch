@@ -1,4 +1,5 @@
 .navLink {
     text-decoration: none;
-    color: rgba(255,255,255,.55);
+    color          : rgba(255, 255, 255, .55);
+    padding-top    : 8px;
 }
