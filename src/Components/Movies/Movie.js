@@ -2,7 +2,10 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styles from './css/movie.module.css';
 
-const Movie = ( { title, releaseDate, posterPath, movieId } ) => {
+const Movie = ( { title, releaseDate, posterPath, movieId, path } ) => {
+    let url = path === 'trending' ? `/movies/${ movieId }` : `/movies/upcoming/${ movieId }`;
+
+
 
     return (
 
@@ -15,10 +18,11 @@ const Movie = ( { title, releaseDate, posterPath, movieId } ) => {
                 </div>
             </div>
 
-            <Link to={ `movies/${ movieId }` }>Load more movie info</Link>
+            <Link to={ url } onClick={ () => console.log( url ) }>Load more movie info</Link>
 
         </div>
     )
 }
+
 
 export default Movie;
