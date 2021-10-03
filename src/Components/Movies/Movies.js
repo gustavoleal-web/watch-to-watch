@@ -6,31 +6,31 @@ import Button from 'react-bootstrap/Button';
 import InputGroup from 'react-bootstrap/InputGroup'
 import FormControl from 'react-bootstrap/FormControl';
 import NavBar from '../Header/NavBar';
+import { useParams } from 'react-router';
 // import { v4 as uuidv4 } from 'uuid';  maybe uninstall this
 
 
-const Movies = ( { path } ) => {
+const Movies = () => {
     const [ movies, setMovies ] = useState( {
         title: '',
         movieList: []
     } );
     const [ searchName, setsearchName ] = useState( '' );
-
+    const params = useParams();
 
     useEffect( () => {
         const fetchShows = async () => {
             try {
-                let response = await axios.get( `/${ path }/movies` );
-                setMovies( { title: 'Trending Movies', movieList: response.data.results.results } );
+                let response = await axios.get( `/${ params.option }/movies` );
+                setMovies( { title: `${ params.option } movies`, movieList: response.data.results.results } );
 
-                //console.log( response.data.results.results )
             }
             catch {
                 console.log( 'error' )
             }
         }
         fetchShows();
-    }, [ path ] );
+    }, [ params.option ] );
 
 
     const onChangeHandler = ( e ) => {
@@ -48,16 +48,9 @@ const Movies = ( { path } ) => {
             catch ( e ) {
                 console.log( e )
             }
-
         }
-
     }
 
-    const fetchNavSelection = ( option, results ) => {
-        //console.log( results );
-        setMovies( { title: option, movieList: results } );
-        //setMovies( results )
-    }
 
     if ( movies.movieList.length === 0 ) {
         return <h2>...Loading please wait.</h2>
@@ -66,7 +59,7 @@ const Movies = ( { path } ) => {
     else {
         return (
             <Fragment>
-                <NavBar type='movies' fetchNavSelection={ fetchNavSelection } />
+                <NavBar type='movies' />
                 <div className={ styles.mainContainer }>
 
                     <InputGroup className={ styles.search }>
@@ -83,17 +76,20 @@ const Movies = ( { path } ) => {
                     </InputGroup>
 
                     <h2 className={ styles.title }>{ movies.title }</h2>
+                    
+                    <div>
+                        {
+                            movies.movieList.map( movie =>
+                                <Movie
+                                    title={ movie.title }
+                                    releaseDate={ movie.release_date }
+                                    posterPath={ movie.poster_path }
+                                    key={ movie.id }
+                                    movieId={ movie.id }
+                                    option={ params.option } /> )
+                        }
 
-                    {
-                        movies.movieList.map( movie =>
-                            <Movie
-                                title={ movie.title }
-                                releaseDate={ movie.release_date }
-                                posterPath={ movie.poster_path }
-                                key={ movie.id }
-                                movieId={ movie.id }
-                                path={ path } /> )
-                    }
+                    </div>
 
                 </div>
             </Fragment>
