@@ -1,14 +1,17 @@
 :root {
-    --card-margin-top: 20px
+    --card-margin-top      : 20px;
+    --main-background-color: rgb(180, 186, 210);
 }
 
 .mainContainer {
     padding-left : 10px;
     padding-right: 10px;
+    margin-top: 55px;
 }
 
 .imgContainer {
-    display: flex;
+    display         : flex;
+    background-color: var(--main-background-color);
 }
 
 .card {
@@ -17,6 +20,7 @@
     border               : 1px solid rgba(0, 0, 0, .125);
     border-radius        : .25rem;
     margin-top           : var(--card-margin-top);
+    background-color     : var(--main-background-color);
 }
 
 .MovieTitle {
@@ -48,6 +52,7 @@
     border               : 1px solid rgba(0, 0, 0, .125);
     border-radius        : .25rem;
     margin-top           : var(--card-margin-top);
+    background-color     : var(--main-background-color);
 }
 
 .statsGenresMargin {
