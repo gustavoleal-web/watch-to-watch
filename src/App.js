@@ -22,33 +22,23 @@ const App = () => {
           <Switch>
 
             <Route path='/' exact>
-              <Redirect to='/movies' />
+              <Redirect to='/movies/trending' />
             </Route>
 
-            <Route path='/movies/upcoming/:movieId'>
+            <Route path='/movies/:navOption/:movieId'>
               <Fragment>
-                <AboutMovie type='upcoming' />
-              </Fragment>
-            </Route>
-            
-            <Route path='/movies' exact>
-              <Fragment>
-                <Movies path='trending' />
-              </Fragment>
-            </Route>
-
-            <Route path='/movies/upcoming'>
-              <Fragment>
-                <Movies path='upcoming' />
+                <AboutMovie />
               </Fragment>
             </Route>
 
 
-            <Route path='/movies/:movieId'>
+            <Route path='/movies/:option' exact>
               <Fragment>
-                <AboutMovie type='trending' />
+                <Movies />
               </Fragment>
             </Route>
+
+
 
 
 
