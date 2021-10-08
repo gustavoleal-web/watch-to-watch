@@ -9,7 +9,6 @@ import NavBar from '../Header/NavBar';
 import { useParams } from 'react-router';
 // import { v4 as uuidv4 } from 'uuid';  maybe uninstall this
 
-
 const Movies = () => {
     const [ movies, setMovies ] = useState( {
         title: '',
@@ -76,8 +75,8 @@ const Movies = () => {
                     </InputGroup>
 
                     <h2 className={ styles.title }>{ movies.title }</h2>
-                    
-                    <div>
+
+                    <div className={ styles.moviesContainer }>
                         {
                             movies.movieList.map( movie =>
                                 <Movie
@@ -90,7 +89,6 @@ const Movies = () => {
                         }
 
                     </div>
-
                 </div>
             </Fragment>
         )
