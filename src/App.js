@@ -38,16 +38,11 @@ const App = () => {
               </Fragment>
             </Route>
 
-
-
-
-
             <Route path='/shows/:showId'>
               <Fragment>
                 <AboutTv />
               </Fragment>
             </Route>
-
 
             <Route path='/shows'>
               <Fragment>
@@ -56,6 +51,12 @@ const App = () => {
             </Route>
 
           </Switch>
+          <p style={ {
+            color: 'rgb(180, 186, 210)',
+            marginBottom: '0',
+            marginTop: '10px'
+          } }>
+            This product uses the TMDB API but is not endorsed or certified by TMDB</p>
         </main>
 
       </div>
