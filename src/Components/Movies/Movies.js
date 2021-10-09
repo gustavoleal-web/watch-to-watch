@@ -83,6 +83,7 @@ const Movies = () => {
                                     title={ movie.title }
                                     releaseDate={ movie.release_date }
                                     posterPath={ movie.poster_path }
+                                    rating={ movie.vote_average }
                                     key={ movie.id }
                                     movieId={ movie.id }
                                     option={ params.option } /> )
