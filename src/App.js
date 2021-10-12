@@ -11,6 +11,7 @@ import Movies from './Components/Movies/Movies';
 import Shows from './Components/TV/Shows';
 import AboutMovie from './Components/Movies/About';
 import AboutTv from './Components/TV/About';
+import dbLogo from './Images/the_movie_db_logo.svg'
 //import MenuOfCanvas from './Components/Header/menuOfCanvas';
 
 const App = () => {
@@ -51,12 +52,17 @@ const App = () => {
             </Route>
 
           </Switch>
-          <p style={ {
-            color: 'rgb(180, 186, 210)',
-            marginBottom: '0',
-            marginTop: '10px'
-          } }>
-            This product uses the TMDB API but is not endorsed or certified by TMDB</p>
+
+          <div style={ { display: 'flex' } }>
+            <img src={ dbLogo } alt='the movie db logo' style={ { width: '78px' } } />
+            <p style={ {
+              color: 'rgb(180, 186, 210)',
+              marginBottom: '0',
+              marginTop: '10px'
+            } }>
+              This product uses the TMDB API but is not endorsed or certified by TMDB</p>
+          </div>
+
         </main>
 
       </div>
