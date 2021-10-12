@@ -6,12 +6,13 @@
 .mainContainer {
     padding-left : 10px;
     padding-right: 10px;
-    margin-top: 55px;
+    margin-top   : 55px;
 }
 
 .imgContainer {
     display         : flex;
     background-color: var(--main-background-color);
+    border          : 5px solid rgb(230, 230, 230);
 }
 
 .card {
@@ -62,12 +63,13 @@
 
 
 .statsGenresUl {
-    list-style  : none;
-    display     : flex;
-    flex-wrap   : wrap;
-    padding-left: 0;
+    list-style     : none;
+    display        : flex;
+    flex-wrap      : wrap;
+    justify-content: flex-start;
 }
 
 .statsGenresUl li {
-    width: 28%;
+    /* width       : 28%; */
+    margin-right: 10px;
 }
