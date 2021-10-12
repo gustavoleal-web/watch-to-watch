@@ -29,7 +29,7 @@
 
 .movieDisplay {
     display              : grid;
-    grid-template-columns: 1.5fr 2fr 0.1fr;
+    grid-template-columns: 1fr 2fr 0.1fr;
 }
 
 /* here */
@@ -62,4 +62,7 @@ p {
     text-align    : end;
     margin-bottom : 0;
     align-self    : center;
+    color         : rgba(123, 8, 40, 0.3);
+    font-weight   : 600;
+    font-style    : italic;
 }
