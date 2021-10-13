@@ -15,7 +15,7 @@ const Movie = ( { title, releaseDate, posterPath, movieId, option, rating } ) =>
         <div className={ styles.movieContainer }>
             <div className={ styles.movieDisplay }>
                 <Link to={ linkPath }>
-                    <img src={ `https://image.tmdb.org/t/p/w300/${ posterPath }` } alt='poster' />
+                    <img src={ `https://image.tmdb.org/t/p/w300/${ posterPath }` } alt='poster' style={ { height: '100%' } } />
                 </Link>
                 <div className={ styles.movieMain }>
                     <h4>{ title }</h4>
@@ -23,9 +23,6 @@ const Movie = ( { title, releaseDate, posterPath, movieId, option, rating } ) =>
                 </div>
                 <p className={ styles.rating }>{ rating }/10</p>
             </div>
-
-
-
         </div>
     )
 }
