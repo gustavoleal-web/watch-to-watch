@@ -17,7 +17,7 @@ import dbLogo from './Images/the_movie_db_logo.svg'
 const App = () => {
   return (
     <Router>
-      <div>
+      <div style={ { maxWidth: '900px', margin: 'auto' } }>
         <main style={ { backgroundColor: 'rgb(55, 58, 71)' } }>
 
           <Switch>
