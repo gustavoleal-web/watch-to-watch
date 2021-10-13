@@ -6,6 +6,7 @@ import Button from 'react-bootstrap/Button';
 import InputGroup from 'react-bootstrap/InputGroup'
 import FormControl from 'react-bootstrap/FormControl';
 import NavBar from '../Header/NavBar';
+import MenuOfCanvas from '../Header/menuOfCanvas';
 import { useParams } from 'react-router';
 // import { v4 as uuidv4 } from 'uuid';  maybe uninstall this
 
@@ -74,7 +75,10 @@ const Movies = () => {
 
         return (
             <Fragment>
-                <NavBar type='movies' />
+            {
+                //<NavBar type='movies' />
+            }
+                <MenuOfCanvas type='movies'/>
                 <div className={ styles.mainContainer }>
 
                     <InputGroup className={ styles.search }>
