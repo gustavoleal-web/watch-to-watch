@@ -17,6 +17,11 @@
     text-transform: capitalize;
 }
 
+.dates {
+    text-align: center;
+    color     : lightgray;
+}
+
 
 @media (min-width: 900px) {
     .moviesContainer {
