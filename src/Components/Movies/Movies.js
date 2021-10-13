@@ -105,9 +105,9 @@ const Movies = () => {
                                     movieId={ movie.id }
                                     option={ params.option } /> )
                         }
-
                     </div>
                 </div>
+                <p style={ { color: 'lightgrey' } }>Note: Ratings are besed from TMBD users.</p>
             </Fragment>
         )
     }
