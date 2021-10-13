@@ -12,7 +12,8 @@ import { useParams } from 'react-router';
 const Movies = () => {
     const [ movies, setMovies ] = useState( {
         title: '',
-        movieList: []
+        movieList: [],
+        dates: { minimum: '', maximum: '' }
     } );
     const [ searchName, setsearchName ] = useState( '' );
     const params = useParams();
@@ -21,8 +22,18 @@ const Movies = () => {
         const fetchShows = async () => {
             try {
                 let response = await axios.get( `/${ params.option }/movies` );
-                setMovies( { title: `${ params.option } movies`, movieList: response.data.results.results } );
+                let dates = {};
+                if ( response.data.results.dates !== undefined ) {
+                    let regex = /(\d{4})-(\d{1,2})-(\d{1,2})/;
+                    let minimum = response.data.results.dates.minimum;
+                    let maximum = response.data.results.dates.maximum;
+                    let formatedMin = minimum.replace( regex, '$2/$3/$1' );
+                    let formatedMax = maximum.replace( regex, '$2/$3/$1' );
 
+                    dates.minimum = formatedMin;
+                    dates.maximum = formatedMax;
+                }
+                setMovies( { title: `${ params.option } movies`, movieList: response.data.results.results, dates: dates } );
             }
             catch {
                 console.log( 'error' )
@@ -42,7 +53,8 @@ const Movies = () => {
 
             try {
                 let response = await axios.get( url );
-                setMovies( { title: 'Results', movieList: response.data.results.results } )
+                setMovies( { title: 'Results', movieList: response.data.results.results } );
+
             }
             catch ( e ) {
                 console.log( e )
@@ -50,12 +62,16 @@ const Movies = () => {
         }
     }
 
-
     if ( movies.movieList.length === 0 ) {
         return <h2>...Loading please wait.</h2>
     }
 
     else {
+        //top rated movies have already been released so they dont need a time frame.
+        let dates = movies.title !== 'toprated movies'
+            ? <h6 className={ styles.dates }>{ movies.dates.minimum } - { movies.dates.maximum }</h6>
+            : null;
+
         return (
             <Fragment>
                 <NavBar type='movies' />
@@ -75,6 +91,7 @@ const Movies = () => {
                     </InputGroup>
 
                     <h2 className={ styles.title }>{ movies.title }</h2>
+                    { dates }
 
                     <div className={ styles.moviesContainer }>
                         {
