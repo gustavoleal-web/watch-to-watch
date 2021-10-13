@@ -9,6 +9,7 @@ import Card from 'react-bootstrap/Card';
 import OfCanvas from '../TV/OfCanvas'
 
 import Carousel from './Carousel';
+import Sypnosis from './Accordion';
 
 
 const About = () => {
@@ -87,14 +88,19 @@ const About = () => {
 
                             </Card>
 
-                            <Card bsPrefix={ styles.cardOverview }>
-                                <OfCanvas overview={ state.overview } />
-                            </Card>
+                            <Sypnosis overview={ state.overview } />
+
+                            {
+                                // <Card bsPrefix={ styles.cardOverview }>
+                                // <OfCanvas overview={ state.overview } />
+                                //</Card>
+                            }
+
 
 
                             <Card bsPrefix={ styles.statsGenres }>
                                 <Card.Title className={ styles.statsGenresMargin }>Status</Card.Title>
-                                <Card.Title style={ { textAlign: 'center' } }>Genres</Card.Title>
+                                <Card.Title style={ { paddingLeft: '32px' } }>Genres</Card.Title>
 
                                 <p className={ styles.statsGenresMargin } >{ state.status }</p>
                                 <ul className={ styles.statsGenresUl }>
@@ -114,6 +120,20 @@ const About = () => {
                                 <Providers movieId={ params.movieId } />
                             </Card>
 
+                            {
+                                //https://api.themoviedb.org/3/movie/movieId/videos?api_key={key}&language=en-US&include_image_language=US
+                                //BdJKm16Co6M would be the id in the iframe
+                            }
+                            <iframe
+                                width="400"
+                                height="315"
+                                src="https://www.youtube.com/embed/BdJKm16Co6M"
+                                title="YouTube video player"
+                                frameborder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen
+                            >
+                            </iframe>
 
                             {
                                 //<img src={ `https://image.tmdb.org/t/p/w300/${ state.backdrop_path }` } alt='poster' />
@@ -125,8 +145,6 @@ const About = () => {
                                     : <Carousel recommendations={ recommended } />
 
                             }
-
-
                         </Fragment>
                 }
             </div>
