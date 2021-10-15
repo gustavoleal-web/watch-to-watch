@@ -14,4 +14,11 @@
     width           : 100%;
 }
 
-/* make the height for genres ; */
+.icons {
+    display              : grid;
+    grid-template-columns: 1fr 10fr;
+}
+
+.icon img {
+    align-self: center;
+}
