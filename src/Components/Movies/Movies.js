@@ -5,7 +5,7 @@ import Movie from './Movie';
 import Button from 'react-bootstrap/Button';
 import InputGroup from 'react-bootstrap/InputGroup'
 import FormControl from 'react-bootstrap/FormControl';
-import NavBar from '../Header/NavBar';
+// import NavBar from '../Header/NavBar';
 import MenuOfCanvas from '../Header/menuOfCanvas';
 import { useParams } from 'react-router';
 // import { v4 as uuidv4 } from 'uuid';  maybe uninstall this
@@ -34,7 +34,11 @@ const Movies = () => {
                     dates.minimum = formatedMin;
                     dates.maximum = formatedMax;
                 }
-                setMovies( { title: `${ params.option } movies`, movieList: response.data.results.results, dates: dates } );
+                setMovies( {
+                    title: `${ params.option } movies`,
+                    movieList: response.data.results.results,
+                    dates: dates
+                } );
             }
             catch {
                 console.log( 'error' )
@@ -54,7 +58,11 @@ const Movies = () => {
 
             try {
                 let response = await axios.get( url );
-                setMovies( { title: 'Results', movieList: response.data.results.results } );
+                setMovies( {
+                    title: 'Results',
+                    movieList: response.data.results.results,
+                    dates: null
+                } );
 
             }
             catch ( e ) {
@@ -69,30 +77,33 @@ const Movies = () => {
 
     else {
         //top rated movies have already been released so they dont need a time frame.
-        let dates = movies.title !== 'toprated movies'
+        //without searchName.length === 0 it will give an error because dates will be undefined
+        let dates = movies.title !== 'toprated movies' && searchName.length === 0
             ? <h6 className={ styles.dates }>{ movies.dates.minimum } - { movies.dates.maximum }</h6>
             : null;
 
         return (
             <Fragment>
-            {
-                //<NavBar type='movies' />
-            }
-                <MenuOfCanvas type='movies'/>
+                {
+                    //<NavBar type='movies' />
+                }
+                <MenuOfCanvas type='movies' onClickHandler={ onClickHandler } onChangeHandler={ onChangeHandler } searchName={ searchName } />
                 <div className={ styles.mainContainer }>
 
-                    <InputGroup className={ styles.search }>
-                        <FormControl
-                            placeholder='Search movies'
-                            aria-label='Search movies'
-                            aria-describedby="basic-addon2"
-                            value={ searchName }
-                            onChange={ onChangeHandler }
-                        />
-                        <Button variant='outline-secondary' id='button-addon2' onClick={ onClickHandler }>
-                            Button
-                        </Button>
-                    </InputGroup>
+                    {
+                        //<InputGroup className={ styles.search }>
+                        //<FormControl
+                        //placeholder='Search movies'
+                        // aria-label='Search movies'
+                        // aria-describedby="basic-addon2"
+                        // value={ searchName }
+                        // onChange={ onChangeHandler }
+                        //  />
+                        // <Button variant='outline-secondary' id='button-addon2' onClick={ onClickHandler }>
+                        //   Button
+                        //  </Button>
+                        //</InputGroup>
+                    }
 
                     <h2 className={ styles.title }>{ movies.title }</h2>
                     { dates }
