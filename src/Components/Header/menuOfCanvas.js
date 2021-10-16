@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import Offcanvas from 'react-bootstrap/Offcanvas';
+import NavOptions from './NavOptions';
 import Dropdown from 'react-bootstrap/Dropdown';
 import InputGroup from 'react-bootstrap/InputGroup';
 import FormControl from 'react-bootstrap/FormControl';
 import Button from 'react-bootstrap/Button';
+import { NavLink } from 'react-router-dom';
 import styles from './css/menu.module.css'
 import menu from '../../Images/menu.png';
-import top from '../../Images/top.png';
-import checkin from '../../Images/check-in.png';
-import clapperboard from '../../Images/clapperboard.png'
 import axios from 'axios';
 
 
@@ -17,8 +16,16 @@ const MenuOfCanvas = ( { type } ) => {
     const handleClose = () => setShow( false );
     const handleShow = () => setShow( true );
 
-
     const [ genres, setGenres ] = useState( [] );
+
+    let linkTo = '';
+
+    if ( type === 'movies' ) {
+        linkTo = 'shows';
+    }
+    else if ( type === 'shows' ) {
+        linkTo = 'movies/trending';
+    }
 
     useEffect( () => {
         const fetchShows = async () => {
@@ -49,17 +56,20 @@ const MenuOfCanvas = ( { type } ) => {
 
             <Offcanvas show={ show } onHide={ handleClose } placement='start'>
                 <Offcanvas.Header closeButton>
-                    <Offcanvas.Title> Img</Offcanvas.Title>
+                    <Offcanvas.Title>{ type.toUpperCase() }</Offcanvas.Title>
                 </Offcanvas.Header>
                 <Offcanvas.Body>
 
                     <Dropdown.Menu show style={ { width: '90%', border: 'none' } }>
-                        <div className={ styles.icons }>
-                            <img src={ `${ checkin }` } alt="ribbon" /><Dropdown.Item eventKey="1">Upcoming</Dropdown.Item>
-                            <img src={ `${ top }` } alt="ribbon" /><Dropdown.Item eventKey="2">Top Rated</Dropdown.Item>
-                            <img src={ `${ clapperboard }` } alt="ribbon" /> <Dropdown.Item eventKey="3">Now Playing</Dropdown.Item>
-                        </div>
 
+                        <NavOptions type={ type } />
+                        <Dropdown.Divider />
+
+                        <NavLink
+                            to={ `/${ linkTo }` }
+                            className={ styles.navLink } >
+                            View { linkTo }
+                        </NavLink>
                         <Dropdown.Divider />
 
                         <Dropdown>
@@ -71,7 +81,6 @@ const MenuOfCanvas = ( { type } ) => {
                                 }
                             </Dropdown.Menu>
                         </Dropdown>
-
                         <Dropdown.Divider />
 
                         <InputGroup>
@@ -89,11 +98,18 @@ const MenuOfCanvas = ( { type } ) => {
 
                 </Offcanvas.Body>
 
-                <div>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from
+                <div>Icons made by
+                    <a href="https://www.freepik.com" title="Freepik">Freepik</a> from
                     <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a>
                 </div>
 
-                <div>Icons made by <a href="https://www.flaticon.com/authors/icongeek26" title="Icongeek26">Icongeek26</a> from
+                <div>Icons made by
+                    <a href="https://www.flaticon.com/authors/icongeek26" title="Icongeek26">Icongeek26</a> from
+                    <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a>
+                </div>
+
+                <div>Icons made by
+                    <a href="https://www.flaticon.com/authors/ctrlastudio" title="Ctrlastudio">Ctrlastudio</a> from
                     <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a>
                 </div>
 
