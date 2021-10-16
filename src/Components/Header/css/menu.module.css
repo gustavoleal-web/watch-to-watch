@@ -19,6 +19,12 @@
     grid-template-columns: 1fr 10fr;
 }
 
-.icon img {
+.icons img {
     align-self: center;
+}
+
+.navLink {
+    text-decoration: none;
+    margin-right   : 15px;
+    padding: 13px 12px;
 }
