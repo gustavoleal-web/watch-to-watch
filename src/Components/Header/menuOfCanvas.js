@@ -11,7 +11,7 @@ import menu from '../../Images/menu.png';
 import axios from 'axios';
 
 
-const MenuOfCanvas = ( { type } ) => {
+const MenuOfCanvas = ( { type, onClickHandler, onChangeHandler, searchName } ) => {
     const [ show, setShow ] = useState( false );
     const handleClose = () => setShow( false );
     const handleShow = () => setShow( true );
@@ -38,12 +38,11 @@ const MenuOfCanvas = ( { type } ) => {
             catch ( e ) {
                 console.log( e )
             }
-
-
         }
         fetchShows();
     }, [ type ] );
 
+ 
     return (
         <>
             <span className={ styles.menuContainer }>
@@ -60,12 +59,12 @@ const MenuOfCanvas = ( { type } ) => {
                 <Offcanvas.Body>
 
                     <Dropdown.Menu show style={ { width: '90%', border: 'none' } }>
-                        <NavOptions type={ type } />
+                        <NavOptions type={ type } handleClose={ handleClose } />
                         <Dropdown.Divider />
 
                         <NavLink
                             to={ `/${ linkTo }` }
-                            className={ styles.navLink } >
+                            className={ styles.navLink }>
                             View { linkTo }
                         </NavLink>
                         <Dropdown.Divider />
@@ -86,8 +85,10 @@ const MenuOfCanvas = ( { type } ) => {
                                 placeholder={ `Search ${ type }` }
                                 aria-label={ `Search ${ type }` }
                                 aria-describedby="basic-addon2"
+                                value={ searchName }
+                                onChange={ onChangeHandler }
                             />
-                            <Button variant='outline-secondary' id='button-addon2' >
+                            <Button variant='outline-secondary' id='button-addon2' onClick={ onClickHandler }>
                                 Button
                             </Button>
                         </InputGroup>
