@@ -46,12 +46,11 @@ const MenuOfCanvas = ( { type } ) => {
 
     return (
         <>
-            <span style={ { display: 'flex', backgroundColor: 'rgb(180, 186, 210)' } }>
-                <button style={ { backgroundColor: 'rgb(180, 186, 210)', border: 'none' } }>
+            <span className={ styles.menuContainer }>
+                <button >
                     <img src={ `${ menu }` } alt="" onClick={ handleShow } />
                 </button>
-
-                <h1 style={ { width: '100%', textAlign: 'center' } }>What to watch</h1>
+                <h1>What to watch</h1>
             </span>
 
             <Offcanvas show={ show } onHide={ handleClose } placement='start'>
@@ -61,7 +60,6 @@ const MenuOfCanvas = ( { type } ) => {
                 <Offcanvas.Body>
 
                     <Dropdown.Menu show style={ { width: '90%', border: 'none' } }>
-
                         <NavOptions type={ type } />
                         <Dropdown.Divider />
 
@@ -85,8 +83,8 @@ const MenuOfCanvas = ( { type } ) => {
 
                         <InputGroup>
                             <FormControl
-                                placeholder='Search movies'
-                                aria-label='Search movies'
+                                placeholder={ `Search ${ type }` }
+                                aria-label={ `Search ${ type }` }
                                 aria-describedby="basic-addon2"
                             />
                             <Button variant='outline-secondary' id='button-addon2' >
