@@ -6,30 +6,32 @@ import checkin from '../../Images/check-in.png';
 import clapperboard from '../../Images/clapperboard.png';
 import newIcon from '../../Images/new.png';
 
-const NavOptions = ( { type } ) => {
+//look into refactoring this with a loop
+
+const NavOptions = ( { type, handleClose } ) => {
     if ( type === 'movies' ) {
         return <div className={ styles.icons }>
             <img src={ `${ checkin }` } alt="ribbon" />
-            <NavLink to={ `/${ type }/upcoming` } className={ styles.navLink }>Upcoming</NavLink>
+            <NavLink to={ `/${ type }/upcoming` } className={ styles.navLink } onClick={ handleClose }>Upcoming</NavLink>
 
             <img src={ `${ clapperboard }` } alt="ribbon" />
-            <NavLink to={ `/${ type }/nowplaying` } className={ styles.navLink }>Now Playing</NavLink>
+            <NavLink to={ `/${ type }/nowplaying` } className={ styles.navLink } onClick={ handleClose }>Now Playing</NavLink>
 
             <img src={ `${ top }` } alt="ribbon" />
-            <NavLink to={ `/${ type }/toprated` } className={ styles.navLink }>Top Rated</NavLink>
+            <NavLink to={ `/${ type }/toprated` } className={ styles.navLink } onClick={ handleClose }>Top Rated</NavLink>
         </div>
     }
 
     else if ( type === 'shows' ) {
         return <div className={ styles.icons }>
             <img src={ `${ newIcon }` } alt="ribbon" />
-            <NavLink to={ `/${ type }/latest` } className={ styles.navLink }>Latest</NavLink>
+            <NavLink to={ `/${ type }/latest` } className={ styles.navLink } onClick={ handleClose }>Latest</NavLink>
 
             <img src={ `${ clapperboard }` } alt="ribbon" />
-            <NavLink to={ `/${ type }/airingtoday` } className={ styles.navLink }>Airing Today</NavLink>
+            <NavLink to={ `/${ type }/airingtoday` } className={ styles.navLink } onClick={ handleClose }>Airing Today</NavLink>
 
             <img src={ `${ top }` } alt="ribbon" />
-            <NavLink to={ `/${ type }/toprated` } className={ styles.navLink }>Top Rated</NavLink>
+            <NavLink to={ `/${ type }/toprated` } className={ styles.navLink } onClick={ handleClose }>Top Rated</NavLink>
         </div>
     }
 }
