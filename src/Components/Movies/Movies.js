@@ -2,27 +2,28 @@ import React, { useState, useEffect, Fragment } from 'react';
 import styles from './css/movies.module.css';
 import axios from 'axios';
 import Movie from './Movie';
-import Button from 'react-bootstrap/Button';
-import InputGroup from 'react-bootstrap/InputGroup'
-import FormControl from 'react-bootstrap/FormControl';
-// import NavBar from '../Header/NavBar';
 import MenuOfCanvas from '../Header/menuOfCanvas';
 import { useParams } from 'react-router';
 // import { v4 as uuidv4 } from 'uuid';  maybe uninstall this
 
 const Movies = () => {
+    const [ searchName, setsearchName ] = useState( '' );
+    const params = useParams();
+
     const [ movies, setMovies ] = useState( {
         title: '',
         movieList: [],
         dates: { minimum: '', maximum: '' }
     } );
-    const [ searchName, setsearchName ] = useState( '' );
-    const params = useParams();
+
+    const [ currentPage, setCurrentPage ] = useState( 1 );
+
+    const pages = [ 1, 2, 3, 4, 5 ];
 
     useEffect( () => {
         const fetchShows = async () => {
             try {
-                let response = await axios.get( `/${ params.option }/movies` );
+                let response = await axios.get( `/${ params.option }/movies/?page=${ currentPage }` );
                 let dates = {};
                 if ( response.data.results.dates !== undefined ) {
                     let regex = /(\d{4})-(\d{1,2})-(\d{1,2})/;
@@ -45,11 +46,19 @@ const Movies = () => {
             }
         }
         fetchShows();
-    }, [ params.option ] );
+    }, [ params.option, currentPage ] );
 
 
     const onChangeHandler = ( e ) => {
+        console.log(currentPage)
         setsearchName( e.target.value );
+    }
+
+    const setNewPage = ( page ) => {
+        if ( currentPage !== page ) {
+            setCurrentPage( page )
+        }
+
     }
 
     const onClickHandler = async () => {
@@ -122,6 +131,19 @@ const Movies = () => {
                         }
                     </div>
                 </div>
+
+                <div className={ styles.pageContainer }>
+                    {
+                        pages.map( page => {
+                            if ( page === currentPage ) {
+                                return <button key={ page } onClick={ () => setNewPage( page ) } className={ styles.selectedPage }>{ page }</button>
+                            }
+                            else return <button key={ page } onClick={ () => setNewPage( page ) } className={ styles.pages }>{ page }</button>
+
+                        } )
+                    }
+                </div>
+
                 <p style={ { color: 'lightgrey' } }>Note: Ratings are besed from TMBD users.</p>
             </Fragment>
         )
