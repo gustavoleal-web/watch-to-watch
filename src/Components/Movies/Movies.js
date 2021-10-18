@@ -50,7 +50,6 @@ const Movies = () => {
 
 
     const onChangeHandler = ( e ) => {
-        console.log(currentPage)
         setsearchName( e.target.value );
     }
 
@@ -80,14 +79,32 @@ const Movies = () => {
         }
     }
 
+
+    const getMoviesByGenre = async ( genreId, genreName ) => {
+
+        try {
+            let response = await axios.get( `/movies/byGenre?genreId=${ genreId }` );
+
+            setMovies( {
+                title: genreName,
+                movieList: response.data.results.results,
+                dates: null
+            } );
+
+        }
+        catch ( e ) {
+            console.log( e )
+        }
+    }
+
     if ( movies.movieList.length === 0 ) {
         return <h2>...Loading please wait.</h2>
     }
 
     else {
-        //top rated movies have already been released so they dont need a time frame.
+        //only upcoming and nowplayin have dates
         //without searchName.length === 0 it will give an error because dates will be undefined
-        let dates = movies.title !== 'toprated movies' && searchName.length === 0
+        let dates = ( movies.title === 'upcoming movies' || movies.title === 'nowplaying movies' ) && searchName.length === 0
             ? <h6 className={ styles.dates }>{ movies.dates.minimum } - { movies.dates.maximum }</h6>
             : null;
 
@@ -96,7 +113,13 @@ const Movies = () => {
                 {
                     //<NavBar type='movies' />
                 }
-                <MenuOfCanvas type='movies' onClickHandler={ onClickHandler } onChangeHandler={ onChangeHandler } searchName={ searchName } />
+                <MenuOfCanvas
+                    type='movies'
+                    onClickHandler={ onClickHandler }
+                    onChangeHandler={ onChangeHandler }
+                    searchName={ searchName }
+                    getMoviesByGenre={ getMoviesByGenre } />
+
                 <div className={ styles.mainContainer }>
 
                     {
