@@ -11,7 +11,7 @@ import menu from '../../Images/menu.png';
 import axios from 'axios';
 
 
-const MenuOfCanvas = ( { type, onClickHandler, onChangeHandler, searchName } ) => {
+const MenuOfCanvas = ( { type, onClickHandler, onChangeHandler, searchName, getMoviesByGenre } ) => {
     const [ show, setShow ] = useState( false );
     const handleClose = () => setShow( false );
     const handleShow = () => setShow( true );
@@ -42,7 +42,12 @@ const MenuOfCanvas = ( { type, onClickHandler, onChangeHandler, searchName } ) =
         fetchShows();
     }, [ type ] );
 
- 
+
+    const passMovieIdAndCloseMenu = ( genreId, genreNname ) => {
+        getMoviesByGenre( genreId, genreNname );
+        handleClose();
+    }
+
     return (
         <>
             <span className={ styles.menuContainer }>
@@ -74,7 +79,7 @@ const MenuOfCanvas = ( { type, onClickHandler, onChangeHandler, searchName } ) =
                             <Dropdown.Menu className={ styles.genres }>
                                 {
                                     genres.length === 0 ? null : genres.map( genre =>
-                                        <Dropdown.Item href='#action/3.1' key={ genre.name }>{ genre.name }</Dropdown.Item> )
+                                        <Dropdown.Item key={ genre.id } onClick={ () => passMovieIdAndCloseMenu( genre.id, genre.name ) }>{ genre.name }</Dropdown.Item> )
                                 }
                             </Dropdown.Menu>
                         </Dropdown>
