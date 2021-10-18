@@ -21,7 +21,7 @@ const Movie = ( { title, releaseDate, posterPath, movieId, option, rating } ) =>
                     <img src={  posterSrc  } alt='poster' style={ { height: '100%' } } />
                 </Link>
                 <div className={ styles.movieMain }>
-                    <h4>{ title }</h4>
+                    <h6>{ title }</h6>
                     <p>{ mmddyyyy }</p>
                 </div>
                 <p className={ styles.rating }>{ rating }/10</p>
