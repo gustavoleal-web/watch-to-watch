@@ -2,11 +2,12 @@ import React, { useEffect, useState, Fragment } from 'react'
 import { useParams } from 'react-router-dom';
 import Providers from './Providers';
 import Title from './Titles';
-import NavBarMenu from '../Header/NavBar';
+//import NavBarMenu from '../Header/NavBar';
+import MenuOfCanvas from '../Header/menuOfCanvas';
 import styles from './css/about.module.css';
 import axios from 'axios';
 import Card from 'react-bootstrap/Card';
-import OfCanvas from '../TV/OfCanvas'
+// import OfCanvas from '../TV/OfCanvas'
 
 import Carousel from './Carousel';
 import Sypnosis from './Accordion';
@@ -50,7 +51,7 @@ const About = () => {
 
     return (
         <Fragment>
-            <NavBarMenu type='movies' />
+            <MenuOfCanvas type='movies' />
             <div className={ styles.mainContainer }>
                 {
                     Object.keys( state ).length === 0 ? null
@@ -129,9 +130,9 @@ const About = () => {
                                 height="315"
                                 src="https://www.youtube.com/embed/BdJKm16Co6M"
                                 title="YouTube video player"
-                                frameborder="0"
+                                frameBorder="0"
                                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                allowfullscreen
+                                allowFullScreen
                             >
                             </iframe>
 
