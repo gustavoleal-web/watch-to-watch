@@ -42,4 +42,9 @@
     text-decoration: none;
     margin-right   : 15px;
     padding        : 13px 12px;
+    color          : black
+}
+
+.navLink:hover {
+    color: rgb(253, 84, 84);
 }
