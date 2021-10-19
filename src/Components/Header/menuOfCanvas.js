@@ -48,6 +48,11 @@ const MenuOfCanvas = ( { type, onClickHandler, onChangeHandler, searchName, getM
         handleClose();
     }
 
+    const closeAfterSearch = () => {
+        onClickHandler();
+        handleClose();
+    }
+
     return (
         <>
             <span className={ styles.menuContainer }>
@@ -83,6 +88,7 @@ const MenuOfCanvas = ( { type, onClickHandler, onChangeHandler, searchName, getM
                                 }
                             </Dropdown.Menu>
                         </Dropdown>
+
                         <Dropdown.Divider />
 
                         <InputGroup>
@@ -93,7 +99,7 @@ const MenuOfCanvas = ( { type, onClickHandler, onChangeHandler, searchName, getM
                                 value={ searchName }
                                 onChange={ onChangeHandler }
                             />
-                            <Button variant='outline-secondary' id='button-addon2' onClick={ onClickHandler }>
+                            <Button variant='outline-secondary' id='button-addon2' onClick={ closeAfterSearch }>
                                 Button
                             </Button>
                         </InputGroup>
