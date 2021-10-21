@@ -80,7 +80,8 @@ const MenuOfCanvas = ( { type, onClickHandler, onChangeHandler, searchName, getM
                         <Dropdown.Divider />
 
                         <Dropdown>
-                            <Dropdown.Toggle id="dropdown-custom-1" bsPrefix={ styles.toggleButton }>Genres</Dropdown.Toggle>
+                            <Dropdown.Toggle id="dropdown-custom-1" bsPrefix={ styles.toggleButton } style={ { backgroundColor: 'rgb(55, 58, 71)' } }
+                            >Genres</Dropdown.Toggle>
                             <Dropdown.Menu className={ styles.genres }>
                                 {
                                     genres.length === 0 ? null : genres.map( genre =>
@@ -108,20 +109,23 @@ const MenuOfCanvas = ( { type, onClickHandler, onChangeHandler, searchName, getM
 
                 </Offcanvas.Body>
 
-                <div>Icons made by
-                    <a href="https://www.freepik.com" title="Freepik">Freepik</a> from
-                    <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a>
-                </div>
+                <span style={ { fontSize: '11px', textAlign: 'center' } }>
+                    <div>Icons made by
+                        <a href="https://www.freepik.com" title="Freepik">Freepik</a> from
+                        <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a>
+                    </div>
 
-                <div>Icons made by
-                    <a href="https://www.flaticon.com/authors/icongeek26" title="Icongeek26">Icongeek26</a> from
-                    <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a>
-                </div>
+                    <div>Icons made by
+                        <a href="https://www.flaticon.com/authors/icongeek26" title="Icongeek26">Icongeek26</a> from
+                        <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a>
+                    </div>
 
-                <div>Icons made by
-                    <a href="https://www.flaticon.com/authors/ctrlastudio" title="Ctrlastudio">Ctrlastudio</a> from
-                    <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a>
-                </div>
+                    <div>Icons made by
+                        <a href="https://www.flaticon.com/authors/ctrlastudio" title="Ctrlastudio">Ctrlastudio</a> from
+                        <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a>
+                    </div>
+                </span>
+
 
             </Offcanvas>
         </>
