@@ -1,27 +1,64 @@
 :root {
     --card-margin-top      : 20px;
     --main-background-color: rgb(180, 186, 210);
+    --poster-width         : 8.5rem;
 }
 
 .mainContainer {
     padding-left : 10px;
     padding-right: 10px;
-    margin-top   : 55px;
+    margin-top   : 20px;
 }
 
 .imgContainer {
-    display         : flex;
-    background-color: var(--main-background-color);
-    border          : 5px solid rgb(230, 230, 230);
+    display              : grid;
+    grid-template-columns: 1fr 1fr;
+    background-color     : var(--main-background-color);
+    border               : 5px solid rgb(230, 230, 230);
+}
+
+.posterImg {
+    height: 200px;
+    width : var(--poster-width);
+}
+
+.rating {
+    background-color: rgb(55, 58, 71);
+    color           : white;
+    width           : var(--poster-width);
+    padding-bottom: 4px;
+}
+
+.rating img {
+    padding-bottom: 4px;
 }
 
 .card {
-    display              : grid;
+    /* display              : grid;
     grid-template-columns: 1fr 1fr 3fr 2fr;
     border               : 1px solid rgba(0, 0, 0, .125);
     border-radius        : .25rem;
     margin-top           : var(--card-margin-top);
-    background-color     : var(--main-background-color);
+    background-color     : var(--main-background-color); */
+
+
+    grid-column-start    : 1;
+    grid-column-end      : 3;
+    display              : grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    padding-top          : 20px;
+    padding-bottom       : 10px;
+}
+
+.card p {
+    align-self    : center;
+    margin-bottom : 0;
+    padding-bottom: 5px;
+}
+
+.card h6 {
+    margin-bottom: 0;
+    justify-self : center;
 }
 
 .MovieTitle {
@@ -30,7 +67,8 @@
 }
 
 .title {
-    margin: 0;
+    margin    : 0;
+    text-align: center;
 }
 
 .cardOverview {
@@ -56,20 +94,41 @@
     background-color     : var(--main-background-color);
 }
 
-.statsGenresMargin {
+.statusTitle {
     /* margin-left: 10px; */
-    text-align: center;
+    text-align   : center;
+    align-self   : center;
+    padding-top  : 20px;
+    margin-bottom: 0px;
 }
 
+.movieStatus {
+    justify-self: start;
+}
 
-.statsGenresUl {
+.genresTitle {
+    justify-self  : center;
+    align-self    : center;
+    margin-bottom : 0px;
+    padding-top   : 20px;
+    padding-bottom: 10px;
+
+}
+
+.genres {
     list-style     : none;
     display        : flex;
     flex-wrap      : wrap;
     justify-content: flex-start;
+
+    padding-left  : 0px;
+    align-self    : center;
+    margin-bottom : 0;
+    padding-top   : 20px;
+    padding-bottom: 10px;
 }
 
-.statsGenresUl li {
+.genres li {
     /* width       : 28%; */
     margin-right: 10px;
 }
