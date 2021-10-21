@@ -25,9 +25,9 @@
 }
 
 .toggleButton {
-    background-color: rgb(55, 58, 71);
-    width           : 100%;
+    width: 100%;
 }
+
 
 .icons {
     display              : grid;
