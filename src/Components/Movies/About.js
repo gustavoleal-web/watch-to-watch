@@ -10,7 +10,7 @@ import axios from 'axios';
 import Card from 'react-bootstrap/Card';
 // import OfCanvas from '../TV/OfCanvas'
 
-import Carousel from './Carousel';
+import Recommendations from './Recommendations';
 import Sypnosis from './Accordion';
 
 
@@ -153,7 +153,7 @@ const About = () => {
                             {
                                 Object.keys( recommended ).length === 0
                                     ? null
-                                    : <Carousel recommendations={ recommended } />
+                                    : <Recommendations recommendations={ recommended } />
 
                             }
                         </Fragment>
