@@ -1,27 +1,26 @@
 import React, { Fragment } from 'react';
-import Carousel from 'react-bootstrap/Carousel';
 import { Link } from 'react-router-dom'
 
 const CarouselComp = ( { recommendations } ) => {
 
     return <Fragment>
-        <h5>Recommendations</h5>
-        <Carousel style={ { backgroundColor: 'black' } }>
+        <h5 style={ { color: 'rgb(180, 186, 210)' } }>Recommendations</h5>
+        <div style={ { backgroundColor: 'rgb(180, 186, 210)' } }>
             {
                 recommendations.map( movie =>
-                    <Carousel.Item interval={ 100000 } key={ movie.id }>
-                        <Link to={ `/movies/${ movie.id }` }>
+                    <div style={ { border: '5px solid white', margin: '5px 10px' } } key={ movie.id }>
+                        <Link to={ `/movies/trending/${ movie.id }` }>
                             <img
                                 src={ `https://image.tmdb.org/t/p/w300/${ movie.poster_path }` }
                                 alt="First slide"
-                                style={ { width: '200px', marginLeft: '70px' } }
+                                style={ { width: '200px' } }
                             />
                         </Link>
-                    </Carousel.Item>
+                    </div>
                 )
             }
 
-        </Carousel>
+        </div>
     </Fragment>
 }
 
