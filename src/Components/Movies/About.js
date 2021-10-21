@@ -5,6 +5,7 @@ import Title from './Titles';
 //import NavBarMenu from '../Header/NavBar';
 import MenuOfCanvas from '../Header/menuOfCanvas';
 import styles from './css/about.module.css';
+import startIcon from '../../Images/star.png'
 import axios from 'axios';
 import Card from 'react-bootstrap/Card';
 // import OfCanvas from '../TV/OfCanvas'
@@ -57,37 +58,45 @@ const About = () => {
                     Object.keys( state ).length === 0 ? null
                         : <Fragment>
                             <div className={ styles.imgContainer }>
-                                <img
-                                    src={ `https://image.tmdb.org/t/p/w300/${ state.poster_path }` }
-                                    alt='poster'
-                                    style={ { height: '200px' } }
-                                />
+                                <div>
+                                    <img
+                                        className={ styles.posterImg }
+                                        src={ `https://image.tmdb.org/t/p/w300/${ state.poster_path }` }
+                                        alt='poster'
+
+                                    />
+                                    <p className={ styles.rating }>{ state.vote_average } <img src={ startIcon } alt='stars' /></p>
+                                </div>
+
                                 <h3 className={ styles.MovieTitle }>{ state.title }</h3>
-                            </div>
 
-                            <Card bsPrefix={ styles.card }>
+                                <div className={ styles.card }>
 
-                                <Title name='Type' />
-                                <Title name='Lang' />
-                                <Title name='Produced In' />
-                                <Title name='Runtime' />
-
-                                <p className={ styles.title }>Movie</p>
-                                <p className={ styles.title }> { state.original_language }</p>
-
-                                <ul className={ styles.productionCountries }>
-                                    {
-                                        state.production_countries.map( company =>
-                                            <li key={ company.name }
-                                                className={ styles.title }>
-                                                { company.iso_3166_1 }
-                                            </li> )
+                                    <Title name='Type' />
+                                    <Title name='Lang' />
+                                    {//<Title name='Produced In' />
                                     }
-                                </ul>
+                                    <Title name='Runtime' />
 
-                                <p className={ styles.title }> { state.runtime } min.</p>
+                                    <h6 className={ styles.title }>Movie</h6>
+                                    <h6 className={ styles.title }> { state.original_language }</h6>
 
-                            </Card>
+                                    {
+                                        //<ul className={ styles.productionCountries }>
+                                        // {
+                                        //     state.production_countries.map( company =>
+                                        //         <li key={ company.name }
+                                        //             className={ styles.title }>
+                                        //             { company.iso_3166_1 }
+                                        //         </li> )
+                                        // }
+                                        //</ul>
+                                    }
+
+                                    <h6 className={ styles.title }> { state.runtime } min.</h6>
+
+                                </div>
+                            </div>
 
                             <Sypnosis overview={ state.overview } />
 
@@ -100,11 +109,11 @@ const About = () => {
 
 
                             <Card bsPrefix={ styles.statsGenres }>
-                                <Card.Title className={ styles.statsGenresMargin }>Status</Card.Title>
-                                <Card.Title style={ { paddingLeft: '32px' } }>Genres</Card.Title>
+                                <Card.Title className={ styles.statusTitle }>Status</Card.Title>
+                                <p className={ `${ styles.movieStatus } ${ styles.statusTitle }` } >{ state.status }</p>
 
-                                <p className={ styles.statsGenresMargin } >{ state.status }</p>
-                                <ul className={ styles.statsGenresUl }>
+                                <Card.Title>Genres</Card.Title>
+                                <ul className={ styles.genres }>
 
                                     {
                                         state.genres.map( genre =>
@@ -125,16 +134,17 @@ const About = () => {
                                 //https://api.themoviedb.org/3/movie/movieId/videos?api_key={key}&language=en-US&include_image_language=US
                                 //BdJKm16Co6M would be the id in the iframe
                             }
-                            <iframe
-                                width="400"
-                                height="315"
-                                src="https://www.youtube.com/embed/BdJKm16Co6M"
-                                title="YouTube video player"
-                                frameBorder="0"
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                allowFullScreen
-                            >
-                            </iframe>
+                            {
+                                //<iframe
+                                //width="400"
+                                //height="315"
+                                //src="https://www.youtube.com/embed/BdJKm16Co6M"
+                                //title="YouTube video player"
+                                //frameBorder="0"
+                                //allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                // allowFullScreen>
+                                //</iframe>
+                            }
 
                             {
                                 //<img src={ `https://image.tmdb.org/t/p/w300/${ state.backdrop_path }` } alt='poster' />
@@ -148,8 +158,8 @@ const About = () => {
                             }
                         </Fragment>
                 }
-            </div>
-        </Fragment>
+            </div >
+        </Fragment >
     )
 }
 
