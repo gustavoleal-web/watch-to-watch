@@ -70,7 +70,7 @@ const About = () => {
 
                                 <h3 className={ styles.MovieTitle }>{ state.title }</h3>
 
-                                <div className={ styles.card }>
+                                <div className={ styles.generalInfo }>
 
                                     <Title name='Type' />
                                     <Title name='Lang' />
@@ -110,9 +110,9 @@ const About = () => {
 
                             <Card bsPrefix={ styles.statsGenres }>
                                 <Card.Title className={ styles.statusTitle }>Status</Card.Title>
-                                <p className={ `${ styles.movieStatus } ${ styles.statusTitle }` } >{ state.status }</p>
+                                <p className={ styles.movieStatus } >{ state.status }</p>
 
-                                <Card.Title>Genres</Card.Title>
+                                <Card.Title className={ styles.genresTitle }>Genres</Card.Title>
                                 <ul className={ styles.genres }>
 
                                     {
@@ -121,10 +121,15 @@ const About = () => {
                                                 className={ styles.genre }>
                                                 { genre.name }
                                             </li>
-                                        )
+                                        )``
                                     }
                                 </ul>
                             </Card>
+
+                            <div style={ { marginTop: '40px', marginBottom: '40px', display: 'flex', flexDirection: 'column', border: '2px solid rgb(180, 186, 210)' } }>
+                                <p style={ { color: 'white', marginBottom: '2px', 'paddingTop': '10px' } }>Official website: </p>
+                                <a href={ state.homepage } style={ { color: 'rgb(180, 186, 210)', textAlign: 'center', paddingBottom: '10px', textDecoration: 'none' } }>{ state.homepage }</a>
+                            </div>
 
                             <Card style={ { marginTop: '20px', marginBottom: '20px' } }>
                                 <Providers movieId={ params.movieId } />
