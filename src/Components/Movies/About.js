@@ -81,31 +81,12 @@ const About = () => {
                                     <h6 className={ styles.title }>Movie</h6>
                                     <h6 className={ styles.title }> { state.original_language }</h6>
 
-                                    {
-                                        //<ul className={ styles.productionCountries }>
-                                        // {
-                                        //     state.production_countries.map( company =>
-                                        //         <li key={ company.name }
-                                        //             className={ styles.title }>
-                                        //             { company.iso_3166_1 }
-                                        //         </li> )
-                                        // }
-                                        //</ul>
-                                    }
-
                                     <h6 className={ styles.title }> { state.runtime } min.</h6>
 
                                 </div>
                             </div>
 
                             <Sypnosis overview={ state.overview } />
-
-                            {
-                                // <Card bsPrefix={ styles.cardOverview }>
-                                // <OfCanvas overview={ state.overview } />
-                                //</Card>
-                            }
-
 
 
                             <Card bsPrefix={ styles.statsGenres }>
@@ -126,9 +107,9 @@ const About = () => {
                                 </ul>
                             </Card>
 
-                            <div style={ { marginTop: '40px', marginBottom: '40px', display: 'flex', flexDirection: 'column', border: '2px solid rgb(180, 186, 210)' } }>
-                                <p style={ { color: 'white', marginBottom: '2px', 'paddingTop': '10px' } }>Official website: </p>
-                                <a href={ state.homepage } style={ { color: 'rgb(180, 186, 210)', textAlign: 'center', paddingBottom: '10px', textDecoration: 'none' } }>{ state.homepage }</a>
+                            <div className={ styles.siteContainer }>
+                                <p >Official website: </p>
+                                <a href={ state.homepage } className={ styles.siteLink }>{ state.homepage }</a>
                             </div>
 
                             <Card style={ { marginTop: '20px', marginBottom: '20px' } }>
