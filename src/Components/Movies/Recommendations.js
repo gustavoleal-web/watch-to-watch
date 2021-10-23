@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom'
 import styles from './css/recommend.module.css';
 
 const CarouselComp = ( { recommendations } ) => {
-
     return <Fragment>
         <h4>Recommendations</h4>
         <div className={ styles.mainContainer }>
@@ -14,14 +13,14 @@ const CarouselComp = ( { recommendations } ) => {
                             <img
                                 src={ `https://image.tmdb.org/t/p/w300/${ movie.poster_path }` }
                                 alt='movie poster'
-                                style={ { width: '200px' } }
+                                className={ styles.poster }
                             />
                         </Link>
                     </div>
                 )
             }
-
         </div>
+
     </Fragment>
 }
 
