@@ -48,7 +48,7 @@
 
 .generalInfo h6 {
     margin-bottom: 0px;
-  
+
 }
 
 .MovieTitle {
@@ -117,4 +117,31 @@
 
 .genres li {
     margin-right: 10px;
+}
+
+.siteContainer {
+    display       : flex;
+    flex-direction: column;
+    margin        : 40px 0px;
+    border        : 2px solid rgb(180, 186, 210)
+}
+
+.siteContainer p {
+    color      : white;
+    margin-top : 2px;
+    padding-top: 10px;
+
+}
+
+.siteLink {
+    color          : rgb(180, 186, 210);
+    text-align     : center;
+    padding-bottom : 10px;
+    text-decoration: none;
+}
+
+@media (max-width: 360px) {
+    .siteContainer a {
+        font-size: 13px;
+    }
 }
