@@ -121,7 +121,7 @@ const About = () => {
                                                 className={ styles.genre }>
                                                 { genre.name }
                                             </li>
-                                        )``
+                                        )
                                     }
                                 </ul>
                             </Card>
