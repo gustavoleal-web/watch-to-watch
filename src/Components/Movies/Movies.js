@@ -61,7 +61,7 @@ const Movies = () => {
     }
 
     const onClickHandler = async () => {
-        if ( searchName.length > 3 ) {
+        if ( searchName.length >= 3 ) {
             let url = `/search/movies/?movieName=${ searchName }`;
 
             try {
@@ -110,9 +110,6 @@ const Movies = () => {
 
         return (
             <Fragment>
-                {
-                    //<NavBar type='movies' />
-                }
                 <MenuOfCanvas
                     type='movies'
                     onClickHandler={ onClickHandler }
@@ -121,21 +118,6 @@ const Movies = () => {
                     getMoviesByGenre={ getMoviesByGenre } />
 
                 <div className={ styles.mainContainer }>
-
-                    {
-                        //<InputGroup className={ styles.search }>
-                        //<FormControl
-                        //placeholder='Search movies'
-                        // aria-label='Search movies'
-                        // aria-describedby="basic-addon2"
-                        // value={ searchName }
-                        // onChange={ onChangeHandler }
-                        //  />
-                        // <Button variant='outline-secondary' id='button-addon2' onClick={ onClickHandler }>
-                        //   Button
-                        //  </Button>
-                        //</InputGroup>
-                    }
 
                     <h2 className={ styles.title }>{ movies.title }</h2>
                     { dates }
