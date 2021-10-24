@@ -14,16 +14,20 @@ import Recommendations from './Recommendations';
 import Sypnosis from './Accordion';
 
 
+
 const About = () => {
     const params = useParams();
     const [ state, setState ] = useState( {} );
+    const [ trailers, setTrailers ] = useState( [] )
     const [ recommended, setRecommended ] = useState( [] );
 
     useEffect( () => {
         const fetchShows = async () => {
             try {
                 let response = await axios.get( `/${ params.navOption }/movie/?movieId=${ params.movieId }` );
-                setState( response.data.results )
+                let trailers = await axios.get( `/videos/?movieId=${ params.movieId }/` ); 
+                setState( response.data.results );
+                setTrailers( trailers.data.results.results );
             }
             catch ( e ) {
                 console.log( e )
@@ -44,8 +48,6 @@ const About = () => {
             catch ( e ) {
                 console.log( e )
             }
-
-
         }
         fetchShows();
     }, [ params.movieId ] );
@@ -121,16 +123,18 @@ const About = () => {
                                 //BdJKm16Co6M would be the id in the iframe
                             }
                             {
-                                //<iframe
-                                //width="400"
-                                //height="315"
-                                //src="https://www.youtube.com/embed/BdJKm16Co6M"
-                                //title="YouTube video player"
-                                //frameBorder="0"
-                                //allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                // allowFullScreen>
-                                //</iframe>
+                                // <iframe
+                                //     width="300"
+                                //     height="215"
+                                //     src="https://www.youtube.com/embed/aSHs224Dge0"
+                                //     title="YouTube video player"
+                                //     frameBorder="0"
+                                //     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                //     allowFullScreen>
+                                // </iframe>
                             }
+
+
 
                             {
                                 //<img src={ `https://image.tmdb.org/t/p/w300/${ state.backdrop_path }` } alt='poster' />
