@@ -58,17 +58,16 @@ const Providers = ( { movieId } ) => {
 
 
     if ( noProviers ) {
-        return <p>No servies at this time.</p>
+        return <p>No providers at this time. Visit the official website for more details.</p>
     }
 
     else {
         return <Fragment>
-            <p>Source:JustWatch</p>
+            <p>Source: JustWatch</p>
 
             <Provider service={ state.stream } serviceName='Stream' />
             <Provider service={ state.buy } serviceName='Buy' />
             <Provider service={ state.rent } serviceName='Rent' />
-
         </Fragment>
     }
 }
