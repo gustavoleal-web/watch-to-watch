@@ -12,7 +12,7 @@ import Card from 'react-bootstrap/Card';
 
 import Recommendations from './Recommendations';
 import Sypnosis from './Accordion';
-
+import Trailers from './Trailers';
 
 
 const About = () => {
@@ -25,7 +25,7 @@ const About = () => {
         const fetchShows = async () => {
             try {
                 let response = await axios.get( `/${ params.navOption }/movie/?movieId=${ params.movieId }` );
-                let trailers = await axios.get( `/videos/?movieId=${ params.movieId }/` ); 
+                let trailers = await axios.get( `/videos/?movieId=${ params.movieId }/` );
                 setState( response.data.results );
                 setTrailers( trailers.data.results.results );
             }
@@ -122,6 +122,10 @@ const About = () => {
                                 //https://api.themoviedb.org/3/movie/movieId/videos?api_key={key}&language=en-US&include_image_language=US
                                 //BdJKm16Co6M would be the id in the iframe
                             }
+
+                            {
+                                trailers.length !== 0 ? <Trailers videos={ trailers } /> : null
+                            }
                             {
                                 // <iframe
                                 //     width="300"
@@ -133,7 +137,6 @@ const About = () => {
                                 //     allowFullScreen>
                                 // </iframe>
                             }
-
 
 
                             {
