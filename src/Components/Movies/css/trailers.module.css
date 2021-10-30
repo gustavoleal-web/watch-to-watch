@@ -1,0 +1,12 @@
+.playerMainContainer {
+    display    : flex;
+    overflow   : auto;
+    white-space: nowrap;
+    margin     : 5px 10px;
+    max-height : 200px;
+}
+
+.reactPlayer {
+    margin: 0px 7px;
+    border: 4px solid rgb(180, 186, 210);
+}
