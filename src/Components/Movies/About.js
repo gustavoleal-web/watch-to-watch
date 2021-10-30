@@ -76,13 +76,10 @@ const About = () => {
 
                                     <Title name='Type' />
                                     <Title name='Lang' />
-                                    {//<Title name='Produced In' />
-                                    }
                                     <Title name='Runtime' />
 
                                     <h6 className={ styles.title }>Movie</h6>
                                     <h6 className={ styles.title }> { state.original_language }</h6>
-
                                     <h6 className={ styles.title }> { state.runtime } min.</h6>
 
                                 </div>
@@ -119,25 +116,8 @@ const About = () => {
                             </Card>
 
                             {
-                                //https://api.themoviedb.org/3/movie/movieId/videos?api_key={key}&language=en-US&include_image_language=US
-                                //BdJKm16Co6M would be the id in the iframe
-                            }
-
-                            {
                                 trailers.length !== 0 ? <Trailers videos={ trailers } /> : null
                             }
-                            {
-                                // <iframe
-                                //     width="300"
-                                //     height="215"
-                                //     src="https://www.youtube.com/embed/aSHs224Dge0"
-                                //     title="YouTube video player"
-                                //     frameBorder="0"
-                                //     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                //     allowFullScreen>
-                                // </iframe>
-                            }
-
 
                             {
                                 //<img src={ `https://image.tmdb.org/t/p/w300/${ state.backdrop_path }` } alt='poster' />
