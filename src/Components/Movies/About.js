@@ -14,12 +14,12 @@ import Recommendations from './Recommendations';
 import Sypnosis from './Accordion';
 import Trailers from './Trailers';
 
-
 const About = () => {
     const params = useParams();
     const [ state, setState ] = useState( {} );
     const [ trailers, setTrailers ] = useState( [] )
     const [ recommended, setRecommended ] = useState( [] );
+    const [ defaultImg, setDefaultImg ] = useState( '' );
 
     useEffect( () => {
         const fetchShows = async () => {
@@ -27,6 +27,7 @@ const About = () => {
                 let response = await axios.get( `/${ params.navOption }/movie/?movieId=${ params.movieId }` );
                 let trailers = await axios.get( `/videos/?movieId=${ params.movieId }/` );
                 setState( response.data.results );
+                setDefaultImg( `https://image.tmdb.org/t/p/w300${ response.data.results.poster_path }` );
                 setTrailers( trailers.data.results.results );
             }
             catch ( e ) {
@@ -42,8 +43,8 @@ const About = () => {
 
             try {
                 let response = await axios.get( `/movie/recommendations/?movieId=${ params.movieId }` );
-                let recommended = response.data.results.results.slice( 9 );
-                setRecommended( recommended )
+                let recommended = response.data.results.results;
+                setRecommended( recommended );
             }
             catch ( e ) {
                 console.log( e )
@@ -63,9 +64,8 @@ const About = () => {
                                 <div>
                                     <img
                                         className={ styles.posterImg }
-                                        src={ `https://image.tmdb.org/t/p/w300/${ state.poster_path }` }
+                                        src={ defaultImg }
                                         alt='poster'
-
                                     />
                                     <p className={ styles.rating }>{ state.vote_average } <img src={ startIcon } alt='stars' /></p>
                                 </div>
@@ -115,9 +115,13 @@ const About = () => {
                                 <Providers movieId={ params.movieId } />
                             </Card>
 
+
+
                             {
                                 trailers.length !== 0 ? <Trailers videos={ trailers } /> : null
                             }
+
+
 
                             {
                                 //<img src={ `https://image.tmdb.org/t/p/w300/${ state.backdrop_path }` } alt='poster' />
