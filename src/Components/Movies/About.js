@@ -22,24 +22,29 @@ const About = () => {
     const [ defaultImg, setDefaultImg ] = useState( '' );
 
     useEffect( () => {
-        const fetchShows = async () => {
+        const fetchMovies = async () => {
             try {
+               
                 let response = await axios.get( `/${ params.navOption }/movie/?movieId=${ params.movieId }` );
                 let trailers = await axios.get( `/videos/?movieId=${ params.movieId }/` );
                 setState( response.data.results );
                 setDefaultImg( `https://image.tmdb.org/t/p/w300${ response.data.results.poster_path }` );
                 setTrailers( trailers.data.results.results );
+                
+
             }
             catch ( e ) {
                 console.log( e )
             }
+            window.scrollTo( 0, 0 )
         }
 
-        fetchShows();
+        fetchMovies();
+
     }, [ params.movieId, params.navOption ] );
 
     useEffect( () => {
-        const fetchShows = async () => {
+        const fetchMovies = async () => {
 
             try {
                 let response = await axios.get( `/movie/recommendations/?movieId=${ params.movieId }` );
@@ -50,7 +55,7 @@ const About = () => {
                 console.log( e )
             }
         }
-        fetchShows();
+        fetchMovies();
     }, [ params.movieId ] );
 
     return (
@@ -108,7 +113,7 @@ const About = () => {
 
                             <div className={ styles.siteContainer }>
                                 <p >Official website: </p>
-                                <a href={ state.homepage } className={ styles.siteLink }>{ state.homepage }</a>
+                                <a href={ `${state.homepage}` } className={ styles.siteLink }>{ state.homepage }</a>
                             </div>
 
                             <Card style={ { marginTop: '20px', marginBottom: '20px' } }>
