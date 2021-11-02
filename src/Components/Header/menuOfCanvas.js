@@ -8,6 +8,7 @@ import Button from 'react-bootstrap/Button';
 import { NavLink } from 'react-router-dom';
 import styles from './css/menu.module.css'
 import menu from '../../Images/menu.png';
+import homeIcon from '../../Images/home.png';
 import axios from 'axios';
 
 
@@ -57,9 +58,17 @@ const MenuOfCanvas = ( { type, onClickHandler, onChangeHandler, searchName, getM
         <>
             <span className={ styles.menuContainer }>
                 <button >
-                    <img src={ `${ menu }` } alt="" onClick={ handleShow } />
+                    <img src={ `${ menu }` } alt="What to watch" onClick={ handleShow } />
                 </button>
                 <h1>What to watch</h1>
+                {/* currently link will only work for movies bs shows/trending isnt set up*/ }
+
+                <NavLink
+                    to={ `/${ type }/trending` }
+                    className={ styles.navLink }>
+                    <img src={ `${ homeIcon }` } alt="" />
+                </NavLink>
+
             </span>
 
             <Offcanvas show={ show } onHide={ handleClose } placement='start'>
