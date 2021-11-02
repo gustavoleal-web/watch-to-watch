@@ -7,17 +7,22 @@ const CarouselComp = ( { recommendations } ) => {
         <h4>Recommendations</h4>
         <div className={ styles.mainContainer }>
             {
-                recommendations.map( movie =>
-                    <div className={ styles.posterContainer } key={ movie.id }>
-                        <Link to={ `/movies/trending/${ movie.id }` }>
-                            <img
-                                src={ `https://image.tmdb.org/t/p/w300/${ movie.poster_path }` }
-                                alt='movie poster'
-                                className={ styles.poster }
-                            />
-                        </Link>
-                    </div>
-                )
+                recommendations.map( movie => {
+                    let imgSource = `https://image.tmdb.org/t/p/w300${ movie.poster_path }`;
+                    return (
+                        <div className={ styles.posterContainer } key={ movie.id }>
+
+                            <Link to={ `/movies/trending/${ movie.id }` }>
+                                <img
+                                    src={ imgSource }
+                                    alt='movie poster'
+                                    className={ styles.poster }
+                                />
+                            </Link>
+                        </div>
+                    )
+
+                } )
             }
         </div>
 
