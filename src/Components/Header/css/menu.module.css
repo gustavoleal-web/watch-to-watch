@@ -1,5 +1,6 @@
 .menuContainer {
     display         : flex;
+    align-items     : center;
     background-color: rgb(180, 186, 210);
 }
 
@@ -40,7 +41,7 @@
 
 .navLink {
     text-decoration: none;
-    margin-right   : 15px;
+    margin-right   : 5px;
     padding        : 13px 12px;
     color          : black
 }
