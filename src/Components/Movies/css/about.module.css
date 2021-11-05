@@ -138,6 +138,7 @@
     text-align     : center;
     padding-bottom : 10px;
     text-decoration: none;
+    overflow       : auto;
 }
 
 @media (max-width: 360px) {
