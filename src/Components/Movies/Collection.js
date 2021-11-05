@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import axios from 'axios';
+import styles from './css/collection.module.css';
 
 const Collection = ( { name, id } ) => {
     const [ movieCollection, setMovieCollection ] = useState( {} );
@@ -33,10 +34,21 @@ const Collection = ( { name, id } ) => {
                 <Offcanvas.Header closeButton>
                     <Offcanvas.Title>{ name }</Offcanvas.Title>
                 </Offcanvas.Header>
-                <Offcanvas.Body>
+                <Offcanvas.Body bsPrefix={ styles.container }>
                     {
                         Object.keys( movieCollection ).length !== 0 && movieCollection.parts.length !== 0
-                            ? movieCollection.parts.map( ( part ) => <img src={ `https://image.tmdb.org/t/p/w300${ part.poster_path }` } alt="" /> )
+                            ? movieCollection.parts.map( ( part ) =>
+                                
+                                    <img
+                                        src={ `https://image.tmdb.org/t/p/w300${ part.poster_path }` }
+                                        alt={ `${ part.title }` }
+                                        key={ part.id }
+                                        className={ styles.poster }
+                                        onClick={ () => console.log( part.title ) } />
+                                    
+                               
+
+                            )
                             : null
 
                     }
