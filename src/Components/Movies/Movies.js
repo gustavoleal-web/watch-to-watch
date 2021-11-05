@@ -57,7 +57,7 @@ const Movies = () => {
         if ( currentPage !== page ) {
             setCurrentPage( page )
         }
-
+        window.scrollTo( 0, 0 );
     }
 
     const onClickHandler = async () => {
