@@ -4,10 +4,12 @@ import Providers from './Providers';
 import Title from './Titles';
 //import NavBarMenu from '../Header/NavBar';
 import MenuOfCanvas from '../Header/menuOfCanvas';
+import Card from 'react-bootstrap/Card';
+import Collection from './Collection';
 import styles from './css/about.module.css';
 import startIcon from '../../Images/star.png'
 import axios from 'axios';
-import Card from 'react-bootstrap/Card';
+
 // import OfCanvas from '../TV/OfCanvas'
 
 import Recommendations from './Recommendations';
@@ -24,13 +26,13 @@ const About = () => {
     useEffect( () => {
         const fetchMovies = async () => {
             try {
-               
+
                 let response = await axios.get( `/${ params.navOption }/movie/?movieId=${ params.movieId }` );
                 let trailers = await axios.get( `/videos/?movieId=${ params.movieId }/` );
                 setState( response.data.results );
                 setDefaultImg( `https://image.tmdb.org/t/p/w300${ response.data.results.poster_path }` );
                 setTrailers( trailers.data.results.results );
-                
+
 
             }
             catch ( e ) {
@@ -111,9 +113,21 @@ const About = () => {
                                 </ul>
                             </Card>
 
+
+                            {
+                                state.belongs_to_collection === null
+                                    ? null
+                                    : <div className={ styles.siteContainer }>
+                                        <Collection name={ state.belongs_to_collection.name } id={ state.belongs_to_collection.id } />
+                                    </div>
+                            }
+
+
+
+
                             <div className={ styles.siteContainer }>
                                 <p >Official website: </p>
-                                <a href={ `${state.homepage}` } className={ styles.siteLink }>{ state.homepage }</a>
+                                <a href={ `${ state.homepage }` } className={ styles.siteLink }>{ state.homepage }</a>
                             </div>
 
                             <Card style={ { marginTop: '20px', marginBottom: '20px' } }>
