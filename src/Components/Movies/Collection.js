@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import axios from 'axios';
 import styles from './css/collection.module.css';
+import infoIcon from '../../Images/info.png'
 
 const Collection = ( { name, id } ) => {
     const [ movieCollection, setMovieCollection ] = useState( {} );
@@ -27,27 +28,30 @@ const Collection = ( { name, id } ) => {
 
     return (
         <>
-            <p onClick={ handleShow }>
-                { name }
-            </p>
+            <span>
+                <p onClick={ handleShow }>
+                    { name }
+                </p>
+                <img src={ infoIcon } alt="" />
+            </span>
+
+
             <Offcanvas show={ show } onHide={ handleClose } placement="end">
                 <Offcanvas.Header closeButton>
                     <Offcanvas.Title>{ name }</Offcanvas.Title>
                 </Offcanvas.Header>
-                <Offcanvas.Body bsPrefix={ styles.container }>
+                <h6>click for more info</h6>
+                <Offcanvas.Body bsPrefix={ styles.canvasBody }>
                     {
                         Object.keys( movieCollection ).length !== 0 && movieCollection.parts.length !== 0
                             ? movieCollection.parts.map( ( part ) =>
-                                
-                                    <img
-                                        src={ `https://image.tmdb.org/t/p/w300${ part.poster_path }` }
-                                        alt={ `${ part.title }` }
-                                        key={ part.id }
-                                        className={ styles.poster }
-                                        onClick={ () => console.log( part.title ) } />
-                                    
-                               
 
+                                <img
+                                    src={ `https://image.tmdb.org/t/p/w300${ part.poster_path }` }
+                                    alt={ `${ part.title }` }
+                                    key={ part.id }
+                                    className={ styles.poster }
+                                />
                             )
                             : null
 
