@@ -4,13 +4,17 @@
     justify-content: center;
 }
 
+.collectionName img {
+    padding      : 3px;
+    margin-bottom: 20px;
+}
+
 .canvasBody {
-    padding          : 1rem;
-    overflow-y       : auto;
-    display          : flex;
-    flex-wrap        : wrap;
-    /* flex-direction: row; */
-    justify-content  : space-evenly;
+    padding        : 1rem;
+    overflow-y     : auto;
+    display        : flex;
+    flex-wrap      : wrap;
+    justify-content: space-evenly;
 }
 
 
@@ -21,9 +25,4 @@
     padding        : 5px 10px;
     margin-bottom  : 10px;
     margin-top     : 10px;
-}
-
-.posterContainer p {
-    width: 150px;
-
 }
