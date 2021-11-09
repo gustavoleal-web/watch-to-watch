@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import Offcanvas from 'react-bootstrap/Offcanvas';
+import CollectionPoster from './CollectioPoster';
 import axios from 'axios';
 import styles from './css/collection.module.css';
-import infoIcon from '../../Images/info.png'
+import infoIcon from '../../Images/info.png';
+
 
 const Collection = ( { name, id } ) => {
     const [ movieCollection, setMovieCollection ] = useState( {} );
@@ -28,8 +30,8 @@ const Collection = ( { name, id } ) => {
 
     return (
         <>
-            <span>
-                <p onClick={ handleShow }>
+            <span onClick={ handleShow } className={ styles.collectionName }>
+                <p>
                     { name }
                 </p>
                 <img src={ infoIcon } alt="" />
@@ -40,18 +42,14 @@ const Collection = ( { name, id } ) => {
                 <Offcanvas.Header closeButton>
                     <Offcanvas.Title>{ name }</Offcanvas.Title>
                 </Offcanvas.Header>
-                <h6>click for more info</h6>
+
                 <Offcanvas.Body bsPrefix={ styles.canvasBody }>
                     {
                         Object.keys( movieCollection ).length !== 0 && movieCollection.parts.length !== 0
-                            ? movieCollection.parts.map( ( part ) =>
-
-                                <img
-                                    src={ `https://image.tmdb.org/t/p/w300${ part.poster_path }` }
-                                    alt={ `${ part.title }` }
-                                    key={ part.id }
-                                    className={ styles.poster }
-                                />
+                            ? movieCollection.parts.map( ( part ) => <CollectionPoster
+                                posterPath={ part.poster_path }
+                                title={ part.title }
+                                key={ part.id } />
                             )
                             : null
 
