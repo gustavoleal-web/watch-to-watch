@@ -1,9 +1,9 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import ReactPlayer from 'react-player/youtube';
 import styles from './css/trailers.module.css'
 
 const Trailers = ( { videos } ) => {
-    return <Fragment>
+    return <div className={ styles.outerContainer }>
         <h4>Trailers</h4>
 
         <div className={ styles.playerMainContainer }>
@@ -19,7 +19,7 @@ const Trailers = ( { videos } ) => {
                                 height='10rem'
                                 className={ styles.reactPlayer }
                             />
-                            <p style={ { color: 'white' } }>{ video.name }</p>
+                            <p style={ { color: 'white', fontSize: '12px' } }>{ video.name }</p>
                         </div>
 
                     }
@@ -28,7 +28,7 @@ const Trailers = ( { videos } ) => {
                 )
             }
         </div>
-    </Fragment >
+    </div >
 }
 
 export default Trailers;
