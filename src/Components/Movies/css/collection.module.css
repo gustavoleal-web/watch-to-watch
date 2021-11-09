@@ -1,5 +1,10 @@
-.container {
-    flex-grow        : 1;
+.collectionName {
+    display        : flex;
+    align-items    : center;
+    justify-content: center;
+}
+
+.canvasBody {
     padding          : 1rem;
     overflow-y       : auto;
     display          : flex;
