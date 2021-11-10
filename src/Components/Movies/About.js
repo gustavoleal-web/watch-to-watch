@@ -2,7 +2,6 @@ import React, { useEffect, useState, Fragment } from 'react'
 import { useParams } from 'react-router-dom';
 import Providers from './Providers';
 import Title from './Titles';
-//import NavBarMenu from '../Header/NavBar';
 import MenuOfCanvas from '../Header/menuOfCanvas';
 import Card from 'react-bootstrap/Card';
 import Collection from './Collection';
