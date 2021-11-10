@@ -22,7 +22,7 @@ const MenuOfCanvas = ( { type, onClickHandler, onChangeHandler, searchName, getM
     let linkTo = '';
 
     if ( type === 'movies' ) {
-        linkTo = 'shows';
+        linkTo = 'shows/trending';
     }
     else if ( type === 'shows' ) {
         linkTo = 'movies/trending';
