@@ -2,17 +2,18 @@ import React, { useEffect, useState, Fragment } from 'react';
 import axios from 'axios';
 import Show from './Show';
 import styles from '../Movies/css/movies.module.css';
-//import NavBar from '../Header/NavBar';
 import MenuOfCanvas from '../Header/menuOfCanvas';
+import { useParams } from 'react-router';
 
 const Shows = () => {
     const [ tvShows, setTvShows ] = useState( [] );
     const [ searchName, setsearchName ] = useState( '' );
-  
+    let params = useParams();
+
     useEffect( () => {
         const fetchShows = async () => {
             try {
-                let response = await axios.get( `http://localhost:3001/trending/shows` );
+                let response = await axios.get( `/${ params.option }/shows` );
                 setTvShows( response.data.results.results );
             }
             catch {
@@ -20,7 +21,7 @@ const Shows = () => {
             }
         }
         fetchShows();
-    }, [] );
+    }, [params.option ] );
 
 
     const onChangeHandler = ( e ) => {
@@ -64,6 +65,7 @@ const Shows = () => {
                                 posterPath={ show.poster_path }
                                 backdropPath={ show.backdrop_path }
                                 rating={ show.vote_average }
+                                option={ params.option }
                                 key={ show.id }
                             /> )
                     }
