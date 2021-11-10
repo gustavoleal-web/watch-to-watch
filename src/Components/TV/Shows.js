@@ -1,15 +1,14 @@
 import React, { useEffect, useState, Fragment } from 'react';
 import axios from 'axios';
 import Show from './Show';
-import Button from 'react-bootstrap/Button';
-import InputGroup from 'react-bootstrap/InputGroup'
-import FormControl from 'react-bootstrap/FormControl';
-import NavBar from '../Header/NavBar';
+import styles from '../Movies/css/movies.module.css';
+//import NavBar from '../Header/NavBar';
+import MenuOfCanvas from '../Header/menuOfCanvas';
 
 const Shows = () => {
     const [ tvShows, setTvShows ] = useState( [] );
-    const [ searchName, setsearchName ] = useState( '' )
-
+    const [ searchName, setsearchName ] = useState( '' );
+  
     useEffect( () => {
         const fetchShows = async () => {
             try {
@@ -53,21 +52,8 @@ const Shows = () => {
     else {
         return (
             <Fragment>
-                <NavBar type='shows' />
-                <div style={ { maxWidth: '900px', margin: 'auto' } }>
-
-                    <InputGroup >
-                        <FormControl
-                            placeholder='Search TV Shows'
-                            aria-label='Search TV Shows'
-                            aria-describedby="basic-addon2"
-                            value={ searchName }
-                            onChange={ onChangeHandler }
-                        />
-                        <Button variant='outline-secondary' id='button-addon2' onClick={ onClickHandler }>
-                            Button
-                        </Button>
-                    </InputGroup>
+                <MenuOfCanvas type='shows' />
+                <div className={ styles.mainContainer }>
 
                     <h2>Trending TV Shows</h2>
                     {
@@ -77,6 +63,7 @@ const Shows = () => {
                                 airDate={ show.first_air_date }
                                 posterPath={ show.poster_path }
                                 backdropPath={ show.backdrop_path }
+                                rating={ show.vote_average }
                                 key={ show.id }
                             /> )
                     }
