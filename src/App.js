@@ -5,14 +5,12 @@ import {
   Route,
   Redirect
 } from "react-router-dom";
-//import NavBarMenu from './Components/Header/NavBar';
-//import NavigationHeader from './Components/Header/NavigationHeader';
+
 import Movies from './Components/Movies/Movies';
 import Shows from './Components/TV/Shows';
 import AboutMovie from './Components/Movies/About';
 import AboutTv from './Components/TV/About';
 import dbLogo from './Images/the_movie_db_logo.svg'
-//import MenuOfCanvas from './Components/Header/menuOfCanvas';
 
 const App = () => {
   return (
@@ -32,6 +30,11 @@ const App = () => {
               </Fragment>
             </Route>
 
+             <Route path='/shows/:navOption/:showId'>
+              <Fragment>
+                <AboutTv />
+              </Fragment>
+            </Route>
 
             <Route path='/movies/:option' exact>
               <Fragment>
@@ -39,17 +42,15 @@ const App = () => {
               </Fragment>
             </Route>
 
-            <Route path='/shows/:showId'>
-              <Fragment>
-                <AboutTv />
-              </Fragment>
-            </Route>
+           
 
-            <Route path='/shows'>
+            <Route path='/shows/:option' exact>
               <Fragment>
                 <Shows />
               </Fragment>
             </Route>
+
+            
 
           </Switch>
 
