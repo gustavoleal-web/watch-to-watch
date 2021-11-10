@@ -4,7 +4,9 @@ import styles from '../Movies/css/movie.module.css';
 import noImage from '../../Images/No-Image-Placeholder.png'
 
 
-const Show = ( { showId, name, airDate, posterPath, backdropPath, rating } ) => {
+const Show = ( { showId, name, airDate, posterPath, backdropPath, rating, option } ) => {
+    let linkPath = `/shows/${ option }/${ showId }`;
+
     let posterImg = null;
     if ( posterPath === null ) {
         console.log( 'undefined' )
@@ -21,12 +23,12 @@ const Show = ( { showId, name, airDate, posterPath, backdropPath, rating } ) => 
 
         <div className={ styles.movieContainer }>
             <div className={ styles.movieDisplay }>
-                <Link to={ `shows/${ showId }` }>
+                <Link to={ linkPath }>
                     { posterImg }
                 </Link>
 
 
-                <div classname={ styles.movieMain }>
+                <div className={ styles.movieMain }>
                     <h4>{ name }</h4>
                     <p>Air Date: { airDate }</p>
                 </div>
