@@ -1,7 +1,6 @@
 import React, { useState, useEffect, Fragment } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
-import NavBarMenu from '../Header/NavBar';
 import Card from 'react-bootstrap/Card'
 import styles from './css/about.module.css'
 import OffCanvasExample from './OfCanvas';
@@ -9,12 +8,12 @@ import OffCanvasExample from './OfCanvas';
 const About = () => {
     const [ state, setState ] = useState( {} )
     const params = useParams();
-
+    
     useEffect( () => {
         const fetchShows = async () => {
 
             try {
-                let response = await axios.get( `/trending/show/?showId=${ params.showId }` );
+                let response = await axios.get( `/${ params.navOption }/show/?showId=${ params.showId }` );
                 setState( response.data.results );
 
                 //props to pass About component
@@ -29,7 +28,7 @@ const About = () => {
 
         }
         fetchShows();
-    }, [ params.showId ] );
+    }, [ params.showId, params.navOption ] );
 
 
     let nextEpisodeDate = null;
@@ -44,7 +43,6 @@ const About = () => {
 
     return (
         <Fragment>
-            <NavBarMenu type='shows' />
             <div className={ styles.mainContainer }>
                 {
                     Object.keys( state ).length === 0 ? null
