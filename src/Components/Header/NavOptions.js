@@ -25,7 +25,7 @@ const NavOptions = ( { type, handleClose } ) => {
     else if ( type === 'shows' ) {
         return <div className={ styles.icons }>
             <img src={ `${ newIcon }` } alt="ribbon" />
-            <NavLink to={ `/${ type }/latest` } className={ styles.navLink } onClick={ handleClose }>Latest</NavLink>
+            <NavLink to={ `/${ type }/popular` } className={ styles.navLink } onClick={ handleClose }>Popular</NavLink>
 
             <img src={ `${ clapperboard }` } alt="ribbon" />
             <NavLink to={ `/${ type }/airingtoday` } className={ styles.navLink } onClick={ handleClose }>Airing Today</NavLink>
