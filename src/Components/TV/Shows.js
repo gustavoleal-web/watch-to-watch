@@ -9,11 +9,12 @@ const Shows = () => {
     const [ tvShows, setTvShows ] = useState( [] );
     const [ searchName, setsearchName ] = useState( '' );
     let params = useParams();
-
+   
     useEffect( () => {
         const fetchShows = async () => {
             try {
                 let response = await axios.get( `/${ params.option }/shows` );
+               
                 setTvShows( response.data.results.results );
             }
             catch {
@@ -21,29 +22,29 @@ const Shows = () => {
             }
         }
         fetchShows();
-    }, [params.option ] );
+    }, [ params.option ] );
 
 
-    const onChangeHandler = ( e ) => {
-        setsearchName( e.target.value );
-    }
+    // const onChangeHandler = ( e ) => {
+    //     setsearchName( e.target.value );
+    // }
 
-    const onClickHandler = async () => {
-        if ( searchName.length > 3 ) {
-            let url = `/search/tv/?tvShow=${ searchName }`;
+    // const onClickHandler = async () => {
+    //     if ( searchName.length > 3 ) {
+    //         let url = `/search/tv/?tvShow=${ searchName }`;
 
-            try {
-                let response = await axios.get( url );
-                console.log( response.data.results.results );
-                setTvShows( response.data.results.results );
-            }
-            catch ( e ) {
-                console.log( e )
-            }
+    //         try {
+    //             let response = await axios.get( url );
+    //             console.log( response.data.results.results );
+    //             setTvShows( response.data.results.results );
+    //         }
+    //         catch ( e ) {
+    //             console.log( e )
+    //         }
 
-        }
+    //     }
 
-    }
+    // }
 
 
     if ( tvShows.length === 0 ) {
