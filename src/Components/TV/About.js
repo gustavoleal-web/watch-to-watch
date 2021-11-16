@@ -3,12 +3,14 @@ import Card from 'react-bootstrap/Card'
 import Seasons from './Seasons';
 import MenuOfCanvas from '../Header/menuOfCanvas';
 import Sypnosis from '../Movies/Accordion';
+import Trailers from '../Movies/Trailers'
 import styles from '../Movies/css/about.module.css';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 
 const About = () => {
-    const [ state, setState ] = useState( {} )
+    const [ state, setState ] = useState( {} );
+    const [ trailers, setTrailers ] = useState( [] )
     const params = useParams();
 
     useEffect( () => {
@@ -16,7 +18,9 @@ const About = () => {
 
             try {
                 let response = await axios.get( `/${ params.navOption }/show/?showId=${ params.showId }` );
+                let trailers = await axios.get( `/tv-videos/?showId=${ params.showId }/` );
                 setState( response.data.results );
+                setTrailers( trailers.data.results.results );
 
                 //props to pass About component
                 //last_air_date
@@ -116,6 +120,11 @@ const About = () => {
                                 <p >Official website: </p>
                                 <a href={ `${ state.homepage }` } className={ styles.siteLink }>{ state.homepage }</a>
                             </div>
+
+
+                            {
+                                trailers.length !== 0 ? <Trailers videos={ trailers } /> : null
+                            }
 
                             <Card>
                                 <img src={ `https://image.tmdb.org/t/p/w300/${ state.backdrop_path }` } alt='poster' />
