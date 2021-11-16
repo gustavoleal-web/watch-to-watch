@@ -7,7 +7,7 @@ import { useParams } from 'react-router';
 
 const Shows = () => {
     const [ tvShows, setTvShows ] = useState( [] );
-    const [ searchName, setsearchName ] = useState( '' );
+    // const [ searchName, setsearchName ] = useState( '' );
     let params = useParams();
    
     useEffect( () => {
