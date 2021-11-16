@@ -1,12 +1,11 @@
 import React, { useState, useEffect, Fragment } from 'react';
-import { useParams } from 'react-router-dom';
-import axios from 'axios';
 import Card from 'react-bootstrap/Card'
-// import stylesTwo from './css/about.module.css'
 import Seasons from './Seasons';
 import MenuOfCanvas from '../Header/menuOfCanvas';
-import styles from '../Movies/css/about.module.css';
 import Sypnosis from '../Movies/Accordion';
+import styles from '../Movies/css/about.module.css';
+import axios from 'axios';
+import { useParams } from 'react-router-dom';
 
 const About = () => {
     const [ state, setState ] = useState( {} )
@@ -60,7 +59,13 @@ const About = () => {
 
                                 <div style={ { margin: 'auto' } }>
                                     <h3 style={ { textAlign: 'center' } }>{ state.name }</h3>
-                                    <h6 style={ { textAlign: 'center' } }>{ state.original_name }</h6>
+
+                                    {
+                                        state.name !== state.original_name
+                                            ? <h6 style={ { textAlign: 'center' } }>{ state.original_name }</h6>
+                                            : null
+                                    }
+
 
                                     <p>Air Date: { state.first_air_date.replaceAll( '-', '/' ) }</p>
                                     { nextEpisodeDate }
@@ -101,24 +106,9 @@ const About = () => {
                             </Card>
 
                             {
-                                state.number_of_seasons >= 1
+                                state.number_of_seasons > 1
                                     ? <div className={ styles.siteContainer }> <Seasons seasons={ state.seasons } name={ state.name } /> </div>
                                     : null
-                            }
-
-
-
-                            { /*<div className={ stylesTwo.seasons }>
-                                { state.seasons.map( season =>
-                                    <div key={ season.season_number } className={ stylesTwo.season }>
-                                        <img src={ `https://image.tmdb.org/t/p/w300${ season.poster_path }` } alt='poster' style={ { height: '200px', width: '135px' } } />
-                                        <p>{ season.name }</p>
-                                        <p>Episodes { season.episode_count }</p>
-
-                                    </div>
-                                ) }
-
-                            </div>*/
                             }
 
                             <Card>
