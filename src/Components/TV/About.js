@@ -2,8 +2,8 @@ import React, { useState, useEffect, Fragment } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import Card from 'react-bootstrap/Card'
-import stylesTwo from './css/about.module.css'
-
+// import stylesTwo from './css/about.module.css'
+import Seasons from './Seasons';
 import MenuOfCanvas from '../Header/menuOfCanvas';
 import styles from '../Movies/css/about.module.css';
 import Sypnosis from '../Movies/Accordion';
@@ -100,10 +100,17 @@ const About = () => {
                                 </ul>
                             </Card>
 
+                            {
+                                state.number_of_seasons >= 1
+                                    ? <div className={ styles.siteContainer }> <Seasons seasons={ state.seasons } name={ state.name } /> </div>
+                                    : null
+                            }
 
-                            <div className={ stylesTwo.seasons }>
+
+
+                            { /*<div className={ stylesTwo.seasons }>
                                 { state.seasons.map( season =>
-                                    <div key={ season.season_number }>
+                                    <div key={ season.season_number } className={ stylesTwo.season }>
                                         <img src={ `https://image.tmdb.org/t/p/w300${ season.poster_path }` } alt='poster' style={ { height: '200px', width: '135px' } } />
                                         <p>{ season.name }</p>
                                         <p>Episodes { season.episode_count }</p>
@@ -111,7 +118,8 @@ const About = () => {
                                     </div>
                                 ) }
 
-                            </div>
+                            </div>*/
+                            }
 
                             <Card>
                                 <img src={ `https://image.tmdb.org/t/p/w300/${ state.backdrop_path }` } alt='poster' />
