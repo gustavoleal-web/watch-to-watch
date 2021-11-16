@@ -111,6 +111,12 @@ const About = () => {
                                     : null
                             }
 
+
+                            <div className={ styles.siteContainer }>
+                                <p >Official website: </p>
+                                <a href={ `${ state.homepage }` } className={ styles.siteLink }>{ state.homepage }</a>
+                            </div>
+
                             <Card>
                                 <img src={ `https://image.tmdb.org/t/p/w300/${ state.backdrop_path }` } alt='poster' />
                             </Card>
