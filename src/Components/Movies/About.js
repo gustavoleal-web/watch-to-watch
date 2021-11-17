@@ -45,7 +45,7 @@ const About = () => {
     }, [ params.movieId, params.navOption ] );
 
     useEffect( () => {
-        const fetchMovies = async () => {
+        const fetchRecommendations = async () => {
 
             try {
                 let response = await axios.get( `/movie/recommendations/?movieId=${ params.movieId }` );
@@ -56,7 +56,7 @@ const About = () => {
                 console.log( e )
             }
         }
-        fetchMovies();
+        fetchRecommendations();
     }, [ params.movieId ] );
 
     return (
@@ -133,13 +133,9 @@ const About = () => {
                                 <Providers movieId={ params.movieId } />
                             </Card>
 
-
-
                             {
                                 trailers.length !== 0 ? <Trailers videos={ trailers } /> : null
                             }
-
-
 
                             {
                                 //<img src={ `https://image.tmdb.org/t/p/w300/${ state.backdrop_path }` } alt='poster' />
