@@ -144,7 +144,7 @@ const About = () => {
                             {
                                 Object.keys( recommended ).length === 0
                                     ? null
-                                    : <Recommendations recommendations={ recommended } />
+                                    : <Recommendations recommendations={ recommended } mediaType='movies'/>
 
                             }
                         </Fragment>
