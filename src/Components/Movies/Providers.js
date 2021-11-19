@@ -6,7 +6,7 @@ import Provider from './Provider';
 //Please note: In order to use this data you must attribute the source of the data as JustWatch. 
 //If we find any usage not complying with these terms we will revoke access to the API.
 
-const Providers = ( { movieId } ) => {
+const Providers = ( { id, mediaType } ) => {
     const [ state, setState ] = useState( {
         link: '',
         stream: [],
@@ -28,9 +28,9 @@ const Providers = ( { movieId } ) => {
         const fetchShows = async () => {
 
             try {
-                let response = await axios.get( `/movie/providers/?movieId=${ movieId }` );
+                let response = await axios.get( `/${ mediaType }/providers/?id=${ id }` );
                 let stateCopy = { ...state };
-                let results
+                let results;
 
                 if ( Object.keys( response.data.results.results ).includes( 'US' ) ) {
                     results = response.data.results.results.US;
@@ -54,7 +54,7 @@ const Providers = ( { movieId } ) => {
         }
         fetchShows();
         // eslint-disable-next-line
-    }, [ movieId ] );
+    }, [ id ] );
 
 
     if ( noProviers ) {
