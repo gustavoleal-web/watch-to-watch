@@ -5,13 +5,15 @@ import MenuOfCanvas from '../Header/menuOfCanvas';
 import Sypnosis from '../Movies/Accordion';
 import Trailers from '../Movies/Trailers';
 import Providers from '../Movies/Providers';
+import Recommendations from '../Movies/Recommendations';
 import styles from '../Movies/css/about.module.css';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 
 const About = () => {
     const [ state, setState ] = useState( {} );
-    const [ trailers, setTrailers ] = useState( [] )
+    const [ trailers, setTrailers ] = useState( [] );
+    const [ recommended, setRecommended ] = useState( [] );
     const params = useParams();
 
     useEffect( () => {
@@ -29,6 +31,23 @@ const About = () => {
         }
         fetchShows();
     }, [ params.showId, params.navOption ] );
+
+    useEffect( () => {
+        const fetchRecommendations = async () => {
+
+            try {
+                let response = await axios.get( `/show/recommendations/?showId=${ params.showId }` );
+                let recommended = response.data.results.results;
+                setRecommended( recommended )
+            }
+            catch ( e ) {
+                console.log( e )
+            }
+        }
+        fetchRecommendations();
+    }, [ params.showId ] );
+
+
 
     let airDate = null;
     let nextEpisodeDate = null;
@@ -123,7 +142,7 @@ const About = () => {
 
 
                             <Card style={ { marginTop: '20px', marginBottom: '20px' } }>
-                                <Providers id={ params.showId } mediaType='show'/>
+                                <Providers id={ params.showId } mediaType='show' />
                             </Card>
 
 
@@ -131,9 +150,22 @@ const About = () => {
                                 trailers.length !== 0 ? <Trailers videos={ trailers } /> : null
                             }
 
-                            <Card>
+                            {
+                                Object.keys( recommended ).length === 0
+                                ? null
+                                : <Recommendations recommendations={ recommended } mediaType='shows'/>
+
+                            }
+
+                            {
+                                /*
+                                 <Card>
                                 <img src={ `https://image.tmdb.org/t/p/w300/${ state.backdrop_path }` } alt='poster' />
                             </Card>
+                                */
+                            }
+
+
                         </Fragment>
                 }
             </div >
