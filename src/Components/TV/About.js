@@ -3,7 +3,8 @@ import Card from 'react-bootstrap/Card'
 import Seasons from './Seasons';
 import MenuOfCanvas from '../Header/menuOfCanvas';
 import Sypnosis from '../Movies/Accordion';
-import Trailers from '../Movies/Trailers'
+import Trailers from '../Movies/Trailers';
+import Providers from '../Movies/Providers';
 import styles from '../Movies/css/about.module.css';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
@@ -21,17 +22,10 @@ const About = () => {
                 let trailers = await axios.get( `/tv-videos/?showId=${ params.showId }/` );
                 setState( response.data.results );
                 setTrailers( trailers.data.results.results );
-
-                //props to pass About component
-                //last_air_date
-                //last_episode_to_air
-                //number_of_seasons
             }
             catch ( e ) {
                 console.log( e )
             }
-
-
         }
         fetchShows();
     }, [ params.showId, params.navOption ] );
@@ -126,6 +120,11 @@ const About = () => {
                                 <p >Official website: </p>
                                 <a href={ `${ state.homepage }` } className={ styles.siteLink }>{ state.homepage }</a>
                             </div>
+
+
+                            <Card style={ { marginTop: '20px', marginBottom: '20px' } }>
+                                <Providers id={ params.showId } mediaType='show'/>
+                            </Card>
 
 
                             {
