@@ -36,13 +36,22 @@ const About = () => {
         fetchShows();
     }, [ params.showId, params.navOption ] );
 
-
+    let airDate = null;
     let nextEpisodeDate = null;
     //shows that have finished airing have a next_episode_to_air value set to null
     //so only the shows with a next episode will render
     if ( Object.keys( state ).length !== 0 ) {
         if ( state.next_episode_to_air !== null ) {
-            nextEpisodeDate = <p>Next Ep: { state.next_episode_to_air.air_date.replaceAll( '-', '/' ) }</p>
+
+            let nextEpisodeAirDate = state.next_episode_to_air.air_date;
+            let firstDate = state.first_air_date;
+
+            let regex = /(\d{4})-(\d{1,2})-(\d{1,2})/;
+            let nextAirDate = nextEpisodeAirDate.replace( regex, '$2/$3/$1' );
+            let firstAirDate = firstDate.replace( regex, '$2/$3/$1' )
+
+            nextEpisodeDate = <p className={ styles.nextEpisodeDate }>Next Ep: { nextAirDate }</p>
+            airDate = <p style={ { fontSize: '13px' } }>Air Date: { firstAirDate }</p>
         }
 
     }
@@ -70,8 +79,7 @@ const About = () => {
                                             : null
                                     }
 
-
-                                    <p>Air Date: { state.first_air_date.replaceAll( '-', '/' ) }</p>
+                                    { airDate }
                                     { nextEpisodeDate }
                                 </div>
 
@@ -85,10 +93,8 @@ const About = () => {
                                     <h6 className={ styles.title }>{ state.number_of_episodes }</h6>
                                 </div>
                             </div>
-                            <p style={ { fontSize: '11px', textAlign: 'end', fontWeight: '600', color: 'lightGray' } }>YYYY/DD/MM</p>
 
                             <Sypnosis overview={ state.overview } />
-
 
                             <Card bsPrefix={ styles.statsGenres }>
                                 <Card.Title className={ styles.statusTitle }>Status</Card.Title>
@@ -131,8 +137,8 @@ const About = () => {
                             </Card>
                         </Fragment>
                 }
-            </div>
-        </Fragment>
+            </div >
+        </Fragment >
     )
 }
 
