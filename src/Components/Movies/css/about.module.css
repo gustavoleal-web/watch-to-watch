@@ -141,6 +141,13 @@
     overflow       : auto;
 }
 
+.nextEpisodeDate {
+    font-size: 15px;
+    font-style: italic;
+    font-weight: 500;
+}
+
+
 @media (max-width: 360px) {
     .siteContainer a {
         font-size: 13px;
