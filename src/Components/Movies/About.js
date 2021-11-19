@@ -130,7 +130,7 @@ const About = () => {
                             </div>
 
                             <Card style={ { marginTop: '20px', marginBottom: '20px' } }>
-                                <Providers movieId={ params.movieId } />
+                                <Providers id={ params.movieId } mediaType='movie'/>
                             </Card>
 
                             {
