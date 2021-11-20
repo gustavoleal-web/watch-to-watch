@@ -29,7 +29,7 @@ const Show = ( { showId, name, airDate, posterPath, backdropPath, rating, option
 
 
                 <div className={ styles.movieMain }>
-                    <h4>{ name }</h4>
+                    <h6>{ name }</h6>
                     <p>Air Date: { airDate }</p>
                 </div>
                 <p className={ styles.rating }>{ rating }/10</p>
