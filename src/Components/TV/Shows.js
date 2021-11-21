@@ -9,12 +9,12 @@ const Shows = () => {
     const [ tvShows, setTvShows ] = useState( [] );
     // const [ searchName, setsearchName ] = useState( '' );
     let params = useParams();
-   
+
     useEffect( () => {
         const fetchShows = async () => {
             try {
                 let response = await axios.get( `/${ params.option }/shows` );
-               
+
                 setTvShows( response.data.results.results );
             }
             catch {
@@ -57,7 +57,7 @@ const Shows = () => {
                 <MenuOfCanvas type='shows' />
                 <div className={ styles.mainContainer }>
 
-                    <h2>Trending TV Shows</h2>
+                    <h2 className={ styles.title }>{ params.option }</h2>
                     {
                         tvShows.map( show =>
                             <Show showId={ show.id }
