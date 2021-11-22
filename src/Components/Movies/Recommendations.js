@@ -8,19 +8,26 @@ const CarouselComp = ( { recommendations, mediaType } ) => {
         <div className={ styles.mainContainer }>
             {
                 recommendations.map( r => {
-                    let imgSource = `https://image.tmdb.org/t/p/w300${ r.poster_path }`;
-                    return (
-                        <div className={ styles.posterContainer } key={ r.id }>
+                    if ( r.poster_path === null ) {
+                        return null;
+                    }
 
-                            <Link to={ `/${ mediaType }/trending/${ r.id }` }>
-                                <img
-                                    src={ imgSource }
-                                    alt='poster'
-                                    className={ styles.poster }
-                                />
-                            </Link>
-                        </div>
-                    )
+                    else {
+                        let imgSource = `https://image.tmdb.org/t/p/w300${ r.poster_path }`;
+                        return (
+                            <div className={ styles.posterContainer } key={ r.id }>
+
+                                <Link to={ `/${ mediaType }/trending/${ r.id }` }>
+                                    <img
+                                        src={ imgSource }
+                                        alt='poster'
+                                        className={ styles.poster }
+                                    />
+                                </Link>
+                            </div>
+                        )
+                    }
+
 
                 } )
             }
