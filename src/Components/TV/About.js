@@ -51,6 +51,7 @@ const About = () => {
 
     let airDate = null;
     let nextEpisodeDate = null;
+    let regex = /(\d{4})-(\d{1,2})-(\d{1,2})/;
     //shows that have finished airing have a next_episode_to_air value set to null
     //so only the shows with a next episode will render
     if ( Object.keys( state ).length !== 0 ) {
@@ -59,12 +60,16 @@ const About = () => {
             let nextEpisodeAirDate = state.next_episode_to_air.air_date;
             let firstDate = state.first_air_date;
 
-            let regex = /(\d{4})-(\d{1,2})-(\d{1,2})/;
             let nextAirDate = nextEpisodeAirDate.replace( regex, '$2/$3/$1' );
             let firstAirDate = firstDate.replace( regex, '$2/$3/$1' )
 
             nextEpisodeDate = <p className={ styles.nextEpisodeDate }>Next Ep: { nextAirDate }</p>
             airDate = <p style={ { fontSize: '13px' } }>Air Date: { firstAirDate }</p>
+        }
+        else {
+            let lastAirDate = state.last_episode_to_air.air_date;
+            let lastAirDateRefactor = lastAirDate.replace( regex, '$2/$3/$1' );
+            nextEpisodeDate = <p className={ styles.nextEpisodeDate }>Last air date: { lastAirDateRefactor }</p>
         }
 
     }
@@ -152,8 +157,8 @@ const About = () => {
 
                             {
                                 Object.keys( recommended ).length === 0
-                                ? null
-                                : <Recommendations recommendations={ recommended } mediaType='shows'/>
+                                    ? null
+                                    : <Recommendations recommendations={ recommended } mediaType='shows' />
 
                             }
 
