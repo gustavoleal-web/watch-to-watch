@@ -6,10 +6,9 @@ import noImage from '../../Images/No-Image-Placeholder.png'
 
 const Show = ( { showId, name, airDate, posterPath, backdropPath, rating, option } ) => {
     let linkPath = `/shows/${ option }/${ showId }`;
-
+    
     let posterImg = null;
     if ( posterPath === null ) {
-        console.log( 'undefined' )
         posterImg = <img src={ `${ noImage }` } alt='poster' style={ { height: '100%' } } />
 
     }
@@ -18,6 +17,8 @@ const Show = ( { showId, name, airDate, posterPath, backdropPath, rating, option
         posterImg = <img src={ `https://image.tmdb.org/t/p/w300/${ posterPath }` } alt='poster' style={ { height: '100%' } } />
     }
 
+    let regex = /(\d{4})-(\d{1,2})-(\d{1,2})/;
+    let refactedAirDate = airDate.replace( regex, '$2/$3/$1' );
 
     return (
 
@@ -30,7 +31,7 @@ const Show = ( { showId, name, airDate, posterPath, backdropPath, rating, option
 
                 <div className={ styles.movieMain }>
                     <h6>{ name }</h6>
-                    <p>Air Date: { airDate }</p>
+                    <p>Air Date: { refactedAirDate }</p>
                 </div>
                 <p className={ styles.rating }>{ rating }/10</p>
             </div>
