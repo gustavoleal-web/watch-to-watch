@@ -1,0 +1,17 @@
+.mainContainer {
+    display          : flex;
+    background-color: #333;
+    overflow        : auto;
+    white-space     : nowrap;
+}
+
+.logoContainer {
+    width  : 100%;
+    padding: 10px;
+}
+
+.logo {
+    height       : 50px;
+    width        : 50px;
+    border-radius: 10px;
+}
