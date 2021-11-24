@@ -1,13 +1,7 @@
-import React from 'react';
-import { Fragment } from 'react';
+import React, { Fragment } from 'react';
+import styles from '../Movies/css/provider.module.css'
 
 const Provider = ( { service, serviceName } ) => {
-    const style = {
-        display: 'flex',
-        backgroundColor: '#333',
-        overflow: 'auto',
-        whiteSpace: 'nowrap'
-    }
 
     if ( service.length === 0 ) {
         return null;
@@ -15,11 +9,11 @@ const Provider = ( { service, serviceName } ) => {
 
     return <Fragment>
         <h5>{ serviceName }</h5>
-        <div style={ style }>
+        <div className={ styles.mainContainer }>
             {
                 service.map( s =>
-                    <div key={ s.provider_id } style={ { width: '100px', padding: '10px' } }>
-                        <img src={ `https://image.tmdb.org/t/p/original${ s.logo_path }` } alt="" style={ { height: '50px', width: '50px', borderRadius: '10px' } } />
+                    <div key={ s.provider_id } className={ styles.logoContainer }>
+                        <img src={ `https://image.tmdb.org/t/p/original${ s.logo_path }` } alt="" className={ styles.logo } />
                     </div>
                 )
             }
