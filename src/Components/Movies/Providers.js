@@ -54,7 +54,7 @@ const Providers = ( { id, mediaType } ) => {
         }
         fetchShows();
         // eslint-disable-next-line
-    }, [ id ] );
+    }, [ id, mediaType ] );
 
 
     if ( noProviers ) {
@@ -63,11 +63,11 @@ const Providers = ( { id, mediaType } ) => {
 
     else {
         return <Fragment>
-            <p>Source: JustWatch</p>
-
             <Provider service={ state.stream } serviceName='Stream' />
             <Provider service={ state.buy } serviceName='Buy' />
             <Provider service={ state.rent } serviceName='Rent' />
+
+            <p>Source: JustWatch</p>
         </Fragment>
     }
 }
