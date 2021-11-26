@@ -8,7 +8,7 @@ const Provider = ( { service, serviceName } ) => {
     }
 
     return <Fragment>
-        <h5>{ serviceName }</h5>
+        <h5 className={ styles.serviceName }>{ serviceName }</h5>
         <div className={ styles.mainContainer }>
             {
                 service.map( s =>
@@ -18,13 +18,7 @@ const Provider = ( { service, serviceName } ) => {
                 )
             }
         </div>
-
-
     </Fragment>
-
-
-
-
 }
 
 export default Provider;
