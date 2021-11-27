@@ -58,7 +58,7 @@ const Providers = ( { id, mediaType } ) => {
 
 
     if ( noProviers ) {
-        return <p>No providers at this time. Visit the official website for more details.</p>
+        return <p style={ { marginBottom: '0', fontSize: '14px', paddingTop: '2px' } }>No providers at this time. Visit the official website for more details.</p>
     }
 
     else {
@@ -67,7 +67,10 @@ const Providers = ( { id, mediaType } ) => {
             <Provider service={ state.buy } serviceName='Buy' />
             <Provider service={ state.rent } serviceName='Rent' />
 
-            <p>Source: JustWatch</p>
+            <p style={ {
+                backgroundColor: 'rgb(180, 186, 210)',
+                marginBottom: '0'
+            } }>Source: JustWatch</p>
         </Fragment>
     }
 }
