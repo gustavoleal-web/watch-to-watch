@@ -1,13 +1,22 @@
+.serviceName {
+    background-color: rgb(180, 186, 210);
+    padding-top     : 10px;
+    padding-left    : 2px;
+    margin-bottom   : 0;
+    padding-bottom  : 5px;
+}
+
 .mainContainer {
-    display          : flex;
-    background-color: #333;
+    display         : flex;
+    background-color: rgb(55, 58, 71);
     overflow        : auto;
     white-space     : nowrap;
 }
 
 .logoContainer {
-    width  : 100%;
-    padding: 10px;
+    /* width        : 100%; */
+    padding      : 10px;
+    margin-bottom: 6px;
 }
 
 .logo {
