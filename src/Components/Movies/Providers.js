@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Fragment } from 'react';
 import Provider from './Provider';
+import styles from '../Movies/css/providers.module.css'
 //You can link to the provided TMDB URL to help support TMDB and provide the actual deep links to the content.
 //Please note: In order to use this data you must attribute the source of the data as JustWatch. 
 //If we find any usage not complying with these terms we will revoke access to the API.
@@ -15,14 +16,6 @@ const Providers = ( { id, mediaType } ) => {
     } );
 
     const [ noProviers, setNoProviders ] = useState( false );
-
-
-    //returns obj
-    //US
-    //buy
-    //rent
-    //flatrate -> streaming service
-    //images => https://image.tmdb.org/t/p/w300/${logo_path}
 
     useEffect( () => {
         const fetchShows = async () => {
@@ -58,7 +51,9 @@ const Providers = ( { id, mediaType } ) => {
 
 
     if ( noProviers ) {
-        return <p style={ { marginBottom: '0', fontSize: '14px', paddingTop: '2px' } }>No providers at this time. Visit the official website for more details.</p>
+        return <p className={ styles.noProvider }>
+            No streaming services available at this time. Visit the official website for more details.
+        </p>
     }
 
     else {
@@ -67,10 +62,7 @@ const Providers = ( { id, mediaType } ) => {
             <Provider service={ state.buy } serviceName='Buy' />
             <Provider service={ state.rent } serviceName='Rent' />
 
-            <p style={ {
-                backgroundColor: 'rgb(180, 186, 210)',
-                marginBottom: '0'
-            } }>Source: JustWatch</p>
+            <p className={ styles.providerSource }>Source: JustWatch</p>
         </Fragment>
     }
 }
