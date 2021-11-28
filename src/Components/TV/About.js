@@ -146,7 +146,7 @@ const About = () => {
                             </div>
 
 
-                            <Card style={ { marginTop: '20px', marginBottom: '20px' } }>
+                            <Card style={ { marginTop: '20px', marginBottom: '20px', backgroundColor:' rgb(180, 186, 210)' } }>
                                 <Providers id={ params.showId } mediaType='show' />
                             </Card>
 
