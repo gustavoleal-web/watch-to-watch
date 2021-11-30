@@ -9,8 +9,6 @@ import styles from './css/about.module.css';
 import startIcon from '../../Images/star.png'
 import axios from 'axios';
 
-// import OfCanvas from '../TV/OfCanvas'
-
 import Recommendations from './Recommendations';
 import Sypnosis from './Accordion';
 import Trailers from './Trailers';
@@ -117,7 +115,7 @@ const About = () => {
                                 state.belongs_to_collection === null
                                     ? null
                                     : <div className={ styles.siteContainer }>
-                                        <Collection name={ state.belongs_to_collection.name } id={ state.belongs_to_collection.id } />
+                                        <Collection name={ state.belongs_to_collection.name } id={ state.belongs_to_collection.id } movieId={params.movieId}/>
                                     </div>
                             }
 
