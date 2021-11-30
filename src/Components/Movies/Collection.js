@@ -6,7 +6,7 @@ import styles from './css/collection.module.css';
 import infoIcon from '../../Images/info.png';
 
 
-const Collection = ( { name, id } ) => {
+const Collection = ( { name, id, movieId } ) => {
     const [ movieCollection, setMovieCollection ] = useState( {} );
     const [ show, setShow ] = useState( false );
 
@@ -46,10 +46,16 @@ const Collection = ( { name, id } ) => {
                 <Offcanvas.Body bsPrefix={ styles.canvasBody }>
                     {
                         Object.keys( movieCollection ).length !== 0 && movieCollection.parts.length !== 0
-                            ? movieCollection.parts.map( ( part ) => <CollectionPoster
-                                posterPath={ part.poster_path }
-                                title={ part.title }
-                                key={ part.id } />
+                            ? movieCollection.parts.map( ( part ) =>
+                                <CollectionPoster
+                                    key={ part.id }
+                                    posterPath={ part.poster_path }
+                                    title={ part.title }
+                                    partId={ part.id }
+                                    movieId={ movieId }
+                                    handleClose={ handleClose }
+                                />
+
                             )
                             : null
 
