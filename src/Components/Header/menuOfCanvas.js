@@ -58,7 +58,7 @@ const MenuOfCanvas = ( { type, onClickHandler, onChangeHandler, searchName, getM
         <>
             <span className={ styles.menuContainer }>
                 <button >
-                    <img src={ `${ menu }` } alt="What to watch" onClick={ handleShow } />
+                    <img src={ `${ menu }` } alt='What to watch' onClick={ handleShow } />
                 </button>
                 <h1>What to watch</h1>
                 {/* currently link will only work for movies bs shows/trending isnt set up*/ }
@@ -66,7 +66,7 @@ const MenuOfCanvas = ( { type, onClickHandler, onChangeHandler, searchName, getM
                 <NavLink
                     to={ `/${ type }/trending` }
                     className={ styles.navLink }>
-                    <img src={ `${ homeIcon }` } alt="" />
+                    <img src={ `${ homeIcon }` } alt='home button' />
                 </NavLink>
 
             </span>
@@ -89,7 +89,7 @@ const MenuOfCanvas = ( { type, onClickHandler, onChangeHandler, searchName, getM
                         <Dropdown.Divider />
 
                         <Dropdown>
-                            <Dropdown.Toggle id="dropdown-custom-1" bsPrefix={ styles.toggleButton } style={ { backgroundColor: 'rgb(55, 58, 71)' } }
+                            <Dropdown.Toggle id='dropdown-custom-1' bsPrefix={ styles.toggleButton } style={ { backgroundColor: 'rgb(55, 58, 71)' } }
                             >Genres</Dropdown.Toggle>
                             <Dropdown.Menu className={ styles.genres }>
                                 {
@@ -105,7 +105,7 @@ const MenuOfCanvas = ( { type, onClickHandler, onChangeHandler, searchName, getM
                             <FormControl
                                 placeholder={ `Search ${ type }` }
                                 aria-label={ `Search ${ type }` }
-                                aria-describedby="basic-addon2"
+                                aria-describedby='basic-addon2'
                                 value={ searchName }
                                 onChange={ onChangeHandler }
                             />
@@ -120,18 +120,11 @@ const MenuOfCanvas = ( { type, onClickHandler, onChangeHandler, searchName, getM
 
                 <span style={ { fontSize: '11px', textAlign: 'center' } }>
                     <div>Icons made by
-                        <a href="https://www.freepik.com" title="Freepik">Freepik</a> from
-                        <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a>
-                    </div>
-
-                    <div>Icons made by
-                        <a href="https://www.flaticon.com/authors/icongeek26" title="Icongeek26">Icongeek26</a> from
-                        <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a>
-                    </div>
-
-                    <div>Icons made by
-                        <a href="https://www.flaticon.com/authors/ctrlastudio" title="Ctrlastudio">Ctrlastudio</a> from
-                        <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a>
+                        <a href='https://www.freepik.com' title='Freepik' className={styles.iconCredit}>Freepik</a>,
+                        <a href='https://www.flaticon.com/authors/icongeek26' title='Icongeek26' className={styles.iconCredit}>Icongeek26</a>,
+                        <a href='https://www.flaticon.com/authors/ctrlastudio' title='Ctrlastudio' className={styles.iconCredit}>Ctrlastudio</a> from
+                        from
+                        <a href='https://www.flaticon.com/' title='Flaticon'>www.flaticon.com</a>
                     </div>
                 </span>
 
