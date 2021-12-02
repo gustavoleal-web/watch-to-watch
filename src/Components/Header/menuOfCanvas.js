@@ -12,7 +12,7 @@ import homeIcon from '../../Images/home.png';
 import axios from 'axios';
 
 
-const MenuOfCanvas = ( { type, onClickHandler, onChangeHandler, searchName, getMoviesByGenre } ) => {
+const MenuOfCanvas = ( { type, onClickHandler, onChangeHandler, searchName, getMediaByGenre } ) => {
     const [ show, setShow ] = useState( false );
     const handleClose = () => setShow( false );
     const handleShow = () => setShow( true );
@@ -20,12 +20,15 @@ const MenuOfCanvas = ( { type, onClickHandler, onChangeHandler, searchName, getM
     const [ genres, setGenres ] = useState( [] );
 
     let linkTo = '';
+    let linkName = '';
 
     if ( type === 'movies' ) {
         linkTo = 'shows/trending';
+        linkName = 'Trending Shows';
     }
     else if ( type === 'shows' ) {
         linkTo = 'movies/trending';
+        linkName = 'Trending Movies';
     }
 
     useEffect( () => {
@@ -45,7 +48,7 @@ const MenuOfCanvas = ( { type, onClickHandler, onChangeHandler, searchName, getM
 
 
     const passMovieIdAndCloseMenu = ( genreId, genreNname ) => {
-        getMoviesByGenre( genreId, genreNname );
+        getMediaByGenre( genreId, genreNname );
         handleClose();
     }
 
@@ -84,7 +87,7 @@ const MenuOfCanvas = ( { type, onClickHandler, onChangeHandler, searchName, getM
                         <NavLink
                             to={ `/${ linkTo }` }
                             className={ styles.navLink }>
-                            View { linkTo }
+                            View { linkName }
                         </NavLink>
                         <Dropdown.Divider />
 
