@@ -80,7 +80,7 @@ const Movies = () => {
     }
 
 
-    const getMoviesByGenre = async ( genreId, genreName ) => {
+    const getMediaByGenre = async ( genreId, genreName ) => {
 
         try {
             let response = await axios.get( `/movies/byGenre?genreId=${ genreId }` );
@@ -115,7 +115,7 @@ const Movies = () => {
                     onClickHandler={ onClickHandler }
                     onChangeHandler={ onChangeHandler }
                     searchName={ searchName }
-                    getMoviesByGenre={ getMoviesByGenre } />
+                    getMediaByGenre={ getMediaByGenre } />
 
                 <div className={ styles.mainContainer }>
 
