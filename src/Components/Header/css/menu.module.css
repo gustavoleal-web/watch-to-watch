@@ -49,3 +49,7 @@
 .navLink:hover {
     color: rgb(253, 84, 84);
 }
+
+.iconCredit {
+    padding: 2px;
+}
