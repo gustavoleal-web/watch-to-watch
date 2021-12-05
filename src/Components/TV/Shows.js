@@ -7,7 +7,7 @@ import { useParams } from 'react-router';
 
 const Shows = () => {
     const [ tvShows, setTvShows ] = useState( [] );
-    // const [ searchName, setsearchName ] = useState( '' );
+    const [ searchName, setsearchName ] = useState( '' );
     let params = useParams();
 
     useEffect( () => {
@@ -25,25 +25,41 @@ const Shows = () => {
     }, [ params.option ] );
 
 
-    // const onChangeHandler = ( e ) => {
-    //     setsearchName( e.target.value );
-    // }
+    const onChangeHandler = ( e ) => {
+        setsearchName( e.target.value );
+    }
 
-    // const onClickHandler = async () => {
-    //     if ( searchName.length > 3 ) {
-    //         let url = `/search/tv/?tvShow=${ searchName }`;
+    const onClickHandler = async () => {
+        if ( searchName.length > 3 ) {
+            let url = `/search/tv/?tvShow=${ searchName }`;
 
-    //         try {
-    //             let response = await axios.get( url );
-    //             console.log( response.data.results.results );
-    //             setTvShows( response.data.results.results );
-    //         }
-    //         catch ( e ) {
-    //             console.log( e )
-    //         }
+            try {
+                let response = await axios.get( url );
+                setTvShows( response.data.results.results );
+            }
+            catch ( e ) {
+                console.log( e )
+            }
+
+        }
+
+    }
+
+    // const getMediaByGenre = async ( genreId, genreName ) => {
+
+    //     try {
+    //         let response = await axios.get( `/tv/byGenre?genreId=${ genreId }` );
+
+    //         setMovies( {
+    //             title: genreName,
+    //             movieList: response.data.results.results,
+    //             dates: null
+    //         } );
 
     //     }
-
+    //     catch ( e ) {
+    //         console.log( e )
+    //     }
     // }
 
 
@@ -54,7 +70,12 @@ const Shows = () => {
     else {
         return (
             <Fragment>
-                <MenuOfCanvas type='shows' />
+                <MenuOfCanvas type='shows'
+                    onClickHandler={ onClickHandler }
+                    onChangeHandler={ onChangeHandler }
+                    searchName={ searchName }
+                />
+
                 <div className={ styles.mainContainer }>
 
                     <h2 className={ styles.title }>{ params.option }</h2>
