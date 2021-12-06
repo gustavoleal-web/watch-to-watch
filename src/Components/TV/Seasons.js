@@ -3,6 +3,7 @@ import Offcanvas from 'react-bootstrap/Offcanvas';
 import CollectionPoster from '../Movies/CollectioPoster';
 import styles from '../Movies/css/collection.module.css';
 import infoIcon from '../../Images/info.png';
+import axios from 'axios';
 
 
 const Collection = ( { seasons, name, currentMediaId } ) => {
@@ -10,6 +11,21 @@ const Collection = ( { seasons, name, currentMediaId } ) => {
 
     const handleClose = () => setShow( false );
     const handleShow = () => setShow( true );
+
+
+
+    const getSeasonDetails = async ( id, seasonNum ) => {
+        try {
+            let response = await axios.get( `/show/season/?showId=${ id }&seasonNum=${ seasonNum }` );
+            let results = response.data.results;
+            console.log( results )
+        }
+        catch ( e ) {
+            console.log( e )
+        }
+
+    }
+
 
     return (
         <>
@@ -35,14 +51,18 @@ const Collection = ( { seasons, name, currentMediaId } ) => {
                                     posterPath={ s.poster_path }
                                     title={ s.name }
                                     partId={ s.id }
-                                    currentMediaId={currentMediaId}
+                                    currentMediaId={ currentMediaId }
+                                    seasonNumber={ s.season_number }
+                                    getSeasonDetails={ getSeasonDetails }
                                 />
                                 <h6 style={ { padding: '5px 10px' } }>{ s.episode_count } Episodes </h6>
                             </div>
                         )
 
                     }
-
+                    <div>
+                        seaos info will go here
+                    </div>
                 </Offcanvas.Body>
             </Offcanvas>
         </>
