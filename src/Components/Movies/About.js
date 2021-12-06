@@ -115,7 +115,7 @@ const About = () => {
                                 state.belongs_to_collection === null
                                     ? null
                                     : <div className={ styles.siteContainer }>
-                                        <Collection name={ state.belongs_to_collection.name } id={ state.belongs_to_collection.id } movieId={params.movieId}/>
+                                        <Collection name={ state.belongs_to_collection.name } id={ state.belongs_to_collection.id } currentMediaId={params.movieId}/>
                                     </div>
                             }
 
