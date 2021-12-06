@@ -5,7 +5,7 @@ import styles from '../Movies/css/collection.module.css';
 import infoIcon from '../../Images/info.png';
 
 
-const Collection = ( { seasons, name } ) => {
+const Collection = ( { seasons, name, currentMediaId } ) => {
     const [ show, setShow ] = useState( false );
 
     const handleClose = () => setShow( false );
@@ -29,13 +29,15 @@ const Collection = ( { seasons, name } ) => {
                 <Offcanvas.Body bsPrefix={ styles.canvasBody }>
                     {
                         seasons.map( ( s ) =>
-                            <div key={ s.id}>
+                            <div key={ s.id }>
                                 <CollectionPoster
+                                    media='tv'
                                     posterPath={ s.poster_path }
                                     title={ s.name }
-                                    key={ s.id }
+                                    partId={ s.id }
+                                    currentMediaId={currentMediaId}
                                 />
-                                <h6 style={ { padding: '5px 10px' } }>Episodes { s.episode_count }</h6>
+                                <h6 style={ { padding: '5px 10px' } }>{ s.episode_count } Episodes </h6>
                             </div>
                         )
 
