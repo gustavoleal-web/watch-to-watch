@@ -6,7 +6,7 @@ import styles from './css/collection.module.css';
 import infoIcon from '../../Images/info.png';
 
 
-const Collection = ( { name, id, movieId } ) => {
+const Collection = ( { name, id, currentMediaId } ) => {
     const [ movieCollection, setMovieCollection ] = useState( {} );
     const [ show, setShow ] = useState( false );
 
@@ -48,11 +48,12 @@ const Collection = ( { name, id, movieId } ) => {
                         Object.keys( movieCollection ).length !== 0 && movieCollection.parts.length !== 0
                             ? movieCollection.parts.map( ( part ) =>
                                 <CollectionPoster
+                                    media='movie'
                                     key={ part.id }
                                     posterPath={ part.poster_path }
                                     title={ part.title }
                                     partId={ part.id }
-                                    movieId={ movieId }
+                                    currentMediaId={ currentMediaId }
                                     handleClose={ handleClose }
                                 />
 
