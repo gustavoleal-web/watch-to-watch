@@ -6,7 +6,12 @@ import MenuOfCanvas from '../Header/menuOfCanvas';
 import { useParams } from 'react-router';
 
 const Shows = () => {
-    const [ tvShows, setTvShows ] = useState( [] );
+    const [ tvShows, setTvShows ] = useState( {
+        title: '',
+        list: [],
+        dates: null
+    } );
+
     const [ searchName, setsearchName ] = useState( '' );
     let params = useParams();
 
@@ -15,7 +20,11 @@ const Shows = () => {
             try {
                 let response = await axios.get( `/${ params.option }/shows` );
 
-                setTvShows( response.data.results.results );
+                setTvShows( {
+                    title: params.option,
+                    list: response.data.results.results,
+                    dates: null
+                } );
             }
             catch {
                 console.log( 'error' )
@@ -35,7 +44,11 @@ const Shows = () => {
 
             try {
                 let response = await axios.get( url );
-                setTvShows( response.data.results.results );
+                setTvShows( {
+                    title: searchName,
+                    list: response.data.results.results,
+                    dates: null
+                } );
             }
             catch ( e ) {
                 console.log( e )
@@ -45,22 +58,22 @@ const Shows = () => {
 
     }
 
-    // const getMediaByGenre = async ( genreId, genreName ) => {
+    const getMediaByGenre = async ( genreId, genreName ) => {
 
-    //     try {
-    //         let response = await axios.get( `/tv/byGenre?genreId=${ genreId }` );
+        try {
+            let response = await axios.get( `/show/byGenre?genreId=${ genreId }` );
 
-    //         setMovies( {
-    //             title: genreName,
-    //             movieList: response.data.results.results,
-    //             dates: null
-    //         } );
+            setTvShows( {
+                title: genreName,
+                list: response.data.results.results,
+                dates: null
+            } );
 
-    //     }
-    //     catch ( e ) {
-    //         console.log( e )
-    //     }
-    // }
+        }
+        catch ( e ) {
+            console.log( e )
+        }
+    }
 
 
     if ( tvShows.length === 0 ) {
@@ -74,13 +87,14 @@ const Shows = () => {
                     onClickHandler={ onClickHandler }
                     onChangeHandler={ onChangeHandler }
                     searchName={ searchName }
+                    getMediaByGenre={ getMediaByGenre }
                 />
 
                 <div className={ styles.mainContainer }>
 
-                    <h2 className={ styles.title }>{ params.option }</h2>
+                    <h2 className={ styles.title }>{ tvShows.title }</h2>
                     {
-                        tvShows.map( show =>
+                        tvShows.list.map( show =>
                             <Show showId={ show.id }
                                 name={ show.name }
                                 airDate={ show.first_air_date }
