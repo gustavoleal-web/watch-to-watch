@@ -135,7 +135,7 @@ const About = () => {
 
                             {
                                 state.number_of_seasons > 1
-                                    ? <div className={ styles.siteContainer }> <Seasons seasons={ state.seasons } name={ state.name } /> </div>
+                                    ? <div className={ styles.siteContainer }> <Seasons seasons={ state.seasons } name={ state.name } currentMediaId={params.showId}/> </div>
                                     : null
                             }
 
