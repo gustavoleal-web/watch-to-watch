@@ -3,9 +3,9 @@ import { Link } from 'react-router-dom';
 import noImage from '../../Images/No-Image-Placeholder.png';
 import styles from './css/collection.module.css'
 
-const CollectionPoster = ( { posterPath, title, partId, movieId, handleClose } ) => {
+const CollectionPoster = ( { media, posterPath, title, partId, currentMediaId, handleClose } ) => {
     let posterSrc;
-    let intMovieId = parseInt( movieId );
+    let intId = parseInt( currentMediaId );
 
     if ( posterPath === null ) {
         posterSrc = noImage;
@@ -20,18 +20,24 @@ const CollectionPoster = ( { posterPath, title, partId, movieId, handleClose } )
         )
     }
     //prevents the unnecessary rerender of the same movie
-    else if ( partId === intMovieId && !isNaN( movieId )) {
+    else if ( partId === intId && !isNaN( currentMediaId ) ) {
         return <span>
             <img src={ `https://image.tmdb.org/t/p/w300${ posterPath }` } alt={ title } className={ styles.poster } />
         </span>
     }
 
-    else {
+    else if ( media === 'movie' ) {
         return (
             <Link to={ `/movies/trending/${ partId }` } onClick={ handleClose }>
                 <img src={ `https://image.tmdb.org/t/p/w300${ posterPath }` } alt={ title } className={ styles.poster } />
             </Link>
         )
+    }
+
+    else {
+        return <span>
+            <img src={ `https://image.tmdb.org/t/p/w300${ posterPath }` } alt={ title } className={ styles.poster } />
+        </span>
     }
 
 
