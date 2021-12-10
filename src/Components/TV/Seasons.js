@@ -1,6 +1,7 @@
 import React, { useState, Fragment } from 'react';
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import CollectionPoster from '../Movies/CollectioPoster';
+import SeasonDetails from './SeasonDetails';
 import styles from '../Movies/css/collection.module.css';
 import infoIcon from '../../Images/info.png';
 import axios from 'axios';
@@ -8,6 +9,7 @@ import axios from 'axios';
 
 const Collection = ( { seasons, name, currentMediaId } ) => {
     const [ show, setShow ] = useState( false );
+    const [ seasonDetails, setSeasonDetails ] = useState( {} );
 
     const handleClose = () => setShow( false );
     const handleShow = () => setShow( true );
@@ -18,7 +20,8 @@ const Collection = ( { seasons, name, currentMediaId } ) => {
         try {
             let response = await axios.get( `/show/season/?showId=${ id }&seasonNum=${ seasonNum }` );
             let results = response.data.results;
-            console.log( results )
+            console.log(results);
+            setSeasonDetails( { results } )
         }
         catch ( e ) {
             console.log( e )
@@ -60,9 +63,12 @@ const Collection = ( { seasons, name, currentMediaId } ) => {
                         )
 
                     }
-                    <div>
-                        seaos info will go here
-                    </div>
+                    {
+                        Object.keys(seasonDetails).length !== 0
+                        ?  <SeasonDetails season={ seasonDetails } />
+                        : null
+                    }
+                   
                 </Offcanvas.Body>
             </Offcanvas>
         </>
