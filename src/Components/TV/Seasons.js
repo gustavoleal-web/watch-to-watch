@@ -10,6 +10,7 @@ import axios from 'axios';
 const Collection = ( { seasons, name, currentMediaId } ) => {
     const [ show, setShow ] = useState( false );
     const [ seasonDetails, setSeasonDetails ] = useState( {} );
+    const [ seasonNumber, setSeasonNumber ] = useState( null );
 
     const handleClose = () => setShow( false );
     const handleShow = () => setShow( true );
@@ -17,16 +18,21 @@ const Collection = ( { seasons, name, currentMediaId } ) => {
 
 
     const getSeasonDetails = async ( id, seasonNum ) => {
-        try {
-            let response = await axios.get( `/show/season/?showId=${ id }&seasonNum=${ seasonNum }` );
-            let results = response.data.results;
-            console.log(results);
-            setSeasonDetails( { results } )
-        }
-        catch ( e ) {
-            console.log( e )
+        //prevents rerender of the already loaded season
+        if ( seasonNumber === null || seasonNumber !== seasonNum ) {
+            try {
+                let response = await axios.get( `/show/season/?showId=${ id }&seasonNum=${ seasonNum }` );
+                let results = response.data.results;
+                console.log( results );
+                setSeasonDetails( { results } );
+                setSeasonNumber( results.season_number );
+            }
+            catch ( e ) {
+                console.log( e )
+            }
         }
 
+        else return null;
     }
 
 
@@ -64,11 +70,11 @@ const Collection = ( { seasons, name, currentMediaId } ) => {
 
                     }
                     {
-                        Object.keys(seasonDetails).length !== 0
-                        ?  <SeasonDetails season={ seasonDetails } />
-                        : null
+                        Object.keys( seasonDetails ).length !== 0
+                            ? <SeasonDetails season={ seasonDetails } />
+                            : null
                     }
-                   
+
                 </Offcanvas.Body>
             </Offcanvas>
         </>
