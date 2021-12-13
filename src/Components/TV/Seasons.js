@@ -1,40 +1,13 @@
 import React, { useState, Fragment } from 'react';
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import CollectionPoster from '../Movies/CollectioPoster';
-import SeasonDetails from './SeasonDetails';
 import styles from '../Movies/css/collection.module.css';
 import infoIcon from '../../Images/info.png';
-import axios from 'axios';
-
 
 const Collection = ( { seasons, name, currentMediaId } ) => {
     const [ show, setShow ] = useState( false );
-    const [ seasonDetails, setSeasonDetails ] = useState( {} );
-    const [ seasonNumber, setSeasonNumber ] = useState( null );
-
     const handleClose = () => setShow( false );
     const handleShow = () => setShow( true );
-
-
-
-    const getSeasonDetails = async ( id, seasonNum ) => {
-        //prevents rerender of the already loaded season
-        if ( seasonNumber === null || seasonNumber !== seasonNum ) {
-            try {
-                let response = await axios.get( `/show/season/?showId=${ id }&seasonNum=${ seasonNum }` );
-                let results = response.data.results;
-                console.log( results );
-                setSeasonDetails( { results } );
-                setSeasonNumber( results.season_number );
-            }
-            catch ( e ) {
-                console.log( e )
-            }
-        }
-
-        else return null;
-    }
-
 
     return (
         <>
@@ -62,18 +35,13 @@ const Collection = ( { seasons, name, currentMediaId } ) => {
                                     partId={ s.id }
                                     currentMediaId={ currentMediaId }
                                     seasonNumber={ s.season_number }
-                                    getSeasonDetails={ getSeasonDetails }
                                 />
                                 <h6 style={ { padding: '5px 10px' } }>{ s.episode_count } Episodes </h6>
                             </div>
                         )
 
                     }
-                    {
-                        Object.keys( seasonDetails ).length !== 0
-                            ? <SeasonDetails season={ seasonDetails } />
-                            : null
-                    }
+                   
 
                 </Offcanvas.Body>
             </Offcanvas>
