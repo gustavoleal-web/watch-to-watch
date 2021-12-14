@@ -10,6 +10,7 @@ import Movies from './Components/Movies/Movies';
 import Shows from './Components/TV/Shows';
 import AboutMovie from './Components/Movies/About';
 import AboutTv from './Components/TV/About';
+import SeasonDetails from './Components/TV/SeasonDetails';
 import dbLogo from './Images/the_movie_db_logo.svg'
 
 const App = () => {
@@ -30,7 +31,13 @@ const App = () => {
               </Fragment>
             </Route>
 
-             <Route path='/shows/:navOption/:showId'>
+            <Route path='/shows/:showId/season/:seasonNumber'>
+              <Fragment>
+                <SeasonDetails />
+              </Fragment>
+            </Route>
+
+            <Route path='/shows/:navOption/:showId'>
               <Fragment>
                 <AboutTv />
               </Fragment>
@@ -42,7 +49,7 @@ const App = () => {
               </Fragment>
             </Route>
 
-           
+
 
             <Route path='/shows/:option' exact>
               <Fragment>
@@ -50,7 +57,7 @@ const App = () => {
               </Fragment>
             </Route>
 
-            
+
 
           </Switch>
 
