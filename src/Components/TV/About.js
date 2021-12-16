@@ -134,8 +134,14 @@ const About = () => {
                             </Card>
 
                             {
-                                state.number_of_seasons > 1
-                                    ? <div className={ styles.siteContainer }> <Seasons seasons={ state.seasons } name={ state.name } currentMediaId={params.showId}/> </div>
+                                state.number_of_seasons > 0
+                                    ? <div className={ styles.siteContainer }>
+                                        <Seasons
+                                            seasons={ state.seasons }
+                                            name={ state.name }
+                                            currentMediaId={ params.showId }
+                                        />
+                                    </div>
                                     : null
                             }
 
@@ -146,7 +152,7 @@ const About = () => {
                             </div>
 
 
-                            <Card style={ { marginTop: '20px', marginBottom: '20px', backgroundColor:' rgb(180, 186, 210)' } }>
+                            <Card style={ { marginTop: '20px', marginBottom: '20px', backgroundColor: ' rgb(180, 186, 210)' } }>
                                 <Providers id={ params.showId } mediaType='show' />
                             </Card>
 
