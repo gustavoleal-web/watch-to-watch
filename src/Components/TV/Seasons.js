@@ -15,7 +15,7 @@ const Collection = ( { seasons, name, currentMediaId } ) => {
                 <p>
                     Seasons
                 </p>
-                <img src={ infoIcon } alt="" />
+                <img src={ infoIcon } alt='more info' />
             </span>
 
 
