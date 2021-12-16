@@ -32,7 +32,7 @@ const MenuOfCanvas = ( { type, onClickHandler, onChangeHandler, searchName, getM
     }
 
     useEffect( () => {
-        const fetchShows = async () => {
+        const fetchGenres = async () => {
 
             try {
                 let response = await axios.get( `/${ type }/genres` );
@@ -43,7 +43,7 @@ const MenuOfCanvas = ( { type, onClickHandler, onChangeHandler, searchName, getM
                 console.log( e )
             }
         }
-        fetchShows();
+        fetchGenres();
     }, [ type ] );
 
 
@@ -64,8 +64,7 @@ const MenuOfCanvas = ( { type, onClickHandler, onChangeHandler, searchName, getM
                     <img src={ `${ menu }` } alt='What to watch' onClick={ handleShow } />
                 </button>
                 <h1>What to watch</h1>
-                {/* currently link will only work for movies bs shows/trending isnt set up*/ }
-
+               
                 <NavLink
                     to={ `/${ type }/trending` }
                     className={ styles.navLink }>
