@@ -1,21 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import { useParams } from 'react-router';
 import axios from 'axios';
-
-// const SeasonDetails = ( { season } ) => {
-//     console.log( season );
-//     return <div style={ { display: 'grid', gridTemplateColumns: '1fr 2fr', width: '100%', border: '1px solid black' } }>
-//         <img style={{height: '100%', width:'100px'}} src={ `https://image.tmdb.org/t/p/w300/${ season.episodes[ 0 ].still_path  }` } alt="" />
-//         <div>
-//             <h6>{ season.episodes[ 0 ].name }</h6>
-//             <p>{ season.episodes[ 0 ].overview }</p>
-//         </div>
-//     </div>
-// }
+import Card from 'react-bootstrap/Card'
+import CardGroup from 'react-bootstrap/CardGroup';
 
 const SeasonDetails = () => {
     const [ seasonDetails, setSeasonDetails ] = useState( {} )
     const params = useParams();
+
+
 
     useEffect( () => {
         const fetchSeasonDetails = async () => {
@@ -34,10 +27,41 @@ const SeasonDetails = () => {
         fetchSeasonDetails();
     }, [ params.showId, params.seasonNumber ] );
 
-    
-    return <div>
-        Season details
-    </div>
+
+    if ( Object.keys( seasonDetails ).length === 0 ) {
+        return true;
+    }
+
+    return <Fragment>
+        {
+            seasonDetails.episodes.map( ( e ) => <CardGroup key={ e.id }
+                style={ {
+                    width: '85%',
+                    margin: 'auto',
+                    paddingTop: '20px',
+                    marginBottom: '20px'
+                } }>
+                <Card>
+                    <Card.Img variant="top" src={ `https://image.tmdb.org/t/p/w500/${ e.still_path }` } style={ { height: '170px' } } />
+                    <Card.Body>
+                        <Card.Title>{ e.name }</Card.Title>
+                        <p style={ { fontSize: '14px' } }>{ e.overview }</p>
+                    </Card.Body>
+                    <Card.Footer style={ { display: 'flex', justifyContent: 'space-between' } }>
+                        <small className="text-muted">Release date: { e.air_date }</small>
+                        <small className="text-muted">{ e.episode_number }</small>
+                    </Card.Footer>
+                </Card>
+            </CardGroup>
+            )
+        }
+
+    </Fragment>
+
+
+
+
+
 }
 
 export default SeasonDetails;
