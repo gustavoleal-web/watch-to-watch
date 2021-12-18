@@ -15,11 +15,11 @@ const Collection = ( { seasons, name, currentMediaId } ) => {
                 <p>
                     Seasons
                 </p>
-                <img src={ infoIcon } alt='more info' />
+                <img src={ infoIcon } alt='more info' className={ styles.infoIcon } />
             </span>
 
 
-            <Offcanvas show={ show } onHide={ handleClose } placement="end">
+            <Offcanvas show={ show } onHide={ handleClose } placement='end'>
                 <Offcanvas.Header closeButton>
                     <Offcanvas.Title>{ name }</Offcanvas.Title>
                 </Offcanvas.Header>
@@ -41,7 +41,7 @@ const Collection = ( { seasons, name, currentMediaId } ) => {
                         )
 
                     }
-                   
+
 
                 </Offcanvas.Body>
             </Offcanvas>
