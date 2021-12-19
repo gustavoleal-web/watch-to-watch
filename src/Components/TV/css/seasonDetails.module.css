@@ -1,0 +1,17 @@
+.cardImg {
+    height: 170px;
+}
+
+.noImgPlaceholder {
+    height    : 170px;
+    width     : 200px;
+    margin    : auto;
+    margin-top: 20px;
+}
+
+.cardGroup {
+    width        : 85%;
+    margin       : auto;
+    padding-top  : 20px;
+    margin-bottom: 20px;
+}
