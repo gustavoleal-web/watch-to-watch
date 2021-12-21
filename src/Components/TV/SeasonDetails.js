@@ -29,11 +29,12 @@ const SeasonDetails = () => {
 
 
     if ( Object.keys( seasonDetails ).length === 0 ) {
-        return true;
+        return null;
     }
 
     return <Fragment>
         <MenuOfCanvas type='shows' />
+        <h2 style={{color: 'white', textAlign: 'center', marginTop: '10px'}}>{ seasonDetails.name }</h2>
         {
             seasonDetails.episodes.map( ( e ) => {
                 let imgSrc = null;
