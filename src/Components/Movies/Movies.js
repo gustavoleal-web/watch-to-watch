@@ -7,7 +7,7 @@ import { useParams } from 'react-router';
 // import { v4 as uuidv4 } from 'uuid';  maybe uninstall this
 
 const Movies = () => {
-    const [ searchName, setsearchName ] = useState( '' );
+    //const [ searchName, setsearchName ] = useState( '' );
     const params = useParams();
 
     const [ movies, setMovies ] = useState( {
@@ -21,7 +21,7 @@ const Movies = () => {
     const pages = [ 1, 2, 3, 4, 5 ];
 
     useEffect( () => {
-        const fetchShows = async () => {
+        const fetchMovies = async () => {
             try {
                 let response = await axios.get( `/${ params.option }/movies/?page=${ currentPage }` );
                 let dates = {};
@@ -45,13 +45,13 @@ const Movies = () => {
                 console.log( 'error' )
             }
         }
-        fetchShows();
+        fetchMovies();
     }, [ params.option, currentPage ] );
 
 
-    const onChangeHandler = ( e ) => {
-        setsearchName( e.target.value );
-    }
+    // const onChangeHandler = ( e ) => {
+    //     setsearchName( e.target.value );
+    // }
 
     const setNewPage = ( page ) => {
         if ( currentPage !== page ) {
@@ -60,31 +60,29 @@ const Movies = () => {
         window.scrollTo( 0, 0 );
     }
 
-    const onClickHandler = async () => {
-        if ( searchName.length >= 3 ) {
-            let url = `/search/movies/?movieName=${ searchName }`;
+    // const onClickHandler = async () => {
+    //     if ( searchName.length >= 3 ) {
+    //         let url = `/search/movies/?movieName=${ searchName }`;
 
-            try {
-                let response = await axios.get( url );
-                setMovies( {
-                    title: 'Results',
-                    movieList: response.data.results.results,
-                    dates: null
-                } );
+    //         try {
+    //             let response = await axios.get( url );
+    //             setMovies( {
+    //                 title: 'Results',
+    //                 movieList: response.data.results.results,
+    //                 dates: null
+    //             } );
 
-            }
-            catch ( e ) {
-                console.log( e )
-            }
-        }
-    }
-
+    //         }
+    //         catch ( e ) {
+    //             console.log( e )
+    //         }
+    //     }
+    // }
 
     const getMediaByGenre = async ( genreId, genreName ) => {
 
         try {
             let response = await axios.get( `/movies/byGenre?genreId=${ genreId }` );
-
             setMovies( {
                 title: genreName,
                 movieList: response.data.results.results,
@@ -104,7 +102,7 @@ const Movies = () => {
     else {
         //only upcoming and nowplayin have dates
         //without searchName.length === 0 it will give an error because dates will be undefined
-        let dates = ( movies.title === 'upcoming movies' || movies.title === 'nowplaying movies' ) && searchName.length === 0
+        let dates = ( movies.title === 'upcoming movies' || movies.title === 'nowplaying movies' ) 
             ? <h6 className={ styles.dates }>{ movies.dates.minimum } - { movies.dates.maximum }</h6>
             : null;
 
@@ -112,9 +110,6 @@ const Movies = () => {
             <Fragment>
                 <MenuOfCanvas
                     type='movies'
-                    onClickHandler={ onClickHandler }
-                    onChangeHandler={ onChangeHandler }
-                    searchName={ searchName }
                     getMediaByGenre={ getMediaByGenre } />
 
                 <div className={ styles.mainContainer }>
