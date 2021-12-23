@@ -12,12 +12,13 @@ import homeIcon from '../../Images/home.png';
 import axios from 'axios';
 
 
-const MenuOfCanvas = ( { type, onClickHandler, onChangeHandler, searchName, getMediaByGenre } ) => {
+const MenuOfCanvas = ( { type, getMediaByGenre } ) => {
     const [ show, setShow ] = useState( false );
     const handleClose = () => setShow( false );
     const handleShow = () => setShow( true );
 
     const [ genres, setGenres ] = useState( [] );
+    const [ searchName, setsearchName ] = useState( '' );
 
     let linkTo = '';
     let linkName = '';
@@ -52,10 +53,15 @@ const MenuOfCanvas = ( { type, onClickHandler, onChangeHandler, searchName, getM
         handleClose();
     }
 
-    const closeAfterSearch = () => {
-        onClickHandler();
-        handleClose();
+
+    const onChangeHandler = ( e ) => {
+        setsearchName( e.target.value );
     }
+
+    // const closeAfterSearch = () => {
+    //      onClickHandler();
+    //     handleClose();
+    // }
 
     return (
         <>
@@ -64,7 +70,7 @@ const MenuOfCanvas = ( { type, onClickHandler, onChangeHandler, searchName, getM
                     <img src={ `${ menu }` } alt='What to watch' onClick={ handleShow } />
                 </button>
                 <h1>What to watch</h1>
-               
+
                 <NavLink
                     to={ `/${ type }/trending` }
                     className={ styles.navLink }>
@@ -96,7 +102,7 @@ const MenuOfCanvas = ( { type, onClickHandler, onChangeHandler, searchName, getM
                             <Dropdown.Menu className={ styles.genres }>
                                 {
                                     genres.length === 0 ? null : genres.map( genre =>
-                                        <Dropdown.Item key={ genre.id } onClick={ () => passMovieIdAndCloseMenu( genre.id, genre.name ) }>{ genre.name }</Dropdown.Item> )
+                                        <Dropdown.Item key={ genre.name } onClick={ () => passMovieIdAndCloseMenu( genre.id, genre.name ) }>{ genre.name }</Dropdown.Item> )
                                 }
                             </Dropdown.Menu>
                         </Dropdown>
@@ -111,9 +117,13 @@ const MenuOfCanvas = ( { type, onClickHandler, onChangeHandler, searchName, getM
                                 value={ searchName }
                                 onChange={ onChangeHandler }
                             />
-                            <Button variant='outline-secondary' id='button-addon2' onClick={ closeAfterSearch }>
-                                Button
-                            </Button>
+
+                            <NavLink to={ `/${ type }/search/${ searchName }` }>
+                                <Button variant='outline-secondary' id='button-addon2' >
+                                    Button
+                                </Button>
+                            </NavLink>
+
                         </InputGroup>
 
                     </Dropdown.Menu>
@@ -122,9 +132,9 @@ const MenuOfCanvas = ( { type, onClickHandler, onChangeHandler, searchName, getM
 
                 <span style={ { fontSize: '11px', textAlign: 'center' } }>
                     <div>Icons made by
-                        <a href='https://www.freepik.com' title='Freepik' className={styles.iconCredit}>Freepik</a>,
-                        <a href='https://www.flaticon.com/authors/icongeek26' title='Icongeek26' className={styles.iconCredit}>Icongeek26</a>,
-                        <a href='https://www.flaticon.com/authors/ctrlastudio' title='Ctrlastudio' className={styles.iconCredit}>Ctrlastudio</a> from
+                        <a href='https://www.freepik.com' title='Freepik' className={ styles.iconCredit }>Freepik</a>,
+                        <a href='https://www.flaticon.com/authors/icongeek26' title='Icongeek26' className={ styles.iconCredit }>Icongeek26</a>,
+                        <a href='https://www.flaticon.com/authors/ctrlastudio' title='Ctrlastudio' className={ styles.iconCredit }>Ctrlastudio</a> from
                         from
                         <a href='https://www.flaticon.com/' title='Flaticon'>www.flaticon.com</a>
                     </div>
