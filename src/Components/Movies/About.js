@@ -20,6 +20,8 @@ const About = () => {
     const [ recommended, setRecommended ] = useState( [] );
     const [ defaultImg, setDefaultImg ] = useState( '' );
 
+    //const [ searchName, setsearchName ] = useState( '' );
+
     useEffect( () => {
         const fetchMovies = async () => {
             try {
@@ -57,9 +59,33 @@ const About = () => {
         fetchRecommendations();
     }, [ params.movieId ] );
 
+
+    // const onChangeHandler = ( e ) => {
+    //     setsearchName( e.target.value );
+    // }
+
+    // const onClickHandler = async () => {
+    //     if ( searchName.length >= 3 ) {
+    //         let url = `/search/movies/?movieName=${ searchName }`;
+
+    //         try {
+    //             let response = await axios.get( url );
+    //             console.log( response.data )
+
+    //         }
+    //         catch ( e ) {
+    //             console.log( e )
+    //         }
+    //     }
+    // }
+
+
+
+
     return (
         <Fragment>
             <MenuOfCanvas type='movies' />
+
             <div className={ styles.mainContainer }>
                 {
                     Object.keys( state ).length === 0 ? null
@@ -115,7 +141,7 @@ const About = () => {
                                 state.belongs_to_collection === null
                                     ? null
                                     : <div className={ styles.siteContainer }>
-                                        <Collection name={ state.belongs_to_collection.name } id={ state.belongs_to_collection.id } currentMediaId={params.movieId}/>
+                                        <Collection name={ state.belongs_to_collection.name } id={ state.belongs_to_collection.id } currentMediaId={ params.movieId } />
                                     </div>
                             }
 
@@ -128,7 +154,7 @@ const About = () => {
                             </div>
 
                             <Card style={ { marginTop: '20px', marginBottom: '20px' } }>
-                                <Providers id={ params.movieId } mediaType='movie'/>
+                                <Providers id={ params.movieId } mediaType='movie' />
                             </Card>
 
                             {
@@ -142,7 +168,7 @@ const About = () => {
                             {
                                 Object.keys( recommended ).length === 0
                                     ? null
-                                    : <Recommendations recommendations={ recommended } mediaType='movies'/>
+                                    : <Recommendations recommendations={ recommended } mediaType='movies' />
 
                             }
                         </Fragment>
