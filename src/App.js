@@ -11,6 +11,7 @@ import Shows from './Components/TV/Shows';
 import AboutMovie from './Components/Movies/About';
 import AboutTv from './Components/TV/About';
 import SeasonDetails from './Components/TV/SeasonDetails';
+import SearchedMedia from './Components/Movies/SearchedMedia'
 import dbLogo from './Images/the_movie_db_logo.svg'
 
 const App = () => {
@@ -23,6 +24,12 @@ const App = () => {
 
             <Route path='/' exact>
               <Redirect to='/movies/trending' />
+            </Route>
+
+            <Route path='/:type/search/:searchName'>
+              <Fragment>
+                <SearchedMedia />
+              </Fragment>
             </Route>
 
             <Route path='/movies/:navOption/:movieId'>
