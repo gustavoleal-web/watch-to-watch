@@ -2,7 +2,7 @@ import React, { useEffect, useState, Fragment } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import Movie from '../Movies/Movie';
-import styles  from '../Movies/css/movies.module.css';
+import styles from '../Movies/css/movies.module.css';
 import MenuOfCanvas from '../Header/menuOfCanvas';
 
 const SearchedMedia = () => {
@@ -18,12 +18,11 @@ const SearchedMedia = () => {
             if ( params.searchName.length >= 3 ) {
                 //need to change this to `/search/mediaType/?searchName=${ params.searchName }
                 //so it works with both shows and movies
-                let url = `/search/movies/?movieName=${ params.searchName }`;
+                let url = `/search/${ params.type }/?searchName=${ params.searchName }`;
 
                 try {
                     let response = await axios.get( url );
                     setSearchResults( { title: params.searchName, searchList: response.data.results.results } )
-                    console.log( response.data.results.results );
 
                 }
                 catch ( e ) {
@@ -32,14 +31,14 @@ const SearchedMedia = () => {
             }
         }
         fetchMovies();
-    }, [ params.searchName ] );
+    }, [ params.type, params.searchName ] );
 
 
     if ( searchResults.searchList.length > 0 ) {
         return (
             <Fragment>
-            {/* type needs to be dynamic. either movies to shows  */}
-                <MenuOfCanvas type='movies'/>
+                {/* type needs to be dynamic. either movies to shows  */ }
+                <MenuOfCanvas type='movies' />
 
                 <div className={ styles.mainContainer }>
 
@@ -49,8 +48,8 @@ const SearchedMedia = () => {
                         {
                             searchResults.searchList.map( movie =>
                                 <Movie
-                                    title={ movie.title }
-                                    releaseDate={ movie.release_date }
+                                    title={ movie.name }
+                                    releaseDate={ movie.first_air_date }
                                     posterPath={ movie.poster_path }
                                     rating={ movie.vote_average }
                                     key={ movie.id }
