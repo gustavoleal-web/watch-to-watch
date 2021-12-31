@@ -1,7 +1,7 @@
 import React, { useState, useEffect, Fragment } from 'react';
 import styles from './css/movies.module.css';
 import axios from 'axios';
-import Movie from './Movie';
+import { default as Movie } from './Media';
 import MenuOfCanvas from '../Header/menuOfCanvas';
 import { useParams } from 'react-router';
 // import { v4 as uuidv4 } from 'uuid';  maybe uninstall this
@@ -102,7 +102,7 @@ const Movies = () => {
     else {
         //only upcoming and nowplayin have dates
         //without searchName.length === 0 it will give an error because dates will be undefined
-        let dates = ( movies.title === 'upcoming movies' || movies.title === 'nowplaying movies' ) 
+        let dates = ( movies.title === 'upcoming movies' || movies.title === 'nowplaying movies' )
             ? <h6 className={ styles.dates }>{ movies.dates.minimum } - { movies.dates.maximum }</h6>
             : null;
 
@@ -121,13 +121,15 @@ const Movies = () => {
                         {
                             movies.movieList.map( movie =>
                                 <Movie
+                                    id={ movie.id }
                                     title={ movie.title }
                                     releaseDate={ movie.release_date }
                                     posterPath={ movie.poster_path }
                                     rating={ movie.vote_average }
+                                    option={ params.option }
+                                    type='movies'
                                     key={ movie.id }
-                                    movieId={ movie.id }
-                                    option={ params.option } /> )
+                                /> )
                         }
                     </div>
                 </div>
