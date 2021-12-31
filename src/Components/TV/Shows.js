@@ -1,6 +1,6 @@
 import React, { useEffect, useState, Fragment } from 'react';
 import axios from 'axios';
-import Show from './Show';
+import { default as Show } from '../Movies/Media';
 import styles from '../Movies/css/movies.module.css';
 import MenuOfCanvas from '../Header/menuOfCanvas';
 import { useParams } from 'react-router';
@@ -92,13 +92,13 @@ const Shows = () => {
                     <h2 className={ styles.title }>{ tvShows.title }</h2>
                     {
                         tvShows.list.map( show =>
-                            <Show showId={ show.id }
-                                name={ show.name }
-                                airDate={ show.first_air_date }
+                            <Show id={ show.id }
+                                title={ show.name }
+                                releaseDate={ show.first_air_date }
                                 posterPath={ show.poster_path }
-                                backdropPath={ show.backdrop_path }
                                 rating={ show.vote_average }
                                 option={ params.option }
+                                type='shows'
                                 key={ show.id }
                             /> )
                     }
