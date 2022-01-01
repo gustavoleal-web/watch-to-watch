@@ -1,9 +1,14 @@
 import React, { useEffect, useState, Fragment } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
-import Movie from '../Movies/Movie';
+import Media from './Media';
 import styles from '../Movies/css/movies.module.css';
 import MenuOfCanvas from '../Header/menuOfCanvas';
+
+
+//tv shows and movies have different names for similar properties
+//for example one has the key title and the other has the key name 
+//solution: create a new object that will have the same key name
 
 const SearchedMedia = () => {
     const [ searchResults, setSearchResults ] = useState( {
@@ -11,13 +16,10 @@ const SearchedMedia = () => {
         searchList: [],
     } )
     const params = useParams();
-    console.log( params );
 
     useEffect( () => {
         const fetchMovies = async () => {
             if ( params.searchName.length >= 3 ) {
-                //need to change this to `/search/mediaType/?searchName=${ params.searchName }
-                //so it works with both shows and movies
                 let url = `/search/${ params.type }/?searchName=${ params.searchName }`;
 
                 try {
@@ -37,24 +39,24 @@ const SearchedMedia = () => {
     if ( searchResults.searchList.length > 0 ) {
         return (
             <Fragment>
-                {/* type needs to be dynamic. either movies to shows  */ }
-                <MenuOfCanvas type='movies' />
+                <MenuOfCanvas type={ params.type } />
 
                 <div className={ styles.mainContainer }>
 
-                    <h2 className={ styles.title }>title</h2>
+                    <h2 className={ styles.title }>{ params.searchName }</h2>
 
                     <div className={ styles.moviesContainer }>
                         {
-                            searchResults.searchList.map( movie =>
-                                <Movie
-                                    title={ movie.name }
-                                    releaseDate={ movie.first_air_date }
-                                    posterPath={ movie.poster_path }
-                                    rating={ movie.vote_average }
-                                    key={ movie.id }
-                                    movieId={ movie.id }
-                                    option='trending' /> )
+                            searchResults.searchList.map( r =>
+                                <Media
+                                    id={ r.id }
+                                    title={ r.name }
+                                    releaseDate={ r.first_air_date }
+                                    posterPath={ r.poster_path }
+                                    rating={ r.vote_average }
+                                    option='trending'
+                                    type={ params.type }
+                                    key={ r.id } /> )
                         }
                     </div>
                 </div>
