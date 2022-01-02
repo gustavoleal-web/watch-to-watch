@@ -24,7 +24,24 @@ const SearchedMedia = () => {
 
                 try {
                     let response = await axios.get( url );
-                    setSearchResults( { title: params.searchName, searchList: response.data.results.results } )
+                    let responseCopy = [ ...response.data.results.results ];
+
+                    //adding the same key found in movies so it matches with shows 
+                    //prevents the props from being undefined in the key name is different
+                    if ( responseCopy.length > 0 ) {
+                        for ( let i = 0; i < responseCopy.length; i++ ) {
+                            if ( responseCopy[ i ].name ) {
+                                responseCopy[ i ].title = responseCopy[ i ].name;
+                                responseCopy[ i ].original_title = responseCopy[ i ].original_name;
+                            }
+                            if ( responseCopy[ i ].first_air_date ) {
+                                responseCopy[ i ].release_date = responseCopy[ i ].first_air_date;
+                            }
+
+                        }
+                    }
+                
+                    setSearchResults( { title: params.searchName, searchList: responseCopy } )
 
                 }
                 catch ( e ) {
@@ -50,8 +67,8 @@ const SearchedMedia = () => {
                             searchResults.searchList.map( r =>
                                 <Media
                                     id={ r.id }
-                                    title={ r.name }
-                                    releaseDate={ r.first_air_date }
+                                    title={ r.title }
+                                    releaseDate={ r.release_date }
                                     posterPath={ r.poster_path }
                                     rating={ r.vote_average }
                                     option='trending'
