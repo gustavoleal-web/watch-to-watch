@@ -5,17 +5,14 @@ import Media from './Media';
 import styles from '../Movies/css/movies.module.css';
 import MenuOfCanvas from '../Header/menuOfCanvas';
 
-
-//tv shows and movies have different names for similar properties
-//for example one has the key title and the other has the key name 
-//solution: create a new object that will have the same key name
-
 const SearchedMedia = () => {
+    const params = useParams();
+
     const [ searchResults, setSearchResults ] = useState( {
-        title: '',
+        title:  params.searchName,
         searchList: [],
     } )
-    const params = useParams();
+   
 
     useEffect( () => {
         const fetchMovies = async () => {
@@ -40,7 +37,7 @@ const SearchedMedia = () => {
 
                         }
                     }
-                
+
                     setSearchResults( { title: params.searchName, searchList: responseCopy } )
 
                 }
@@ -53,14 +50,33 @@ const SearchedMedia = () => {
     }, [ params.type, params.searchName ] );
 
 
+    const getMediaByGenre = async ( genreId, genreName ) => {
+
+        try {
+            let response = await axios.get( `/movies/byGenre?genreId=${ genreId }` );
+            setSearchResults( {
+                title: genreName,
+                searchList: response.data.results.results,
+                dates: null
+            } );
+
+        }
+        catch ( e ) {
+            console.log( e )
+        }
+    }
+
     if ( searchResults.searchList.length > 0 ) {
         return (
             <Fragment>
-                <MenuOfCanvas type={ params.type } />
+                <MenuOfCanvas
+                    type={ params.type }
+                    getMediaByGenre={ getMediaByGenre }
+                />
 
                 <div className={ styles.mainContainer }>
 
-                    <h2 className={ styles.title }>{ params.searchName }</h2>
+                    <h3 className={ styles.title }> Search results for '{ searchResults.title }'</h3>
 
                     <div className={ styles.moviesContainer }>
                         {
