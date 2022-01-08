@@ -7,7 +7,7 @@ import { useParams } from 'react-router';
 // import { v4 as uuidv4 } from 'uuid';  maybe uninstall this
 
 const Movies = () => {
-    //const [ searchName, setsearchName ] = useState( '' );
+    
     const params = useParams();
 
     const [ movies, setMovies ] = useState( {
@@ -48,11 +48,6 @@ const Movies = () => {
         fetchMovies();
     }, [ params.option, currentPage ] );
 
-
-    // const onChangeHandler = ( e ) => {
-    //     setsearchName( e.target.value );
-    // }
-
     const setNewPage = ( page ) => {
         if ( currentPage !== page ) {
             setCurrentPage( page )
@@ -60,57 +55,21 @@ const Movies = () => {
         window.scrollTo( 0, 0 );
     }
 
-    // const onClickHandler = async () => {
-    //     if ( searchName.length >= 3 ) {
-    //         let url = `/search/movies/?movieName=${ searchName }`;
-
-    //         try {
-    //             let response = await axios.get( url );
-    //             setMovies( {
-    //                 title: 'Results',
-    //                 movieList: response.data.results.results,
-    //                 dates: null
-    //             } );
-
-    //         }
-    //         catch ( e ) {
-    //             console.log( e )
-    //         }
-    //     }
-    // }
-
-    const getMediaByGenre = async ( genreId, genreName ) => {
-
-        try {
-            let response = await axios.get( `/movies/byGenre?genreId=${ genreId }` );
-            setMovies( {
-                title: genreName,
-                movieList: response.data.results.results,
-                dates: null
-            } );
-
-        }
-        catch ( e ) {
-            console.log( e )
-        }
-    }
 
     if ( movies.movieList.length === 0 ) {
         return <h2>...Loading please wait.</h2>
     }
 
     else {
-        //only upcoming and nowplayin have dates
-        //without searchName.length === 0 it will give an error because dates will be undefined
+        //only upcoming and nowplaying movies have dates
+        //so only those need to be displayed.
         let dates = ( movies.title === 'upcoming movies' || movies.title === 'nowplaying movies' )
             ? <h6 className={ styles.dates }>{ movies.dates.minimum } - { movies.dates.maximum }</h6>
             : null;
 
         return (
             <Fragment>
-                <MenuOfCanvas
-                    type='movies'
-                    getMediaByGenre={ getMediaByGenre } />
+                <MenuOfCanvas type='movies' />
 
                 <div className={ styles.mainContainer }>
 
