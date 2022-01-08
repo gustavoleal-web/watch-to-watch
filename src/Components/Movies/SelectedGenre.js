@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, Fragment } from 'react';
 import { useParams } from 'react-router-dom';
+import Media from '../Movies/Media';
 import axios from 'axios';
 
 const SelectedGenre = () => {
@@ -11,9 +12,7 @@ const SelectedGenre = () => {
 
             try {
                 let response = await axios.get( `/${ params.type }/byGenre/?genreId=${ params.genreId }` );
-
-                console.log( response.data.results.results );
-                //setGenres( results );
+                setMediaByGenre( response.data.results.results );
             }
             catch ( e ) {
                 console.log( e )
@@ -22,10 +21,31 @@ const SelectedGenre = () => {
         fetchMediaByGenres();
     }, [ params.type, params.genreId ] );
 
+    if ( mediaByGenre.length > 0 ) {
+        return <Fragment>
+            <h1>{ params.genreOption }</h1>
+
+            {
+                mediaByGenre.map( ( g ) =>
+                    <Media
+                        id={ g.id }
+                        title={ g.title }
+                        releaseDate={ g.release_date }
+                        posterPath={ g.poster_path }
+                        rating={ g.vote_average }
+                        option='trending'
+                        type={ params.type } />
+                )
+            }
+
+        </Fragment >
 
 
-    console.log( params )
-    return <div>{ params.genreOption }</div>
+
+    }
+
+    else return null
+
 }
 
 export default SelectedGenre;
