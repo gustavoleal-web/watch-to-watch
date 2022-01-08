@@ -14,7 +14,7 @@ import homeIcon from '../../Images/home.png';
 import axios from 'axios';
 
 
-const MenuOfCanvas = ( { type, getMediaByGenre } ) => {
+const MenuOfCanvas = ( { type } ) => {
     const [ show, setShow ] = useState( false );
     const handleClose = () => setShow( false );
     const handleShow = () => setShow( true );
@@ -49,21 +49,9 @@ const MenuOfCanvas = ( { type, getMediaByGenre } ) => {
         fetchGenres();
     }, [ type ] );
 
-
-    const passMovieIdAndCloseMenu = ( genreId, genreNname ) => {
-        getMediaByGenre( genreId, genreNname );
-        handleClose();
-    }
-
-
     const onChangeHandler = ( e ) => {
         setsearchName( e.target.value );
     }
-
-    // const closeAfterSearch = () => {
-    //      onClickHandler();
-    //     handleClose();
-    // }
 
     return (
         <>
@@ -99,14 +87,20 @@ const MenuOfCanvas = ( { type, getMediaByGenre } ) => {
                         <Dropdown.Divider />
 
                         <Dropdown>
-                            <Dropdown.Toggle id='dropdown-custom-1' bsPrefix={ styles.toggleButton } style={ { backgroundColor: 'rgb(55, 58, 71)' } }
-                            >Genres</Dropdown.Toggle>
+                            <Dropdown.Toggle
+                                id='dropdown-custom-1'
+                                bsPrefix={ styles.toggleButton }
+                                style={ { backgroundColor: 'rgb(55, 58, 71)' } }
+                            >Genres
+                            </Dropdown.Toggle>
                             <Dropdown.Menu bsPrefix={ styles.genres }>
                                 {
                                     genres.length === 0 ? null : genres.map( genre =>
                                         <NavLink to={ `/${ type }/genre/${ genre.name }/${ genre.id }` }
                                             className={ styles.genreLink }
                                             id={ genre.id }
+                                            key={ genre.id }
+                                            onClick={ () => handleClose() }
                                         >
                                             { genre.name }
                                         </NavLink >
@@ -140,8 +134,6 @@ const MenuOfCanvas = ( { type, getMediaByGenre } ) => {
                             <Row className="mb-3">
                                 <Form.Group controlId="formGridCity">
                                     <Form.Label>Year</Form.Label>
-
-
                                 </Form.Group>
 
                                 <p>Or date range</p>
