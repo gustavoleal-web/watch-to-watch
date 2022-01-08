@@ -15,14 +15,37 @@
 }
 
 .genres {
-    position  : absolute;
-    inset     : 0px auto auto 0px;
-    transform : translate3d(0px, 40px, 0px);
-    height    : 150px;
-    overflow-x: hidden;
-    overflow-y: auto;
-    height    : 400px;
-    width     : 100%;
+    overflow-x      : hidden;
+    overflow-y      : auto;
+    position        : absolute;
+    z-index         : 1000;
+    min-width       : 10rem;
+    padding         : 0.5rem 0;
+    margin          : 0;
+    font-size       : 1rem;
+    color           : rgb(33, 37, 41);
+    text-align      : left;
+    list-style      : none;
+    background-color: rgb(255, 255, 255);
+    background-clip : padding-box;
+    border          : 1px solid rgba(0, 0, 0, .15);
+    border-radius   : 0.25rem;
+    display         : flex;
+    flex-direction  : column;
+    height          : 400px;
+    width           : 100%;
+
+}
+
+.genreLink {
+    margin         : 7px;
+    text-decoration: none;
+    color          : black;
+}
+
+.genreLink:hover {
+    color:  rgb(180, 186, 210);
+    font-size       : 18px;
 }
 
 .toggleButton {
