@@ -3,6 +3,8 @@ import Offcanvas from 'react-bootstrap/Offcanvas';
 import NavOptions from './NavOptions';
 import Dropdown from 'react-bootstrap/Dropdown';
 import InputGroup from 'react-bootstrap/InputGroup';
+import Form from 'react-bootstrap/Form';
+import Row from 'react-bootstrap/Row';
 import FormControl from 'react-bootstrap/FormControl';
 import Button from 'react-bootstrap/Button';
 import { NavLink } from 'react-router-dom';
@@ -99,10 +101,16 @@ const MenuOfCanvas = ( { type, getMediaByGenre } ) => {
                         <Dropdown>
                             <Dropdown.Toggle id='dropdown-custom-1' bsPrefix={ styles.toggleButton } style={ { backgroundColor: 'rgb(55, 58, 71)' } }
                             >Genres</Dropdown.Toggle>
-                            <Dropdown.Menu className={ styles.genres }>
+                            <Dropdown.Menu bsPrefix={ styles.genres }>
                                 {
                                     genres.length === 0 ? null : genres.map( genre =>
-                                        <Dropdown.Item key={ genre.name } onClick={ () => passMovieIdAndCloseMenu( genre.id, genre.name ) }>{ genre.name }</Dropdown.Item> )
+                                        <NavLink to={ `/${ type }/genre/${ genre.name }/${ genre.id }` }
+                                            className={ styles.genreLink }
+                                            id={ genre.id }
+                                        >
+                                            { genre.name }
+                                        </NavLink >
+                                    )
                                 }
                             </Dropdown.Menu>
                         </Dropdown>
@@ -120,15 +128,48 @@ const MenuOfCanvas = ( { type, getMediaByGenre } ) => {
 
                             <NavLink to={ `/${ type }/search/${ searchName }` }>
                                 <Button variant='outline-secondary' id='button-addon2' >
-                                    Button
+                                    Search
                                 </Button>
                             </NavLink>
 
                         </InputGroup>
 
+                        <Dropdown.Divider />
+
+                        <Form>
+                            <Row className="mb-3">
+                                <Form.Group controlId="formGridCity">
+                                    <Form.Label>Year</Form.Label>
+
+
+                                </Form.Group>
+
+                                <p>Or date range</p>
+
+                                <div>
+                                    <Form.Group controlId="formGridState">
+                                        <Form.Label>From</Form.Label>
+                                        <input type='date' />
+                                    </Form.Group>
+
+                                    <Form.Group controlId="formGridZip">
+                                        <Form.Label>To</Form.Label>
+                                        <input type='date' />
+                                    </Form.Group>
+                                </div>
+
+                            </Row>
+
+                        </Form>
+
+
+
                     </Dropdown.Menu>
 
                 </Offcanvas.Body>
+
+
+
 
                 <span style={ { fontSize: '11px', textAlign: 'center' } }>
                     <div>Icons made by
