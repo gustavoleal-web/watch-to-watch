@@ -27,7 +27,7 @@ const App = () => {
               <Redirect to='/movies/trending' />
             </Route>
 
-            <Route path='/:type/genre/:genreOption'>
+            <Route path='/:type/genre/:genreOption/:genreId'>
               <Fragment>
                 <SelectedGenre />
               </Fragment>
