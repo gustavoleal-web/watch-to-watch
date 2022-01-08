@@ -9,10 +9,10 @@ const SearchedMedia = () => {
     const params = useParams();
 
     const [ searchResults, setSearchResults ] = useState( {
-        title:  params.searchName,
+        title: params.searchName,
         searchList: [],
     } )
-   
+
 
     useEffect( () => {
         const fetchMovies = async () => {
@@ -50,29 +50,10 @@ const SearchedMedia = () => {
     }, [ params.type, params.searchName ] );
 
 
-    const getMediaByGenre = async ( genreId, genreName ) => {
-
-        try {
-            let response = await axios.get( `/movies/byGenre?genreId=${ genreId }` );
-            setSearchResults( {
-                title: genreName,
-                searchList: response.data.results.results,
-                dates: null
-            } );
-
-        }
-        catch ( e ) {
-            console.log( e )
-        }
-    }
-
     if ( searchResults.searchList.length > 0 ) {
         return (
             <Fragment>
-                <MenuOfCanvas
-                    type={ params.type }
-                    getMediaByGenre={ getMediaByGenre }
-                />
+                <MenuOfCanvas type={ params.type } />
 
                 <div className={ styles.mainContainer }>
 
