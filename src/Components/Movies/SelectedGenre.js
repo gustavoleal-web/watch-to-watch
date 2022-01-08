@@ -28,6 +28,7 @@ const SelectedGenre = () => {
             {
                 mediaByGenre.map( ( g ) =>
                     <Media
+                        key={ g.id }
                         id={ g.id }
                         title={ g.title }
                         releaseDate={ g.release_date }
