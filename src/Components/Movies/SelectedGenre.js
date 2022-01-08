@@ -1,6 +1,7 @@
 import React, { useEffect, useState, Fragment } from 'react';
 import { useParams } from 'react-router-dom';
 import Media from '../Movies/Media';
+import MenuOfCanvas from '../Header/menuOfCanvas';
 import axios from 'axios';
 
 const SelectedGenre = () => {
@@ -12,7 +13,27 @@ const SelectedGenre = () => {
 
             try {
                 let response = await axios.get( `/${ params.type }/byGenre/?genreId=${ params.genreId }` );
-                setMediaByGenre( response.data.results.results );
+
+                let responseCopy = [ ...response.data.results.results ];
+
+                    //adding the same key found in movies so it matches with shows 
+                    //prevents the props from being undefined in the key name is different
+                    if ( responseCopy.length > 0 ) {
+                        for ( let i = 0; i < responseCopy.length; i++ ) {
+                            if ( responseCopy[ i ].name ) {
+                                responseCopy[ i ].title = responseCopy[ i ].name;
+                                responseCopy[ i ].original_title = responseCopy[ i ].original_name;
+                            }
+                            if ( responseCopy[ i ].first_air_date ) {
+                                responseCopy[ i ].release_date = responseCopy[ i ].first_air_date;
+                            }
+
+                        }
+                    }
+
+
+                setMediaByGenre(responseCopy );
+               
             }
             catch ( e ) {
                 console.log( e )
@@ -23,6 +44,8 @@ const SelectedGenre = () => {
 
     if ( mediaByGenre.length > 0 ) {
         return <Fragment>
+            <MenuOfCanvas type={ params.type } />
+            
             <h1>{ params.genreOption }</h1>
 
             {
