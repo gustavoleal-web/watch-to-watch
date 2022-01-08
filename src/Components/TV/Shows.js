@@ -12,7 +12,6 @@ const Shows = () => {
         dates: null
     } );
 
-    // const [ searchName, setsearchName ] = useState( '' );
     let params = useParams();
 
     useEffect( () => {
@@ -34,48 +33,6 @@ const Shows = () => {
     }, [ params.option ] );
 
 
-    // const onChangeHandler = ( e ) => {
-    //     setsearchName( e.target.value );
-    // }
-
-    // const onClickHandler = async () => {
-    //     if ( searchName.length > 3 ) {
-    //         let url = `/search/tv/?tvShow=${ searchName }`;
-
-    //         try {
-    //             let response = await axios.get( url );
-    //             setTvShows( {
-    //                 title: searchName,
-    //                 list: response.data.results.results,
-    //                 dates: null
-    //             } );
-    //         }
-    //         catch ( e ) {
-    //             console.log( e )
-    //         }
-
-    //     }
-
-    // }
-
-    const getMediaByGenre = async ( genreId, genreName ) => {
-
-        try {
-            let response = await axios.get( `/show/byGenre?genreId=${ genreId }` );
-
-            setTvShows( {
-                title: genreName,
-                list: response.data.results.results,
-                dates: null
-            } );
-
-        }
-        catch ( e ) {
-            console.log( e )
-        }
-    }
-
-
     if ( tvShows.length === 0 ) {
         return <h2>...Loading please wait.</h2>
     }
@@ -83,9 +40,7 @@ const Shows = () => {
     else {
         return (
             <Fragment>
-                <MenuOfCanvas type='shows'
-                    getMediaByGenre={ getMediaByGenre }
-                />
+                <MenuOfCanvas type='shows' />
 
                 <div className={ styles.mainContainer }>
 
