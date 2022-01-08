@@ -20,8 +20,6 @@ const About = () => {
     const [ recommended, setRecommended ] = useState( [] );
     const [ defaultImg, setDefaultImg ] = useState( '' );
 
-    //const [ searchName, setsearchName ] = useState( '' );
-
     useEffect( () => {
         const fetchMovies = async () => {
             try {
@@ -59,28 +57,8 @@ const About = () => {
         fetchRecommendations();
     }, [ params.movieId ] );
 
-
-    // const onChangeHandler = ( e ) => {
-    //     setsearchName( e.target.value );
-    // }
-
-    // const onClickHandler = async () => {
-    //     if ( searchName.length >= 3 ) {
-    //         let url = `/search/movies/?movieName=${ searchName }`;
-
-    //         try {
-    //             let response = await axios.get( url );
-    //             console.log( response.data )
-
-    //         }
-    //         catch ( e ) {
-    //             console.log( e )
-    //         }
-    //     }
-    // }
-
-
-
+    
+ 
 
     return (
         <Fragment>
@@ -144,9 +122,6 @@ const About = () => {
                                         <Collection name={ state.belongs_to_collection.name } id={ state.belongs_to_collection.id } currentMediaId={ params.movieId } />
                                     </div>
                             }
-
-
-
 
                             <div className={ styles.siteContainer }>
                                 <p >Official website: </p>
