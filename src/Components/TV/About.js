@@ -7,6 +7,7 @@ import Trailers from '../Movies/Trailers';
 import Providers from '../Movies/Providers';
 import Recommendations from '../Movies/Recommendations';
 import styles from '../Movies/css/about.module.css';
+import startIcon from '../../Images/star.png'
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 
@@ -82,11 +83,15 @@ const About = () => {
                     Object.keys( state ).length === 0 ? null
                         : <Fragment>
                             <div className={ styles.imgContainer }>
-                                <img
-                                    src={ `https://image.tmdb.org/t/p/w300/${ state.poster_path }` }
-                                    alt='poster'
-                                    style={ { height: '200px' } }
-                                />
+                                <div>
+                                    <img
+                                        src={ `https://image.tmdb.org/t/p/w300/${ state.poster_path }` }
+                                        alt='poster'
+                                        className={ styles.posterImg }
+                                    />
+                                    <p className={ styles.rating }>{ state.vote_average } <img src={ startIcon } alt='stars' /></p>
+                                </div>
+
 
                                 <div style={ { margin: 'auto' } }>
                                     <h3 style={ { textAlign: 'center' } }>{ state.name }</h3>
