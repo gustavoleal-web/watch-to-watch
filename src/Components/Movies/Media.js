@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import styles from './css/movie.module.css';
+import styles from './css/media.module.css';
 import noImage from '../../Images/No-Image-Placeholder.png';
 
 
@@ -38,12 +38,12 @@ const Media = ( { id, title, releaseDate, posterPath, rating, option, type } ) =
 
     return (
 
-        <div className={ styles.movieContainer }>
-            <div className={ styles.movieDisplay }>
+        <div className={ styles.mediaContainer }>
+            <div className={ styles.mediaDisplay }>
                 <Link to={ linkPath }>
                     { posterImg }
                 </Link>
-                <div className={ styles.movieMain }>
+                <div className={ styles.mediaMain }>
                     <h6>{ title }</h6>
                     <p>{ mmddyyyy }</p>
                 </div>
