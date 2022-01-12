@@ -1,9 +1,26 @@
 .seasons {
-    display: grid;
+    display              : grid;
     grid-template-columns: 1fr 1fr;
-    background-color: white;
+    background-color     : white;
 }
 
 .season {
     justify-self: center;
 }
+
+.posterImg {
+    height: 200px;
+    width : var(--poster-width);
+}
+
+.rating {
+    background-color: rgb(55, 58, 71);
+    color           : white;
+    width           : var(--poster-width);
+    padding-bottom  : 4px;
+}
+
+.rating img {
+    padding-bottom: 4px;
+}
+
