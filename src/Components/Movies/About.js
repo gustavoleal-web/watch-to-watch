@@ -78,7 +78,7 @@ const About = () => {
                                     <p className={ styles.rating }>{ state.vote_average } <img src={ startIcon } alt='stars' /></p>
                                 </div>
 
-                                <h3 className={ styles.MovieTitle }>{ state.title }</h3>
+                                <h3 className={ styles.movieTitle }>{ state.title }</h3>
 
                                 <div className={ styles.generalInfo }>
 
