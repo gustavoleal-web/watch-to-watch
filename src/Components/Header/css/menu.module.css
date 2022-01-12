@@ -44,8 +44,8 @@
 }
 
 .genreLink:hover {
-    color:  rgb(180, 186, 210);
-    font-size       : 18px;
+    color    : rgb(180, 186, 210);
+    font-size: 18px;
 }
 
 .toggleButton {
@@ -75,4 +75,9 @@
 
 .iconCredit {
     padding: 2px;
+}
+
+.dateRange {
+    display        : flex;
+    justify-content: space-around;
 }
