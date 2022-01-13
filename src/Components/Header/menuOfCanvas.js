@@ -132,7 +132,7 @@ const MenuOfCanvas = ( { type } ) => {
 
                         <Dropdown.Divider />
 
-                        <CustomSearch/>
+                        <CustomSearch genres={ genres } />
                     </Dropdown.Menu>
 
                 </Offcanvas.Body>
