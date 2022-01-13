@@ -2,7 +2,7 @@ import React from 'react';
 import Form from 'react-bootstrap/Form';
 import Accordion from 'react-bootstrap/Accordion';
 
-const CustomSearch = () => {
+const CustomSearch = ( { genres } ) => {
 
 
     return <div>
@@ -75,9 +75,11 @@ const CustomSearch = () => {
                 <Accordion.Body>
                     <Form.Group controlId="formGridZip">
                         <Form.Select size='sm'>
-                            <option value="Action">Action</option>
-                            <option value="Advanture">Advanture</option>
-                            <option value="Horror">Horror</option>
+                            {
+                                genres.map( genre => <option value={ genre.name }>{ genre.name }</option> )
+                            }
+
+
                         </Form.Select>
                     </Form.Group>
                 </Accordion.Body>
