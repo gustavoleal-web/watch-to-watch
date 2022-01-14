@@ -22,6 +22,7 @@ const MenuOfCanvas = ( { type } ) => {
     const handleShow = () => setShow( true );
 
     const [ genres, setGenres ] = useState( [] );
+    const [ languages, setLanguages ] = useState( [] );
     const [ searchName, setsearchName ] = useState( '' );
 
     let linkTo = '';
@@ -50,6 +51,34 @@ const MenuOfCanvas = ( { type } ) => {
         }
         fetchGenres();
     }, [ type ] );
+
+    useEffect( () => {
+        const fetchLang = async () => {
+
+            try {
+                let fetchedLanguage = await axios.get( `/languages` );
+                let results = fetchedLanguage.data.results;
+                console.log( fetchedLanguage)
+
+                //sorting languages alphabetically
+                if ( results.length > 0 ) {
+                    results.sort( ( a, b ) => {
+                        var nameA = a.english_name.toLowerCase(), nameB = b.english_name.toLowerCase();
+                        if ( nameA < nameB )
+                            return -1;
+                        if ( nameA > nameB )
+                            return 1;
+                        return 0; 
+                    } );
+                }
+                setLanguages( results );
+            }
+            catch ( e ) {
+                console.log( e )
+            }
+        }
+        fetchLang();
+    }, [] );
 
     const onChangeHandler = ( e ) => {
         setsearchName( e.target.value );
@@ -132,7 +161,7 @@ const MenuOfCanvas = ( { type } ) => {
 
                         <Dropdown.Divider />
 
-                        <CustomSearch genres={ genres } />
+                        <CustomSearch genres={ genres } langs={ languages } />
                     </Dropdown.Menu>
 
                 </Offcanvas.Body>
