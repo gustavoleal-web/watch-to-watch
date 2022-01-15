@@ -2,7 +2,7 @@ import React from 'react';
 import Form from 'react-bootstrap/Form';
 import Accordion from 'react-bootstrap/Accordion';
 
-const CustomSearch = ( { genres } ) => {
+const CustomSearch = ( { genres, langs } ) => {
 
 
     return <div>
@@ -18,7 +18,7 @@ const CustomSearch = ( { genres } ) => {
                             <Form.Select size='sm'>
                                 {
                                     Array.from( { length: 123 }, ( _, i ) => 2022 - i )
-                                        .map( year => <option value={ year }>{ year }</option> )
+                                        .map( year => <option value={ year } key={ year }>{ year }</option> )
 
                                 }
 
@@ -52,17 +52,19 @@ const CustomSearch = ( { genres } ) => {
 
                     <Form.Group controlId="formGridState">
                         <Form.Select size='sm'>
-                            <option value="ENG" default>ENG</option>
-                            <option value="SPA">SPA</option>
-                            <option value="JAP">JAP</option>
+                            {
+                                langs.map( lang => <option value={ lang.iso_639_1 } key={ lang.iso_639_1 }>{ lang.english_name }</option> )
+                            }
                         </Form.Select>
                     </Form.Group>
 
                     <Form.Group controlId="formGridZip">
                         <Form.Select size='sm'>
                             <option>Rating</option>
-                            { Array.from( { length: 10 }, ( _, i ) => 10 - i )
-                                .map( rating => <option value={ rating }>{ rating }</option> ) }
+                            {
+                                Array.from( { length: 10 }, ( _, i ) => 10 - i )
+                                    .map( rating => <option value={ rating } key={ rating }>{ rating }</option> )
+                            }
                         </Form.Select>
                     </Form.Group>
 
@@ -76,7 +78,7 @@ const CustomSearch = ( { genres } ) => {
                     <Form.Group controlId="formGridZip">
                         <Form.Select size='sm'>
                             {
-                                genres.map( genre => <option value={ genre.name }>{ genre.name }</option> )
+                                genres.map( genre => <option value={ genre.name } key={ genre.name }>{ genre.name }</option> )
                             }
 
 
