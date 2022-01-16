@@ -2,7 +2,6 @@ import React, { Fragment, useEffect, useState } from 'react';
 import { useParams } from 'react-router';
 import axios from 'axios';
 import MenuOfCanvas from '../Header/menuOfCanvas';
-// import Seasons from './Seasons';
 import Card from 'react-bootstrap/Card'
 import CardGroup from 'react-bootstrap/CardGroup';
 import noImage from '../../Images/No-Image-Placeholder.png'
@@ -10,14 +9,15 @@ import noImage from '../../Images/No-Image-Placeholder.png'
 const SeasonDetails = () => {
     const [ seasonDetails, setSeasonDetails ] = useState( {} )
     const params = useParams();
+    const [ seasonNumber, setSeasonNumber ] = useState( params.seasonNumber );
 
     useEffect( () => {
         const fetchSeasonDetails = async () => {
             try {
-                let response = await axios.get( `/show/season/?showId=${ params.showId }&seasonNum=${ params.seasonNumber }` );
+                let response = await axios.get( `/show/season/?showId=${ params.showId }&seasonNum=${ seasonNumber }` );
                 let results = response.data.results;
                 setSeasonDetails( results );
-                // setSeasonNumber( results.season_number );
+                //setSeasonNumber( results.season_number );
             }
             catch ( e ) {
                 console.log( e )
@@ -25,7 +25,7 @@ const SeasonDetails = () => {
 
         }
         fetchSeasonDetails();
-    }, [ params.showId, params.seasonNumber ] );
+    }, [ params.showId, seasonNumber ] );
 
 
     if ( Object.keys( seasonDetails ).length === 0 ) {
@@ -34,7 +34,7 @@ const SeasonDetails = () => {
 
     return <Fragment>
         <MenuOfCanvas type='shows' />
-        <h2 style={{color: 'white', textAlign: 'center', marginTop: '10px'}}>{ seasonDetails.name }</h2>
+        <h2 style={ { color: 'white', textAlign: 'center', marginTop: '20px' } }>{ seasonDetails.name }</h2>
         {
             seasonDetails.episodes.map( ( e ) => {
                 let imgSrc = null;
@@ -75,16 +75,10 @@ const SeasonDetails = () => {
 
             }
 
-
             )
         }
 
     </Fragment>
-
-
-
-
-
 }
 
 export default SeasonDetails;
