@@ -9,11 +9,11 @@ const CustomSearch = ( { genres, langs } ) => {
     return <Fragment>
         <Accordion>
             <h5>Custom Search</h5>
-            <Accordion.Item eventKey="0" flush='true'>
+            <Accordion.Item eventKey='0' flush='true'>
                 <Accordion.Header>Year</Accordion.Header>
                 <Accordion.Body>
                     <Form>
-                        <Form.Group controlId="formGridCity">
+                        <Form.Group controlId='formGridCity'>
                             <Form.Select size='sm'>
                                 {
                                     Array.from( { length: 123 }, ( _, i ) => 2022 - i )
@@ -27,16 +27,16 @@ const CustomSearch = ( { genres, langs } ) => {
                 </Accordion.Body>
             </Accordion.Item>
 
-            <Accordion.Item eventKey="1">
+            <Accordion.Item eventKey='1'>
                 <Accordion.Header>Date Range</Accordion.Header>
                 <Accordion.Body>
                     <div>
-                        <Form.Group controlId="formGridState">
+                        <Form.Group controlId='formGridState'>
                             <Form.Label>From</Form.Label>
                             <input type='date' />
                         </Form.Group>
 
-                        <Form.Group controlId="formGridZip">
+                        <Form.Group controlId='formGridZip'>
                             <Form.Label>To</Form.Label>
                             <input type='date' />
                         </Form.Group>
@@ -44,11 +44,11 @@ const CustomSearch = ( { genres, langs } ) => {
                 </Accordion.Body>
             </Accordion.Item>
 
-            <Accordion.Item eventKey="2">
+            <Accordion.Item eventKey='2'>
                 <Accordion.Header>Lang and Rating</Accordion.Header>
                 <Accordion.Body>
 
-                    <Form.Group controlId="formGridState">
+                    <Form.Group controlId='formGridState'>
                         <Form.Select size='sm' defaultValue={ selectedLang } onChange={ ( e ) => setSelectedLan( e.target.value ) }>
                             {
                                 langs.map( lang => <option value={ lang.iso_639_1 } key={ lang.iso_639_1 }>{ lang.english_name }</option> )
@@ -56,7 +56,7 @@ const CustomSearch = ( { genres, langs } ) => {
                         </Form.Select>
                     </Form.Group>
 
-                    <Form.Group controlId="formGridZip">
+                    <Form.Group controlId='formGridZip'>
                         <Form.Select size='sm'>
                             {
                                 Array.from( { length: 10 }, ( _, i ) => 10 - i )
@@ -68,11 +68,11 @@ const CustomSearch = ( { genres, langs } ) => {
                 </Accordion.Body>
             </Accordion.Item>
 
-            <Accordion.Item eventKey="3">
+            <Accordion.Item eventKey='3'>
                 <Accordion.Header>Genre</Accordion.Header>
 
                 <Accordion.Body>
-                    <Form.Group controlId="formGridZip">
+                    <Form.Group controlId='formGridZip'>
                         <Form.Select size='sm'>
                             {
                                 genres.map( genre => <option value={ genre.name } key={ genre.name }>{ genre.name }</option> )
