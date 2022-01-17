@@ -1,13 +1,12 @@
-import React from 'react';
+import React, { useState, Fragment } from 'react';
 import Form from 'react-bootstrap/Form';
 import Accordion from 'react-bootstrap/Accordion';
 
 const CustomSearch = ( { genres, langs } ) => {
+    const [ selectedLang, setSelectedLan ] = useState( 'en' );
 
 
-    return <div>
-
-        {/* these will have to be looped */ }
+    return <Fragment>
         <Accordion>
             <h5>Custom Search</h5>
             <Accordion.Item eventKey="0" flush='true'>
@@ -21,7 +20,6 @@ const CustomSearch = ( { genres, langs } ) => {
                                         .map( year => <option value={ year } key={ year }>{ year }</option> )
 
                                 }
-
                             </Form.Select>
                         </Form.Group>
                     </Form>
@@ -51,7 +49,7 @@ const CustomSearch = ( { genres, langs } ) => {
                 <Accordion.Body>
 
                     <Form.Group controlId="formGridState">
-                        <Form.Select size='sm'>
+                        <Form.Select size='sm' defaultValue={ selectedLang } onChange={ ( e ) => setSelectedLan( e.target.value ) }>
                             {
                                 langs.map( lang => <option value={ lang.iso_639_1 } key={ lang.iso_639_1 }>{ lang.english_name }</option> )
                             }
@@ -60,7 +58,6 @@ const CustomSearch = ( { genres, langs } ) => {
 
                     <Form.Group controlId="formGridZip">
                         <Form.Select size='sm'>
-                            <option>Rating</option>
                             {
                                 Array.from( { length: 10 }, ( _, i ) => 10 - i )
                                     .map( rating => <option value={ rating } key={ rating }>{ rating }</option> )
@@ -81,17 +78,14 @@ const CustomSearch = ( { genres, langs } ) => {
                                 genres.map( genre => <option value={ genre.name } key={ genre.name }>{ genre.name }</option> )
                             }
 
-
                         </Form.Select>
                     </Form.Group>
                 </Accordion.Body>
 
             </Accordion.Item>
-
-
         </Accordion>
 
-    </div>
+    </Fragment>
 }
 
 export default CustomSearch;
