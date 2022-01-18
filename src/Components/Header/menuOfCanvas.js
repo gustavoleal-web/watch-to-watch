@@ -161,7 +161,7 @@ const MenuOfCanvas = ( { type } ) => {
 
                         <Dropdown.Divider />
 
-                        <CustomSearch genres={ genres } langs={ languages } />
+                        <CustomSearch genres={ genres } langs={ languages } type={ type }/>
                     </Dropdown.Menu>
 
                 </Offcanvas.Body>
