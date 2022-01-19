@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Fragment } from 'react';
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import NavOptions from './NavOptions';
 import CustomSearch from './CustomSearch';
@@ -58,7 +58,7 @@ const MenuOfCanvas = ( { type } ) => {
             try {
                 let fetchedLanguage = await axios.get( `/languages` );
                 let results = fetchedLanguage.data.results;
-                console.log( fetchedLanguage)
+                console.log( fetchedLanguage )
 
                 //sorting languages alphabetically
                 if ( results.length > 0 ) {
@@ -68,7 +68,7 @@ const MenuOfCanvas = ( { type } ) => {
                             return -1;
                         if ( nameA > nameB )
                             return 1;
-                        return 0; 
+                        return 0;
                     } );
                 }
                 setLanguages( results );
@@ -85,7 +85,7 @@ const MenuOfCanvas = ( { type } ) => {
     }
 
     return (
-        <>
+        <Fragment>
             <span className={ styles.menuContainer }>
                 <button >
                     <img src={ `${ menu }` } alt='What to watch' onClick={ handleShow } />
@@ -100,7 +100,7 @@ const MenuOfCanvas = ( { type } ) => {
 
             </span>
 
-            <Offcanvas show={ show } onHide={ handleClose } placement='start'>
+            <Offcanvas show={ show } onHide={ handleClose } placement='start' style={ { maxHeight: '800px', overflowY: 'auto' } }>
                 <Offcanvas.Header closeButton>
                     <Offcanvas.Title>{ type.toUpperCase() }</Offcanvas.Title>
                 </Offcanvas.Header>
@@ -161,13 +161,10 @@ const MenuOfCanvas = ( { type } ) => {
 
                         <Dropdown.Divider />
 
-                        <CustomSearch genres={ genres } langs={ languages } type={ type }/>
+                        <CustomSearch genres={ genres } langs={ languages } type={ type } />
                     </Dropdown.Menu>
 
                 </Offcanvas.Body>
-
-
-
 
                 <span style={ { fontSize: '11px', textAlign: 'center' } }>
                     <div>Icons made by
@@ -179,9 +176,8 @@ const MenuOfCanvas = ( { type } ) => {
                     </div>
                 </span>
 
-
             </Offcanvas>
-        </>
+        </Fragment>
     );
 }
 
