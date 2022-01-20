@@ -1,10 +1,13 @@
 import React, { useState, Fragment } from 'react';
 import Form from 'react-bootstrap/Form';
 import Accordion from 'react-bootstrap/Accordion';
+import styles from './css/menu.module.css'
 
 const CustomSearch = ( { genres, langs, type } ) => {
-    const [ selectedLang, setSelectedLan ] = useState( 'en' );
+    //search path will be something like 
+    //https://api.themoviedb.org/3/discover/movie?api_key=xxxxx&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&primary_release_year=2021&with_genres=18&with_original_language=en&vote_average.gte=7
 
+    const [ selectedLang, setSelectedLan ] = useState( 'en' );
 
     return <Fragment>
         <div style={ { margin: '30px 10px' } }>
@@ -32,7 +35,7 @@ const CustomSearch = ( { genres, langs, type } ) => {
         </div>
 
         <div style={ { margin: '30px 10px' } }>
-            <h6>Search more specific {type}</h6>
+            <h6>Search more specific { type }</h6>
             <Accordion>
                 <Accordion.Item eventKey='1'>
                     <Accordion.Header>Date Range</Accordion.Header>
@@ -82,7 +85,7 @@ const CustomSearch = ( { genres, langs, type } ) => {
                         <Form.Group controlId='formGridZip'>
                             <Form.Select size='sm'>
                                 {
-                                    genres.map( genre => <option value={ genre.name } key={ genre.name }>{ genre.name }</option> )
+                                    genres.map( genre => <option value={ genre.id } key={ genre.name }>{ genre.name }</option> )
                                 }
 
                             </Form.Select>
@@ -92,6 +95,16 @@ const CustomSearch = ( { genres, langs, type } ) => {
                 </Accordion.Item>
             </Accordion>
         </div>
+
+        <span style={ { fontSize: '11px', textAlign: 'center' } }>
+            <div>Icons made by
+                <a href='https://www.freepik.com' title='Freepik' className={ styles.iconCredit }>Freepik</a>,
+                <a href='https://www.flaticon.com/authors/icongeek26' title='Icongeek26' className={ styles.iconCredit }>Icongeek26</a>,
+                <a href='https://www.flaticon.com/authors/ctrlastudio' title='Ctrlastudio' className={ styles.iconCredit }>Ctrlastudio</a> from
+                from
+                <a href='https://www.flaticon.com/' title='Flaticon'>www.flaticon.com</a>
+            </div>
+        </span>
     </Fragment >
 }
 
