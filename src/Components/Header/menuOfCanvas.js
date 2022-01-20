@@ -165,17 +165,6 @@ const MenuOfCanvas = ( { type } ) => {
                     </Dropdown.Menu>
 
                 </Offcanvas.Body>
-
-                <span style={ { fontSize: '11px', textAlign: 'center' } }>
-                    <div>Icons made by
-                        <a href='https://www.freepik.com' title='Freepik' className={ styles.iconCredit }>Freepik</a>,
-                        <a href='https://www.flaticon.com/authors/icongeek26' title='Icongeek26' className={ styles.iconCredit }>Icongeek26</a>,
-                        <a href='https://www.flaticon.com/authors/ctrlastudio' title='Ctrlastudio' className={ styles.iconCredit }>Ctrlastudio</a> from
-                        from
-                        <a href='https://www.flaticon.com/' title='Flaticon'>www.flaticon.com</a>
-                    </div>
-                </span>
-
             </Offcanvas>
         </Fragment>
     );
