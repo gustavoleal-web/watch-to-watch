@@ -131,6 +131,7 @@ const MenuOfCanvas = ( { type } ) => {
 
                         <Dropdown.Divider />
 
+                        {/* these will have to be looped */ }
                         <Accordion>
                             <Accordion.Item eventKey="0">
                                 <Accordion.Header>Year</Accordion.Header>
