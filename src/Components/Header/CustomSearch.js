@@ -1,25 +1,53 @@
 import React, { useState, Fragment } from 'react';
 import Form from 'react-bootstrap/Form';
 import Accordion from 'react-bootstrap/Accordion';
+import Button from 'react-bootstrap/Button';
 import styles from './css/menu.module.css'
+import axios from 'axios';
 
 const CustomSearch = ( { genres, langs, type } ) => {
     //search path will be something like 
-    //https://api.themoviedb.org/3/discover/movie?api_key=xxxxx&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&primary_release_year=2021&with_genres=18&with_original_language=en&vote_average.gte=7
+    //https://api.themoviedb.org/3/discover/movie?api_key=${key.API}&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&primary_release_year=${year}&with_genres=18&with_original_language=en&vote_average.gte=7
+
+    //will need 3 ways to search for these options
+    //1. just the year with default lang set to english_name. no genre or rating
+    //2. year with rating, lang, and genre. (genre can be null)
+    //3. from to date, rating, lang, and genre
+
+    const date = new Date();
+    // const day = date.getDate();
+    // const month = date.getMonth() + 1;
+    const year = date.getFullYear();
 
     const [ selectedLang, setSelectedLan ] = useState( 'en' );
+    const [ selectedYear, setSelectedYear ] = useState( year );
+
+    const setYear = ( e ) => setSelectedYear( e.target.value );
+
+    const fetchSearchOptions = async () => {
+        try {
+            const response = await axios.get( `/${ type }/releaseYear/?releaseYear=${ selectedYear }` );
+            let results = response.data.results;
+            console.log( results );
+        }
+
+        catch ( error ) {
+            console.log( error )
+        }
+    }
 
     return <Fragment>
+        {/*year*/ }
+
         <div style={ { margin: '30px 10px' } }>
             <h6>Search { type } by year</h6>
             <Accordion>
-
                 <Accordion.Item eventKey='0' flush='true'>
                     <Accordion.Header>Year</Accordion.Header>
                     <Accordion.Body>
                         <Form>
                             <Form.Group controlId='formGridCity'>
-                                <Form.Select size='sm'>
+                                <Form.Select size='sm' defaultValue={ selectedLang } onChange={ ( e ) => setYear( e ) }>
                                     {
                                         Array.from( { length: 123 }, ( _, i ) => 2022 - i )
                                             .map( year => <option value={ year } key={ year }>{ year }</option> )
@@ -34,6 +62,7 @@ const CustomSearch = ( { genres, langs, type } ) => {
             </Accordion>
         </div>
 
+        {/*date range*/ }
         <div style={ { margin: '30px 10px' } }>
             <h6>Search more specific { type }</h6>
             <Accordion>
@@ -53,12 +82,17 @@ const CustomSearch = ( { genres, langs, type } ) => {
                         </div>
                     </Accordion.Body>
                 </Accordion.Item>
+            </Accordion>
+        </div>
 
+        <div style={ { margin: '30px 10px' } }>
+            <Accordion>
                 <Accordion.Item eventKey='2'>
                     <Accordion.Header>Lang and Rating</Accordion.Header>
                     <Accordion.Body>
 
-                        <Form.Group controlId='formGridState'>
+                        {/*language*/ }
+                        <Form.Group controlId='formGridState' style={ { marginBottom: '15px' } }>
                             <Form.Select size='sm' defaultValue={ selectedLang } onChange={ ( e ) => setSelectedLan( e.target.value ) }>
                                 {
                                     langs.map( lang => <option value={ lang.iso_639_1 } key={ lang.iso_639_1 }>{ lang.english_name }</option> )
@@ -66,6 +100,7 @@ const CustomSearch = ( { genres, langs, type } ) => {
                             </Form.Select>
                         </Form.Group>
 
+                        {/*rating*/ }
                         <Form.Group controlId='formGridZip'>
                             <Form.Select size='sm'>
                                 {
@@ -78,9 +113,9 @@ const CustomSearch = ( { genres, langs, type } ) => {
                     </Accordion.Body>
                 </Accordion.Item>
 
+                {/*genre*/ }
                 <Accordion.Item eventKey='3'>
                     <Accordion.Header>Genre</Accordion.Header>
-
                     <Accordion.Body>
                         <Form.Group controlId='formGridZip'>
                             <Form.Select size='sm'>
@@ -94,7 +129,10 @@ const CustomSearch = ( { genres, langs, type } ) => {
 
                 </Accordion.Item>
             </Accordion>
+
         </div>
+
+        <Button onClick={ () => fetchSearchOptions() }>Search</Button>
 
         <span style={ { fontSize: '11px', textAlign: 'center' } }>
             <div>Icons made by
