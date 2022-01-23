@@ -58,7 +58,6 @@ const MenuOfCanvas = ( { type } ) => {
             try {
                 let fetchedLanguage = await axios.get( `/languages` );
                 let results = fetchedLanguage.data.results;
-                console.log( fetchedLanguage )
 
                 //sorting languages alphabetically
                 if ( results.length > 0 ) {
@@ -99,7 +98,9 @@ const MenuOfCanvas = ( { type } ) => {
                 </NavLink>
 
             </span>
-
+            {/* have to make the height dynamic based on screen size
+                maybe 800px for mobile and 100% for desktop
+            */ }
             <Offcanvas show={ show } onHide={ handleClose } placement='start' style={ { maxHeight: '800px', overflowY: 'auto' } }>
                 <Offcanvas.Header closeButton>
                     <Offcanvas.Title>{ type.toUpperCase() }</Offcanvas.Title>
