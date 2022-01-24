@@ -62,7 +62,7 @@ const MenuOfCanvas = ( { type } ) => {
                 //sorting languages alphabetically
                 if ( results.length > 0 ) {
                     results.sort( ( a, b ) => {
-                        var nameA = a.english_name.toLowerCase(), nameB = b.english_name.toLowerCase();
+                        let nameA = a.english_name.toLowerCase(), nameB = b.english_name.toLowerCase();
                         if ( nameA < nameB )
                             return -1;
                         if ( nameA > nameB )
