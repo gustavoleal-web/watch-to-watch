@@ -13,6 +13,7 @@ import AboutTv from './Components/TV/About';
 import SeasonDetails from './Components/TV/SeasonDetails';
 import SearchedMedia from './Components/Movies/SearchedMedia';
 import SelectedGenre from './Components/Movies/SelectedGenre';
+import CustomSearchResults from './Components/Movies/CutomSearchResults';
 import dbLogo from './Images/the_movie_db_logo.svg'
 
 const App = () => {
@@ -32,6 +33,12 @@ const App = () => {
                 <SelectedGenre />
               </Fragment>
             </Route>
+
+            <Route path='/:type/:releaseYear/:language/'>
+            <Fragment>
+              <CustomSearchResults />
+            </Fragment>
+          </Route>
 
             <Route path='/:type/search/:searchName'>
               <Fragment>
@@ -63,15 +70,11 @@ const App = () => {
               </Fragment>
             </Route>
 
-
-
             <Route path='/shows/:option' exact>
               <Fragment>
                 <Shows />
               </Fragment>
             </Route>
-
-
 
           </Switch>
 
