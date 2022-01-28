@@ -2,8 +2,8 @@ import React, { useState, Fragment } from 'react';
 import Form from 'react-bootstrap/Form';
 import Accordion from 'react-bootstrap/Accordion';
 import Button from 'react-bootstrap/Button';
+import { NavLink } from 'react-router-dom';
 import styles from './css/menu.module.css'
-import axios from 'axios';
 
 const CustomSearch = ( { genres, langs, type } ) => {
     //search path will be something like 
@@ -20,21 +20,10 @@ const CustomSearch = ( { genres, langs, type } ) => {
     const year = date.getFullYear();
 
     const [ selectedLang, setSelectedLan ] = useState( 'en' );
+    const [ selectedGenre, setSelectedGenre ] = useState( null );
     const [ selectedYear, setSelectedYear ] = useState( year );
 
     const setYear = ( e ) => setSelectedYear( e.target.value );
-
-    const fetchSearchOptions = async () => {
-        try {
-            const response = await axios.get( `/${ type }/releaseYear/?releaseYear=${ selectedYear }` );
-            let results = response.data.results;
-            console.log( results );
-        }
-
-        catch ( error ) {
-            console.log( error )
-        }
-    }
 
     return <Fragment>
         {/*year*/ }
@@ -132,7 +121,10 @@ const CustomSearch = ( { genres, langs, type } ) => {
 
         </div>
 
-        <Button onClick={ () => fetchSearchOptions() }>Search</Button>
+        <NavLink to={ `/${ type }/${ selectedYear }/${ selectedLang }` }>
+            <Button>Search</Button>
+        </NavLink>
+
 
         <span style={ { fontSize: '11px', textAlign: 'center' } }>
             <div>Icons made by
