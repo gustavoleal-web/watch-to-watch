@@ -6,9 +6,6 @@ import { NavLink } from 'react-router-dom';
 import styles from './css/menu.module.css'
 
 const CustomSearch = ( { genres, langs, type } ) => {
-    //search path will be something like 
-    //https://api.themoviedb.org/3/discover/movie?api_key=${key.API}&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&primary_release_year=${year}&with_genres=18&with_original_language=en&vote_average.gte=7
-
     //will need 3 ways to search for these options
     //1. just the year with default lang set to english_name. no genre or rating
     //2. year with rating, lang, and genre. (genre can be null)
@@ -20,8 +17,10 @@ const CustomSearch = ( { genres, langs, type } ) => {
     const year = date.getFullYear();
 
     const [ selectedLang, setSelectedLan ] = useState( 'en' );
-    const [ selectedGenre, setSelectedGenre ] = useState( null );
+    const [ selectedGenre, setSelectedGenre ] = useState( -1 );
     const [ selectedYear, setSelectedYear ] = useState( year );
+    const [ selectedRating, setSelectedRating ] = useState( -1 );
+    const [ dateRange, setDateRange ] = useState( [] );
 
     const setYear = ( e ) => setSelectedYear( e.target.value );
 
@@ -61,12 +60,12 @@ const CustomSearch = ( { genres, langs, type } ) => {
                         <div>
                             <Form.Group controlId='formGridState'>
                                 <Form.Label>From</Form.Label>
-                                <input type='date' />
+                                <input type='date' onChange={ ( e ) => console.log( e.target.value ) } />
                             </Form.Group>
 
                             <Form.Group controlId='formGridZip'>
                                 <Form.Label>To</Form.Label>
-                                <input type='date' />
+                                <input type='date' onChange={ ( e ) => console.log( e.target.value ) } />
                             </Form.Group>
                         </div>
                     </Accordion.Body>
@@ -91,7 +90,8 @@ const CustomSearch = ( { genres, langs, type } ) => {
 
                         {/*rating*/ }
                         <Form.Group controlId='formGridZip'>
-                            <Form.Select size='sm'>
+                            <Form.Select size='sm' defaultValue={ selectedRating } onChange={ () => console.log( 'rating changed' ) }>
+                                <option defaultValue={ -1 }>Select a rating</option>
                                 {
                                     Array.from( { length: 10 }, ( _, i ) => 10 - i )
                                         .map( rating => <option value={ rating } key={ rating }>{ rating }</option> )
@@ -107,7 +107,8 @@ const CustomSearch = ( { genres, langs, type } ) => {
                     <Accordion.Header>Genre</Accordion.Header>
                     <Accordion.Body>
                         <Form.Group controlId='formGridZip'>
-                            <Form.Select size='sm'>
+                            <Form.Select size='sm' defaultValue={ selectedGenre } onChange={ () => console.log( 'rating changed' ) }>
+                                <option defaultValue={ -1 }>Select a genre</option>
                                 {
                                     genres.map( genre => <option value={ genre.id } key={ genre.name }>{ genre.name }</option> )
                                 }
@@ -120,6 +121,14 @@ const CustomSearch = ( { genres, langs, type } ) => {
             </Accordion>
 
         </div>
+
+        {
+            selectedGenre !== -1
+                ? <NavLink to={ `/${ type }/${ selectedYear }/${ selectedLang }/${ selectedGenre }` }>
+                    <Button>Search</Button>
+                </NavLink>
+                : null
+        }
 
         <NavLink to={ `/${ type }/${ selectedYear }/${ selectedLang }` }>
             <Button>Search</Button>
