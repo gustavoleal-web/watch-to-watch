@@ -16,13 +16,17 @@ const CustomSearch = ( { genres, langs, type } ) => {
     // const month = date.getMonth() + 1;
     const year = date.getFullYear();
 
-    const [ selectedLang, setSelectedLan ] = useState( 'en' );
-    const [ selectedGenre, setSelectedGenre ] = useState( -1 );
-    const [ selectedYear, setSelectedYear ] = useState( year );
-    const [ selectedRating, setSelectedRating ] = useState( -1 );
-    const [ dateRange, setDateRange ] = useState( [] );
+    const [ dateRange, setDateRange ] = useState( { from: '', to: '', } );
+    const [ selectOptions, setSelectOptions ] = useState( {
+        language: 'en',
+        genreID: -1,
+        rating: -1,
+        year: year,
+        dateRange: { from: '', to: '' }
+    } );
 
-    const setYear = ( e ) => setSelectedYear( e.target.value );
+    const setOptions = ( e, key ) => setSelectOptions( { ...selectOptions, [ key ]: e.target.value } );
+
 
     return <Fragment>
         {/*year*/ }
@@ -35,7 +39,7 @@ const CustomSearch = ( { genres, langs, type } ) => {
                     <Accordion.Body>
                         <Form>
                             <Form.Group controlId='formGridCity'>
-                                <Form.Select size='sm' defaultValue={ selectedLang } onChange={ ( e ) => setYear( e ) }>
+                                <Form.Select size='sm' defaultValue={ selectOptions.year } onChange={ ( e ) => setOptions( e, 'year' ) }>
                                     {
                                         Array.from( { length: 123 }, ( _, i ) => 2022 - i )
                                             .map( year => <option value={ year } key={ year }>{ year }</option> )
@@ -81,7 +85,7 @@ const CustomSearch = ( { genres, langs, type } ) => {
 
                         {/*language*/ }
                         <Form.Group controlId='formGridState' style={ { marginBottom: '15px' } }>
-                            <Form.Select size='sm' defaultValue={ selectedLang } onChange={ ( e ) => setSelectedLan( e.target.value ) }>
+                            <Form.Select size='sm' defaultValue={ selectOptions.language } onChange={ ( e ) => setOptions( e, 'language' ) }>
                                 {
                                     langs.map( lang => <option value={ lang.iso_639_1 } key={ lang.iso_639_1 }>{ lang.english_name }</option> )
                                 }
@@ -90,7 +94,7 @@ const CustomSearch = ( { genres, langs, type } ) => {
 
                         {/*rating*/ }
                         <Form.Group controlId='formGridZip'>
-                            <Form.Select size='sm' defaultValue={ selectedRating } onChange={ () => console.log( 'rating changed' ) }>
+                            <Form.Select size='sm' defaultValue={ selectOptions.rating } onChange={ ( e ) => setOptions( e, 'rating' ) }>
                                 <option defaultValue={ -1 }>Select a rating</option>
                                 {
                                     Array.from( { length: 10 }, ( _, i ) => 10 - i )
@@ -107,7 +111,7 @@ const CustomSearch = ( { genres, langs, type } ) => {
                     <Accordion.Header>Genre</Accordion.Header>
                     <Accordion.Body>
                         <Form.Group controlId='formGridZip'>
-                            <Form.Select size='sm' defaultValue={ selectedGenre } onChange={ () => console.log( 'rating changed' ) }>
+                            <Form.Select size='sm' defaultValue={ selectOptions.genreID } onChange={ ( e ) => setOptions( e, 'genreID' ) }>
                                 <option defaultValue={ -1 }>Select a genre</option>
                                 {
                                     genres.map( genre => <option value={ genre.id } key={ genre.name }>{ genre.name }</option> )
@@ -123,14 +127,14 @@ const CustomSearch = ( { genres, langs, type } ) => {
         </div>
 
         {
-            selectedGenre !== -1
-                ? <NavLink to={ `/${ type }/${ selectedYear }/${ selectedLang }/${ selectedGenre }` }>
+            selectOptions.genreID !== -1
+                ? <NavLink to={ `/${ type }/${ selectOptions.year }/${ selectOptions.language }/${ selectOptions.genreID }` }>
                     <Button>Search</Button>
                 </NavLink>
                 : null
         }
 
-        <NavLink to={ `/${ type }/${ selectedYear }/${ selectedLang }` }>
+        <NavLink to={ `/${ type }/${ selectOptions.year }/${ selectOptions.language }` }>
             <Button>Search</Button>
         </NavLink>
 
