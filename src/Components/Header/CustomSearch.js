@@ -12,11 +12,8 @@ const CustomSearch = ( { genres, langs, type } ) => {
     //3. from to date, rating, lang, and genre
 
     const date = new Date();
-    // const day = date.getDate();
-    // const month = date.getMonth() + 1;
     const year = date.getFullYear();
 
-    const [ dateRange, setDateRange ] = useState( { from: '', to: '', } );
     const [ selectOptions, setSelectOptions ] = useState( {
         language: 'en',
         genreID: -1,
@@ -25,7 +22,29 @@ const CustomSearch = ( { genres, langs, type } ) => {
         dateRange: { from: '', to: '' }
     } );
 
-    const setOptions = ( e, key ) => setSelectOptions( { ...selectOptions, [ key ]: e.target.value } );
+    const setOptions = ( e, key, range = null ) => {
+        //bc dateRange is an obj inside state an arg is passed to only change that property and not the others.
+        if ( key === 'dateRange' && range !== null ) {
+            //if any property of dateRange is already set we make sure to copy it so it is not lost when the state is set.
+            if ( range === 'from' ) {
+                let dateRangeCopy = { ...selectOptions.dateRange };
+                dateRangeCopy.from = e.target.value;
+                dateRangeCopy.to = selectOptions[ key ].to;
+                setSelectOptions( { ...selectOptions, [ key ]: dateRangeCopy } );
+            }
+            else if ( range === 'to' ) {
+                let dateRangeCopy = { ...selectOptions.dateRange };
+                dateRangeCopy.from = selectOptions[ key ].from;
+                dateRangeCopy.to = e.target.value;
+                setSelectOptions( { ...selectOptions, [ key ]: dateRangeCopy } );
+            }
+
+        }
+        else {
+            setSelectOptions( { ...selectOptions, [ key ]: e.target.value } )
+        }
+
+    };
 
 
     return <Fragment>
@@ -64,12 +83,12 @@ const CustomSearch = ( { genres, langs, type } ) => {
                         <div>
                             <Form.Group controlId='formGridState'>
                                 <Form.Label>From</Form.Label>
-                                <input type='date' onChange={ ( e ) => console.log( e.target.value ) } />
+                                <input type='date' onChange={ ( e ) => setOptions( e, 'dateRange', 'from' ) } />
                             </Form.Group>
 
                             <Form.Group controlId='formGridZip'>
                                 <Form.Label>To</Form.Label>
-                                <input type='date' onChange={ ( e ) => console.log( e.target.value ) } />
+                                <input type='date' onChange={ ( e ) => setOptions( e, 'dateRange', 'to' ) } />
                             </Form.Group>
                         </div>
                     </Accordion.Body>
