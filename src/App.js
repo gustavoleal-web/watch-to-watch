@@ -1,9 +1,8 @@
 import React, { Fragment } from 'react'
 import {
-  BrowserRouter as Router,
-  Switch,
+  Routes,
   Route,
-  Redirect
+  Navigate
 } from "react-router-dom";
 
 import Movies from './Components/Movies/Movies';
@@ -18,66 +17,79 @@ import dbLogo from './Images/the_movie_db_logo.svg'
 
 const App = () => {
   return (
-    <Router>
+    <div>
       <div style={ { maxWidth: '900px', margin: 'auto' } }>
         <main style={ { backgroundColor: 'rgb(55, 58, 71)' } }>
 
-          <Switch>
+          <Routes>
 
-            <Route path='/' exact>
-              <Redirect to='/movies/trending' />
+            <Route path='/:type/genre/:genreOption/:genreId' element={
+              <SelectedGenre />
+            }>
             </Route>
 
-            <Route path='/:type/genre/:genreOption/:genreId'>
+            <Route path='/:type/year/:releaseYear/language/:language/' element={
               <Fragment>
-                <SelectedGenre />
+                <CustomSearchResults />
               </Fragment>
+            }>
+
             </Route>
 
-              <Route path='/:type/year/:releaseYear/language/:language/'>
-                <Fragment>
-                  <CustomSearchResults />
-                </Fragment>
-              </Route>
-          
 
-            <Route path='/:type/search/:searchName'>
+            <Route path='/:type/search/:searchName' element={
               <Fragment>
                 <SearchedMedia />
               </Fragment>
+            }>
+
             </Route>
 
-            <Route path='/movies/:navOption/:movieId'>
+            <Route path='/movies/:navOption/:movieId' element={
               <Fragment>
                 <AboutMovie />
               </Fragment>
+            }>
+
             </Route>
 
-            <Route path='/shows/:showId/season/:seasonNumber'>
+            <Route path='/shows/:showId/season/:seasonNumber' element={
               <Fragment>
                 <SeasonDetails />
               </Fragment>
+            }>
+
             </Route>
 
-            <Route path='/shows/:navOption/:showId'>
+            <Route path='/shows/:navOption/:showId' element={
               <Fragment>
                 <AboutTv />
               </Fragment>
+            }>
+
             </Route>
 
-            <Route path='/movies/:option' exact>
+            <Route path='/movies/:option' exact element={
               <Fragment>
                 <Movies />
               </Fragment>
+            }>
+
             </Route>
 
-            <Route path='/shows/:option' exact>
+            <Route path='/shows/:option' exact element={
               <Fragment>
                 <Shows />
               </Fragment>
+            }>
             </Route>
 
-          </Switch>
+            <Route
+              path='*'
+              element={ <Navigate to="/movies/trending" /> }
+            />
+
+          </Routes>
 
           <div style={ { display: 'flex' } }>
             <img src={ dbLogo } alt='the movie db logo' style={ { width: '78px' } } />
@@ -92,7 +104,7 @@ const App = () => {
         </main>
 
       </div>
-    </Router>
+    </div>
   );
 }
 
