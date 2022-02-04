@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import {
   Routes,
   Route,
@@ -23,71 +23,32 @@ const App = () => {
 
           <Routes>
 
-            <Route path='/:type/genre/:genreOption/:genreId' element={
-              <SelectedGenre />
-            }>
-            </Route>
-
-            <Route path='/:type/year/:releaseYear/language/:language/' element={
-              <Fragment>
-                <CustomSearchResults />
-              </Fragment>
-            }>
-
-            </Route>
-
-
-            <Route path='/:type/search/:searchName' element={
-              <Fragment>
-                <SearchedMedia />
-              </Fragment>
-            }>
-
-            </Route>
-
-            <Route path='/movies/:navOption/:movieId' element={
-              <Fragment>
-                <AboutMovie />
-              </Fragment>
-            }>
-
-            </Route>
-
-            <Route path='/shows/:showId/season/:seasonNumber' element={
-              <Fragment>
-                <SeasonDetails />
-              </Fragment>
-            }>
-
-            </Route>
-
-            <Route path='/shows/:navOption/:showId' element={
-              <Fragment>
-                <AboutTv />
-              </Fragment>
-            }>
-
-            </Route>
-
-            <Route path='/movies/:option' exact element={
-              <Fragment>
-                <Movies />
-              </Fragment>
-            }>
-
-            </Route>
-
-            <Route path='/shows/:option' exact element={
-              <Fragment>
-                <Shows />
-              </Fragment>
-            }>
-            </Route>
-
-            <Route
-              path='*'
-              element={ <Navigate to="/movies/trending" /> }
-            />
+            <Route path='/:type/genre/:genreOption/:genreId'
+              element={ <SelectedGenre /> } />
+          
+            <Route path='/:type/year/:releaseYear/language/:language/'
+              element={ <CustomSearchResults /> }/>
+           
+            <Route path='/:type/search/:searchName'
+              element={ <SearchedMedia /> }/>
+           
+            <Route path='/movies/:navOption/:movieId'
+              element={ <AboutMovie /> }/>
+          
+            <Route path='/shows/:showId/season/:seasonNumber'
+              element={ <SeasonDetails /> }/>
+           
+            <Route path='/shows/:navOption/:showId'
+              element={ <AboutTv /> }/>
+            
+            <Route path='/movies/:option'
+              element={ <Movies /> }/>
+           
+            <Route path='/shows/:option'
+              element={ <Shows /> }/>
+           
+            <Route path='*'
+              element={ <Navigate to="/movies/trending" /> } />
 
           </Routes>
 
