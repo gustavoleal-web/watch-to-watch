@@ -26,24 +26,21 @@ const CustomSearch = ( { genres, langs, type } ) => {
         //bc dateRange is an obj inside state an arg is passed to only change that property and not the others.
         if ( key === 'dateRange' && range !== null ) {
             //if any property of dateRange is already set we make sure to copy it so it is not lost when the state is set.
+            let dateRangeCopy = { ...selectOptions.dateRange };
+            dateRangeCopy[ range ] = e.target.value;
+
             if ( range === 'from' ) {
-                let dateRangeCopy = { ...selectOptions.dateRange };
-                dateRangeCopy.from = e.target.value;
                 dateRangeCopy.to = selectOptions[ key ].to;
-                setSelectOptions( { ...selectOptions, [ key ]: dateRangeCopy } );
             }
             else if ( range === 'to' ) {
-                let dateRangeCopy = { ...selectOptions.dateRange };
                 dateRangeCopy.from = selectOptions[ key ].from;
-                dateRangeCopy.to = e.target.value;
-                setSelectOptions( { ...selectOptions, [ key ]: dateRangeCopy } );
             }
-
+            setSelectOptions( { ...selectOptions, [ key ]: dateRangeCopy } );
         }
         else {
             setSelectOptions( { ...selectOptions, [ key ]: e.target.value } )
         }
-       
+
     };
 
 
@@ -145,18 +142,9 @@ const CustomSearch = ( { genres, langs, type } ) => {
 
         </div>
 
-        {
-            selectOptions.genreID !== -1
-                ? <NavLink to={ `/${ type }/${ selectOptions.year }/${ selectOptions.language }/${ selectOptions.genreID }` }>
-                    <Button>Search</Button>
-                </NavLink>
-                : null
-        }
-
         <NavLink to={ `/${ type }/year/${ selectOptions.year }/language/${ selectOptions.language }` }>
             <Button>Search</Button>
         </NavLink>
-
 
         <span style={ { fontSize: '11px', textAlign: 'center' } }>
             <div>Icons made by
