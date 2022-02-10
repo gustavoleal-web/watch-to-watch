@@ -1,4 +1,4 @@
-.movieContainer {
+.mediaContainer {
     border             : 1px solid rgb(135, 140, 158);
     margin-top         : 20px;
     margin-left        : 10px;
@@ -11,26 +11,26 @@
 }
 
 
-.movieDisplay {
+.mediaDisplay {
     display              : grid;
     grid-template-columns: 1fr 2fr 0.1fr;
 }
 
-.movieDisplay a {
+.mediaDisplay a {
     grid-row-start: 1;
     grid-row-end  : 3;
 }
 
-.movieDisplay img {
+.mediaDisplay img {
     border-radius: 14px;
     width        : 85%;
 }
 
-.movieMain {
+.mediaMain {
     padding-top: 30px;
 }
 
-.movieMain h6,
+.mediaMain h6,
 p {
     text-align  : center;
     padding-left: 6px;
