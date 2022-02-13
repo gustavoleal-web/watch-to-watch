@@ -11,22 +11,23 @@ const CustomSearch = ( { genres, langs, type } ) => {
     //2. year with rating, lang, and genre. (genre can be null)
     //3. from to date, rating, lang, and genre
 
-    const date = new Date();
-    const year = date.getFullYear();
+    // const date = new Date();
+    // const year = date.getFullYear();
 
     const [ selectOptions, setSelectOptions ] = useState( {
         language: 'en',
         genreID: -1,
         rating: -1,
-        year: year,
+        year: -1,
         dateRange: { from: '', to: '' }
     } );
 
     const setOptions = ( e, key, range = null ) => {
-        //bc dateRange is an obj inside state an arg is passed to only change that property and not the others.
+        let dateRangeCopy = { ...selectOptions.dateRange };
+        //bc dateRange is an obj inside state range is passed to only change that property and not the others.
+
         if ( key === 'dateRange' && range !== null ) {
-            //if any property of dateRange is already set we make sure to copy it so it is not lost when the state is set.
-            let dateRangeCopy = { ...selectOptions.dateRange };
+            //if any property of dateRange is already set we make sure to copy it so it is not lost when the state is updated.
             dateRangeCopy[ range ] = e.target.value;
 
             if ( range === 'from' ) {
@@ -142,7 +143,7 @@ const CustomSearch = ( { genres, langs, type } ) => {
 
         </div>
 
-        <NavLink to={ `/${ type }/year/${ selectOptions.year }/language/${ selectOptions.language }` }>
+        <NavLink to={ `/${ type }/year/${ selectOptions.year }/genre/${ selectOptions.genreID }/language/${ selectOptions.language }/rating/${ selectOptions.rating }` }>
             <Button>Search</Button>
         </NavLink>
 
