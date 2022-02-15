@@ -18,7 +18,7 @@ const CustomSearchResults = () => {
         const fetchSearchOptions = async () => {
             try {
                 const response = await axios.get(
-                    `/${ params.type }/releaseYear/genre/language/rating/?year=${ params.releaseYear }&originalLang=${ params.language }&rating=${ params.rating }&genre=${ params.genre }` );
+                    `/${ params.type }/releaseYear/genre/language/rating/?year=${ params.releaseYear }&originalLang=${ params.language }&rating=${ params.rating }&genre=${ params.genre }&type=${ params.type }` );
 
                 let results = response.data.results;
                 console.log( results.results );
@@ -46,7 +46,11 @@ const CustomSearchResults = () => {
             <MenuOfCanvas type={ params.type } />
 
             <h2 className={ styles.title }>{ params.type } results</h2>
-
+            {
+            /*need to update the props for tv shows since the names are different
+            ex: tv shows use name instead of title and few others.
+            look at state or shows component for more info*/
+            }
             { state.list.map( item =>
                 <Media
                     key={ item.id }
@@ -60,9 +64,6 @@ const CustomSearchResults = () => {
                 />
             ) }
         </Fragment>
-
-
-
     }
 
 
