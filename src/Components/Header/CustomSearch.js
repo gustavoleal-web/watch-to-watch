@@ -11,38 +11,41 @@ const CustomSearch = ( { genres, langs, type } ) => {
     //2. year with rating, lang, and genre. (genre can be null)
     //3. from to date, rating, lang, and genre
 
-    // const date = new Date();
-    // const year = date.getFullYear();
+    const date = new Date();
+    const year = date.getFullYear();
 
     const [ selectOptions, setSelectOptions ] = useState( {
         language: 'en',
         genreID: -1,
         rating: -1,
-        year: -1,
+        year: year,
         dateRange: { from: '', to: '' }
     } );
 
-    const setOptions = ( e, key, range = null ) => {
-        let dateRangeCopy = { ...selectOptions.dateRange };
-        //bc dateRange is an obj inside state range is passed to only change that property and not the others.
+    // const setOptions = ( e, key, range = null ) => {
+    //     let dateRangeCopy = { ...selectOptions.dateRange };
+    //     //bc dateRange is an obj inside state range is passed to only change that property and not the others.
 
-        if ( key === 'dateRange' && range !== null ) {
-            //if any property of dateRange is already set we make sure to copy it so it is not lost when the state is updated.
-            dateRangeCopy[ range ] = e.target.value;
+    //     if ( key === 'dateRange' && range !== null ) {
+    //         //if any property of dateRange is already set we make sure to copy it so it is not lost when the state is updated.
+    //         dateRangeCopy[ range ] = e.target.value;
 
-            if ( range === 'from' ) {
-                dateRangeCopy.to = selectOptions[ key ].to;
-            }
-            else if ( range === 'to' ) {
-                dateRangeCopy.from = selectOptions[ key ].from;
-            }
-            setSelectOptions( { ...selectOptions, [ key ]: dateRangeCopy } );
-        }
-        else {
-            setSelectOptions( { ...selectOptions, [ key ]: e.target.value } )
-        }
+    //         if ( range === 'from' ) {
+    //             dateRangeCopy.to = selectOptions[ key ].to;
+    //         }
+    //         else if ( range === 'to' ) {
+    //             dateRangeCopy.from = selectOptions[ key ].from;
+    //         }
+    //         setSelectOptions( { ...selectOptions, [ key ]: dateRangeCopy } );
+    //     }
+    //     else {
+    //         setSelectOptions( { ...selectOptions, [ key ]: e.target.value } )
+    //     }
 
-    };
+    // };
+
+
+    const setOptions = ( e, key ) => setSelectOptions( { ...selectOptions, [ key ]: e.target.value } );
 
 
     return <Fragment>
@@ -72,27 +75,29 @@ const CustomSearch = ( { genres, langs, type } ) => {
         </div>
 
         {/*date range*/ }
-        <div style={ { margin: '30px 10px' } }>
-            <h6>Search more specific { type }</h6>
-            <Accordion>
-                <Accordion.Item eventKey='1'>
-                    <Accordion.Header>Date Range</Accordion.Header>
-                    <Accordion.Body>
-                        <div>
-                            <Form.Group controlId='formGridState'>
-                                <Form.Label>From</Form.Label>
-                                <input type='date' onChange={ ( e ) => setOptions( e, 'dateRange', 'from' ) } />
-                            </Form.Group>
+        { // <div style={ { margin: '30px 10px' } }>
+            //     <h6>Search more specific { type }</h6>
+            //     <Accordion>
+            //         <Accordion.Item eventKey='1'>
+            //             <Accordion.Header>Date Range</Accordion.Header>
+            //             <Accordion.Body>
+            //                 <div>
+            //                     <Form.Group controlId='formGridState'>
+            //                         <Form.Label>From</Form.Label>
+            //                         <input type='date' onChange={ ( e ) => setOptions( e, 'dateRange', 'from' ) } />
+            //                     </Form.Group>
 
-                            <Form.Group controlId='formGridZip'>
-                                <Form.Label>To</Form.Label>
-                                <input type='date' onChange={ ( e ) => setOptions( e, 'dateRange', 'to' ) } />
-                            </Form.Group>
-                        </div>
-                    </Accordion.Body>
-                </Accordion.Item>
-            </Accordion>
-        </div>
+            //                     <Form.Group controlId='formGridZip'>
+            //                         <Form.Label>To</Form.Label>
+            //                         <input type='date' onChange={ ( e ) => setOptions( e, 'dateRange', 'to' ) } />
+            //                     </Form.Group>
+            //                 </div>
+            //             </Accordion.Body>
+            //         </Accordion.Item>
+            //     </Accordion>
+            // </div>
+        }
+
 
         <div style={ { margin: '30px 10px' } }>
             <Accordion>
