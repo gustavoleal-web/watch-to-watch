@@ -13,7 +13,6 @@ const SearchedMedia = () => {
         searchList: [],
     } )
 
-
     useEffect( () => {
         const fetchMovies = async () => {
             if ( params.searchName.length >= 3 ) {
@@ -23,7 +22,7 @@ const SearchedMedia = () => {
                     let response = await axios.get( url );
                     let responseCopy = [ ...response.data.results.results ];
 
-                    //adding the same key found in movies so it matches with shows 
+                    //changing the keys: name, first_air_date, and release_date in show to the key names found in movies
                     //prevents the props from being undefined in the key name is different
                     if ( responseCopy.length > 0 ) {
                         for ( let i = 0; i < responseCopy.length; i++ ) {
@@ -34,7 +33,6 @@ const SearchedMedia = () => {
                             if ( responseCopy[ i ].first_air_date ) {
                                 responseCopy[ i ].release_date = responseCopy[ i ].first_air_date;
                             }
-
                         }
                     }
 
