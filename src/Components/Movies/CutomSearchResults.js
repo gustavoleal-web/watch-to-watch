@@ -20,12 +20,28 @@ const CustomSearchResults = () => {
                 const response = await axios.get(
                     `/${ params.type }/releaseYear/genre/language/rating/?year=${ params.releaseYear }&originalLang=${ params.language }&rating=${ params.rating }&genre=${ params.genre }&type=${ params.type }` );
 
-                let results = response.data.results;
-                console.log( results.results );
+                let responseResults = response.data.results;
+                console.log( responseResults.results );
+
+                let responseCopy = [ ...responseResults.results ];
+
+                    //changing the keys: name, first_air_date, and release_date in show to the key names found in movies
+                    //prevents the props from being undefined in the key name is different
+                    if ( responseCopy.length > 0 ) {
+                        for ( let i = 0; i < responseCopy.length; i++ ) {
+                            if ( responseCopy[ i ].name ) {
+                                responseCopy[ i ].title = responseCopy[ i ].name;
+                                responseCopy[ i ].original_title = responseCopy[ i ].original_name;
+                            }
+                            if ( responseCopy[ i ].first_air_date ) {
+                                responseCopy[ i ].release_date = responseCopy[ i ].first_air_date;
+                            }
+                        }
+                    }
 
                 setState( {
                     title: params.type,
-                    list: results.results,
+                    list: responseCopy,
                     dates: null
                 } )
             }
@@ -46,23 +62,20 @@ const CustomSearchResults = () => {
             <MenuOfCanvas type={ params.type } />
 
             <h2 className={ styles.title }>{ params.type } results</h2>
+           
             {
-            /*need to update the props for tv shows since the names are different
-            ex: tv shows use name instead of title and few others.
-            look at state or shows component for more info*/
+              state.list.map( item =>
+                        <Media
+                            key={ item.id }
+                            id={ item.id }
+                            title={ item.title }
+                            releaseDate={ item.release_date }
+                            posterPath={ item.poster_path }
+                            rating={ item.vote_average }
+                            option='customResults'
+                            type={ params.type }
+                        /> )           
             }
-            { state.list.map( item =>
-                <Media
-                    key={ item.id }
-                    id={ item.id }
-                    title={ item.title }
-                    releaseDate={ item.release_date }
-                    posterPath={ item.poster_path }
-                    rating={ item.vote_average }
-                    option='customResults'
-                    type={ params.type }
-                />
-            ) }
         </Fragment>
     }
 
