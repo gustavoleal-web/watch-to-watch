@@ -25,28 +25,28 @@ const App = () => {
 
             <Route path='/:type/genre/:genreOption/:genreId'
               element={ <SelectedGenre /> } />
-          
-            <Route path='/:type/year/:releaseYear/language/:language/'
-              element={ <CustomSearchResults /> }/>
-           
+
+            <Route path='/:type/year/:releaseYear/genre/:genre/language/:language/rating/:rating'
+              element={ <CustomSearchResults /> } />
+
             <Route path='/:type/search/:searchName'
-              element={ <SearchedMedia /> }/>
-           
+              element={ <SearchedMedia /> } />
+
             <Route path='/movies/:navOption/:movieId'
-              element={ <AboutMovie /> }/>
-          
+              element={ <AboutMovie /> } />
+
             <Route path='/shows/:showId/season/:seasonNumber'
-              element={ <SeasonDetails /> }/>
-           
+              element={ <SeasonDetails /> } />
+
             <Route path='/shows/:navOption/:showId'
-              element={ <AboutTv /> }/>
-            
+              element={ <AboutTv /> } />
+
             <Route path='/movies/:option'
-              element={ <Movies /> }/>
-           
+              element={ <Movies /> } />
+
             <Route path='/shows/:option'
-              element={ <Shows /> }/>
-           
+              element={ <Shows /> } />
+
             <Route path='*'
               element={ <Navigate to="/movies/trending" /> } />
 
