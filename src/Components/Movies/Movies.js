@@ -5,7 +5,7 @@ import { default as Movie } from './Media';
 import MenuOfCanvas from '../Header/menuOfCanvas';
 import { useParams } from 'react-router';
 import InfiniteScroll from 'react-infinite-scroll-component';
-import { v4 as uuidv4 } from 'uuid';  //maybe uninstall this
+//import { v4 as uuidv4 } from 'uuid';  //maybe uninstall this
 
 const Movies = () => {
 
@@ -18,16 +18,18 @@ const Movies = () => {
     } );
 
     const [ currentPage, setCurrentPage ] = useState( 1 );
+    const [ maxPages, setMaxPages ] = useState( 0 );
+    const [ hasMore, setHasMore ] = useState( true );
 
-    const [ hasMore, setHasMore ] = useState( true )
 
+    //don't need these pages anymore since infinte scroll us now working
     const pages = [ 1, 2, 3 ];
 
     useEffect( () => {
         const fetchMovies = async () => {
 
             try {
-                let response = await axios.get( `/${ params.option }/movies/?page=${ currentPage }` );
+                let response = await axios.get( `/${ params.option }/movies/?page=${ 1 }` );
                 let dates = {};
                 if ( response.data.results.dates !== undefined ) {
                     let regex = /(\d{4})-(\d{1,2})-(\d{1,2})/;
@@ -39,19 +41,17 @@ const Movies = () => {
                     dates.minimum = formatedMin;
                     dates.maximum = formatedMax;
                 }
-                let copy;
-                if(movies.movieList.length === 0) {
-                    copy = response.data.results.results;
-                }
-                else {
-                    copy = [ ...movies.movieList, ...response.data.results.results ];
-                } 
-                setMovies( {
-                    title: `${ params.option } movies`,
-                    movieList: copy,
-                    dates: dates
-                } );
 
+
+                if ( movies.movieList.length === 0 ) {
+                    setMovies( {
+                        title: `${ params.option } movies`,
+                        movieList: response.data.results.results,
+                        dates: dates
+                    } );
+
+                    setMaxPages( response.data.results.total_pages );
+                }
 
             }
             catch {
@@ -59,18 +59,19 @@ const Movies = () => {
             }
         }
         fetchMovies();
-    }, [ params.option, currentPage ] );
+    }, [ params.option ] );
 
     const fetchData = async () => {
-        if ( currentPage > 3 ) {
+        if ( currentPage > ( maxPages / 2 ) ) {
             setHasMore( false );
+            console.log( 'no more calls' )
             return;
         }
 
         let nextPage = currentPage + 1;
         console.log( currentPage, nextPage )
         let response = await axios.get( `/${ params.option }/movies/?page=${ nextPage }` );
-        console.log( response )
+        //console.log( response )
 
         let dates = {};
         if ( response.data.results.dates !== undefined ) {
@@ -84,11 +85,11 @@ const Movies = () => {
             dates.maximum = formatedMax;
         }
 
-        const copy = [ ...movies.movieList, ...response.data.results.results ];
-        //console.log(copy); 
+        const updatedMoviList = [ ...movies.movieList, ...response.data.results.results ];
+
         setMovies( {
             title: `${ params.option } movies`,
-            movieList: movies.movieList.concat( response.data.results.results ),
+            movieList: updatedMoviList,
             dates: dates
         } );
 
@@ -131,11 +132,12 @@ const Movies = () => {
                             loader={ <h4>Loading...</h4> }
                             endMessage={
                                 <p style={ { textAlign: 'center' } }>
-                                    <b>Yay! You have seen it all</b>
+                                    <b>End of the line.</b>
                                 </p> }>
                             {
-                                movies.movieList.map( movie =>
+                                movies.movieList.map( ( movie ) =>
                                     <Movie
+                                        key={ movie.id }
                                         id={ movie.id }
                                         title={ movie.title }
                                         releaseDate={ movie.release_date }
@@ -143,8 +145,8 @@ const Movies = () => {
                                         rating={ movie.vote_average }
                                         option={ params.option }
                                         type='movies'
-                                        key={ uuidv4() }
-                                    /> )
+                                    />
+                                )
                             }
                         </InfiniteScroll>
                     </div>
