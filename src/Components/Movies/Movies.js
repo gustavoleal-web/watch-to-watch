@@ -21,10 +21,6 @@ const Movies = () => {
     const [ maxPages, setMaxPages ] = useState( 0 );
     const [ hasMore, setHasMore ] = useState( true );
 
-
-    //don't need these pages anymore since infinte scroll us now working
-    const pages = [ 1, 2, 3 ];
-
     useEffect( () => {
         const fetchMovies = async () => {
 
@@ -64,15 +60,12 @@ const Movies = () => {
     const fetchData = async () => {
         if ( currentPage > ( maxPages / 2 ) ) {
             setHasMore( false );
-            console.log( 'no more calls' )
             return;
         }
 
         let nextPage = currentPage + 1;
-        console.log( currentPage, nextPage )
         let response = await axios.get( `/${ params.option }/movies/?page=${ nextPage }` );
-        //console.log( response )
-
+        
         let dates = {};
         if ( response.data.results.dates !== undefined ) {
             let regex = /(\d{4})-(\d{1,2})-(\d{1,2})/;
@@ -96,14 +89,7 @@ const Movies = () => {
         setCurrentPage( nextPage );
     }
 
-    const setNewPage = ( page ) => {
-        if ( currentPage !== page ) {
-            setCurrentPage( page )
-        }
-        window.scrollTo( 0, 0 );
-    }
-
-
+    
     if ( movies.movieList.length === 0 ) {
         return <h2>...Loading please wait.</h2>
     }
@@ -123,6 +109,7 @@ const Movies = () => {
 
                     <h2 className={ styles.title }>{ movies.title }</h2>
                     { dates }
+                    <p style={ { color: 'lightgrey', fontSize: '11px' } }>Note: Ratings are besed from TMBD users.</p>
 
                     <div className={ styles.moviesContainer }>
                         <InfiniteScroll
@@ -151,20 +138,6 @@ const Movies = () => {
                         </InfiniteScroll>
                     </div>
                 </div>
-
-                <div className={ styles.pageContainer }>
-                    {
-                        pages.map( page => {
-                            if ( page === currentPage ) {
-                                return <button key={ page } onClick={ () => setNewPage( page ) } className={ styles.selectedPage }>{ page }</button>
-                            }
-                            else return <button key={ page } onClick={ () => setNewPage( page ) } className={ styles.pages }>{ page }</button>
-
-                        } )
-                    }
-                </div>
-
-                <p style={ { color: 'lightgrey' } }>Note: Ratings are besed from TMBD users.</p>
             </Fragment>
         )
     }
