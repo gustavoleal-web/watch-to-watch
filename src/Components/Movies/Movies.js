@@ -38,17 +38,13 @@ const Movies = () => {
                     dates.maximum = formatedMax;
                 }
 
+                setMovies( {
+                    title: `${ params.option } movies`,
+                    movieList: response.data.results.results,
+                    dates: dates
+                } );
 
-                if ( movies.movieList.length === 0 ) {
-                    setMovies( {
-                        title: `${ params.option } movies`,
-                        movieList: response.data.results.results,
-                        dates: dates
-                    } );
-
-                    setMaxPages( response.data.results.total_pages );
-                }
-
+                setMaxPages( response.data.results.total_pages );
             }
             catch {
                 console.log( 'error' )
@@ -57,15 +53,15 @@ const Movies = () => {
         fetchMovies();
     }, [ params.option ] );
 
-    const fetchData = async () => {
-        if ( currentPage > ( maxPages / 2 ) ) {
+    const fetchMoreData = async () => {
+        if ( currentPage > ( maxPages / 4 ) ) {
             setHasMore( false );
             return;
         }
 
         let nextPage = currentPage + 1;
         let response = await axios.get( `/${ params.option }/movies/?page=${ nextPage }` );
-        
+
         let dates = {};
         if ( response.data.results.dates !== undefined ) {
             let regex = /(\d{4})-(\d{1,2})-(\d{1,2})/;
@@ -78,18 +74,18 @@ const Movies = () => {
             dates.maximum = formatedMax;
         }
 
-        const updatedMoviList = [ ...movies.movieList, ...response.data.results.results ];
+        const updatedMovieList = [ ...movies.movieList, ...response.data.results.results ];
 
         setMovies( {
             title: `${ params.option } movies`,
-            movieList: updatedMoviList,
+            movieList: updatedMovieList,
             dates: dates
         } );
 
         setCurrentPage( nextPage );
     }
 
-    
+
     if ( movies.movieList.length === 0 ) {
         return <h2>...Loading please wait.</h2>
     }
@@ -103,7 +99,7 @@ const Movies = () => {
 
         return (
             <Fragment>
-                <MenuOfCanvas type='movies' />
+                <MenuOfCanvas type='movies'/>
 
                 <div className={ styles.mainContainer }>
 
@@ -114,13 +110,14 @@ const Movies = () => {
                     <div className={ styles.moviesContainer }>
                         <InfiniteScroll
                             dataLength={ movies.movieList.length } //This is important field to render the next data
-                            next={ fetchData }
+                            next={ fetchMoreData }
                             hasMore={ hasMore }
                             loader={ <h4>Loading...</h4> }
                             endMessage={
                                 <p style={ { textAlign: 'center' } }>
                                     <b>End of the line.</b>
                                 </p> }>
+
                             {
                                 movies.movieList.map( ( movie ) =>
                                     <Movie
