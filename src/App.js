@@ -34,11 +34,12 @@ const App = () => {
               </Fragment>
             </Route>
 
-            <Route path='/:type/:releaseYear/:language/'>
-            <Fragment>
-              <CustomSearchResults />
-            </Fragment>
-          </Route>
+              <Route path='/:type/year/:releaseYear/language/:language/'>
+                <Fragment>
+                  <CustomSearchResults />
+                </Fragment>
+              </Route>
+          
 
             <Route path='/:type/search/:searchName'>
               <Fragment>
