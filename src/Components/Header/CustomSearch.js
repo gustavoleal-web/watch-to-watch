@@ -43,7 +43,7 @@ const CustomSearch = ( { genres, langs, type } ) => {
         else {
             setSelectOptions( { ...selectOptions, [ key ]: e.target.value } )
         }
-
+       
     };
 
 
@@ -153,7 +153,7 @@ const CustomSearch = ( { genres, langs, type } ) => {
                 : null
         }
 
-        <NavLink to={ `/${ type }/${ selectOptions.year }/${ selectOptions.language }` }>
+        <NavLink to={ `/${ type }/year/${ selectOptions.year }/language/${ selectOptions.language }` }>
             <Button>Search</Button>
         </NavLink>
 
