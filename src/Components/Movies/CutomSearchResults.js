@@ -21,7 +21,9 @@ const CustomSearchResults = () => {
         fetchSearchOptions();
     }, [ params.type, params.releaseYear, params.language ] )
 
-    return <Fragment></Fragment>
+    return <Fragment>
+    <h5>Custom Search Results</h5>
+    </Fragment>
 }
 
 export default CustomSearchResults;
