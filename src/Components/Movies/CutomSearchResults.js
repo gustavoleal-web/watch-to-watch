@@ -6,9 +6,6 @@ import { useParams } from 'react-router';
 import axios from 'axios';
 import InfiniteScroll from 'react-infinite-scroll-component';
 
-//component no returning correct list for tv shows. 
-//works fine for movies. 
-
 const CustomSearchResults = () => {
     const params = useParams();
 
@@ -22,34 +19,46 @@ const CustomSearchResults = () => {
     const [ maxPages, setMaxPages ] = useState( 0 );
     const [ hasMore, setHasMore ] = useState( true );
 
+    //changing the keys: name, first_air_date, and release_date in show to the key names found in movies
+    //prevents the props from being undefined in the key name is different
+    const changeTvKeysToMatchMovieKeys = ( responseCopyArr ) => {
+        for ( let i = 0; i < responseCopyArr.length; i++ ) {
+            if ( responseCopyArr[ i ].name ) {
+                responseCopyArr[ i ].title = responseCopyArr[ i ].name;
+                responseCopyArr[ i ].original_title = responseCopyArr[ i ].original_name;
+            }
+            if ( responseCopyArr[ i ].first_air_date ) {
+                responseCopyArr[ i ].release_date = responseCopyArr[ i ].first_air_date;
+            }
+        }
+
+        return responseCopyArr;
+    }
+
+
+
     useEffect( () => {
         const fetchSearchOptions = async () => {
             try {
                 const response = await axios.get(
                     `/${ params.type }/releaseYear/genre/language/rating/?year=${ params.releaseYear }&originalLang=${ params.language }&rating=${ params.rating }&genre=${ params.genre }&type=${ params.type }&page=${ 1 }` );
 
-                let responseResults = response.data.results;
-                let responseCopy = [ ...responseResults.results ];
+                let responseResults = response.data.results.results;
+                let updatedResults = null;
 
-                //changing the keys: name, first_air_date, and release_date in show to the key names found in movies
-                //prevents the props from being undefined in the key name is different
-                if ( responseCopy.length > 0 ) {
-                    for ( let i = 0; i < responseCopy.length; i++ ) {
-                        if ( responseCopy[ i ].name ) {
-                            responseCopy[ i ].title = responseCopy[ i ].name;
-                            responseCopy[ i ].original_title = responseCopy[ i ].original_name;
-                        }
-                        if ( responseCopy[ i ].first_air_date ) {
-                            responseCopy[ i ].release_date = responseCopy[ i ].first_air_date;
-                        }
-                    }
+
+                if ( responseResults.length > 0 && params.type === 'shows' ) {
+                    updatedResults = changeTvKeysToMatchMovieKeys( responseResults )
+                }
+                else {
+                    updatedResults = responseResults
                 }
 
                 setState( {
                     title: params.type,
-                    list: responseCopy,
+                    list: updatedResults,
                     dates: null
-                } )
+                } );
 
                 setMaxPages( response.data.results.total_pages );
             }
@@ -59,20 +68,33 @@ const CustomSearchResults = () => {
             }
         }
         fetchSearchOptions();
-    }, [ params ] )
+    }, [ params ] );
+
+
 
     const fetchMoreData = async () => {
-        if ( currentPage >  maxPages  ) {
+        if ( currentPage > maxPages ) {
             setHasMore( false );
             return;
         }
 
         let nextPage = currentPage + 1;
-        let response = await axios.get( 
+        let response = await axios.get(
             `/${ params.type }/releaseYear/genre/language/rating/?year=${ params.releaseYear }&originalLang=${ params.language }&rating=${ params.rating }&genre=${ params.genre }&type=${ params.type }&page=${ nextPage }` );
 
-        const updatedTvList = [ ...state.list, ...response.data.results.results ];
-        console.log( updatedTvList)
+
+        let responseResults = response.data.results.results;
+        let updatedResults = null;
+
+        if ( responseResults.length > 0 && params.type === 'shows' ) {
+            updatedResults = changeTvKeysToMatchMovieKeys( responseResults )
+        }
+        else {
+            updatedResults = responseResults
+        }
+
+        //combined in to one array to not loose the previous results
+        const updatedTvList = [ ...state.list, ...updatedResults ];
 
         setState( {
             ...state, list: updatedTvList,
