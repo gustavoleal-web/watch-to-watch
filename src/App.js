@@ -35,7 +35,7 @@ const App = () => {
             <Route path='/movies/:navOption/:movieId'
               element={ <AboutMovie /> } />
 
-            <Route path='/shows/:showId/season/:seasonNumber'
+            <Route path='/shows/:showId/season/:seasonNumber/of/:numberOfSeasons'
               element={ <SeasonDetails /> } />
 
             <Route path='/shows/:navOption/:showId'
