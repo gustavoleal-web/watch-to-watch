@@ -4,13 +4,14 @@ import CollectionPoster from '../Movies/CollectioPoster';
 import styles from '../Movies/css/collection.module.css';
 import infoIcon from '../../Images/info.png';
 
-const Collection = ( { seasons, name, currentMediaId } ) => {
+const Seasons = ( { seasons, name, currentMediaId } ) => {
     const [ show, setShow ] = useState( false );
     const handleClose = () => setShow( false );
     const handleShow = () => setShow( true );
+    const numberOfSeasons = seasons.length;
 
     return (
-        <>
+        <Fragment>
             <span onClick={ handleShow } className={ styles.collectionName }>
                 <p>
                     Seasons
@@ -35,6 +36,8 @@ const Collection = ( { seasons, name, currentMediaId } ) => {
                                     partId={ s.id }
                                     currentMediaId={ currentMediaId }
                                     seasonNumber={ s.season_number }
+                                    numberOfSeasons={ numberOfSeasons }
+
                                 />
                                 <h6 style={ { padding: '5px 10px' } }>{ s.episode_count } Episodes </h6>
                             </div>
@@ -45,9 +48,9 @@ const Collection = ( { seasons, name, currentMediaId } ) => {
 
                 </Offcanvas.Body>
             </Offcanvas>
-        </>
+        </Fragment>
     );
 }
 
 
-export default Collection;
+export default Seasons;
