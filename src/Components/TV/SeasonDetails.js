@@ -5,6 +5,7 @@ import MenuOfCanvas from '../Header/menuOfCanvas';
 import Card from 'react-bootstrap/Card'
 import CardGroup from 'react-bootstrap/CardGroup';
 import noImage from '../../Images/No-Image-Placeholder.png'
+import Form from 'react-bootstrap/Form'
 
 const SeasonDetails = () => {
     const [ seasonDetails, setSeasonDetails ] = useState( {} )
@@ -16,8 +17,8 @@ const SeasonDetails = () => {
             try {
                 let response = await axios.get( `/show/season/?showId=${ params.showId }&seasonNum=${ seasonNumber }` );
                 let results = response.data.results;
+                console.log( response )
                 setSeasonDetails( results );
-                //setSeasonNumber( results.season_number );
             }
             catch ( e ) {
                 console.log( e )
@@ -25,8 +26,9 @@ const SeasonDetails = () => {
 
         }
         fetchSeasonDetails();
-    }, [ params.showId, seasonNumber ] );
+    }, [ params, seasonNumber ] );
 
+    const changeSeason = ( season ) => { setSeasonNumber( season ) }
 
     if ( Object.keys( seasonDetails ).length === 0 ) {
         return null;
@@ -34,7 +36,15 @@ const SeasonDetails = () => {
 
     return <Fragment>
         <MenuOfCanvas type='shows' />
+
         <h2 style={ { color: 'white', textAlign: 'center', marginTop: '20px' } }>{ seasonDetails.name }</h2>
+
+        <Form.Select aria-label="Default select example" size='sm' onChange={ ( e ) => changeSeason( e.target.value ) }>
+            { Array.from( { length: params.numberOfSeasons }, ( _, i ) => 1 + i )
+                .map( i => <option defaultValue={ seasonNumber } value={ i } key={ i }>{ i }</option> ) }
+        </Form.Select>
+
+
         {
             seasonDetails.episodes.map( ( e ) => {
                 let imgSrc = null;
