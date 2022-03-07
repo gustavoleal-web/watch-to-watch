@@ -1,0 +1,22 @@
+.container {
+    max-width: 900px;
+    margin: auto;
+}
+
+.main {
+    background-color: rgb(55, 58, 71);
+}
+
+.creditContainer {
+    display: flex;
+}
+
+.creditContainer img {
+    width: 700px;
+}
+
+.creditContainer p {
+    color : rgb(180, 186, 210);
+    margin-bottom: 0;
+    margin-top: 10px;
+}
