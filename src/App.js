@@ -19,7 +19,7 @@ const App = () => {
   return (
     <div>
       <div style={ { maxWidth: '900px', margin: 'auto' } }>
-        <main style={ { backgroundColor: '#e2e2e2' } }>
+        <main style={ { backgroundColor: 'rgb(55, 58, 71)' } }>
 
           <Routes>
 
