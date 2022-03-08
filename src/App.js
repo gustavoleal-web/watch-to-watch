@@ -13,13 +13,14 @@ import SeasonDetails from './Components/TV/SeasonDetails';
 import SearchedMedia from './Components/Movies/SearchedMedia';
 import SelectedGenre from './Components/Movies/SelectedGenre';
 import CustomSearchResults from './Components/Movies/CutomSearchResults';
-import dbLogo from './Images/the_movie_db_logo.svg'
+import dbLogo from './Images/the_movie_db_logo.svg';
+import styles from './app.module.css';
 
 const App = () => {
   return (
     <div>
-      <div style={ { maxWidth: '900px', margin: 'auto' } }>
-        <main style={ { backgroundColor: 'rgb(55, 58, 71)' } }>
+      <div className={ styles.container }>
+        <main className={ styles.main }>
 
           <Routes>
 
@@ -52,14 +53,11 @@ const App = () => {
 
           </Routes>
 
-          <div style={ { display: 'flex' } }>
-            <img src={ dbLogo } alt='the movie db logo' style={ { width: '78px' } } />
-            <p style={ {
-              color: 'rgb(180, 186, 210)',
-              marginBottom: '0',
-              marginTop: '10px'
-            } }>
-              This product uses the TMDB API but is not endorsed or certified by TMDB</p>
+          <div className={ styles.creditContainer }>
+            <img src={ dbLogo } alt='the movie db logo' />
+            <p>
+              This product uses the TMDB API but is not endorsed or certified by TMDB
+            </p>
           </div>
 
         </main>
