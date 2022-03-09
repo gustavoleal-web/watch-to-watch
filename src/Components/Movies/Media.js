@@ -47,10 +47,10 @@ const Media = ( { id, title, releaseDate, posterPath, rating, option, type, over
                     <div className={ styles.mediaMain }>
                         <h6>{ title }</h6>
                         <p>{ mmddyyyy }</p>
-                        <p style={ { fontSize: '13px', letterSpacing: '0.7px'} }>{ overview.slice( 0, 100 ) }...</p>
+                        <p className={ styles.overview }>{ overview.slice( 0, 100 ) }...</p>
                         <p className={ styles.rating }>{ rating }</p>
                     </div>
-                   
+
                 </div>
             </NavLink>
         </div>
