@@ -1,10 +1,10 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import styles from './css/media.module.css';
 import noImage from '../../Images/No-Image-Placeholder.png';
 
 
-const Media = ( { id, title, releaseDate, posterPath, rating, option, type } ) => {
+const Media = ( { id, title, releaseDate, posterPath, rating, option, type, overview } ) => {
     //since SearchedMedia component is using the movie component to render searched tv shows
     //when the use clicks on the show it will return the movie with the matching id not 
     //clicked tv show. 
@@ -39,16 +39,20 @@ const Media = ( { id, title, releaseDate, posterPath, rating, option, type } ) =
     return (
 
         <div className={ styles.mediaContainer }>
-            <div className={ styles.mediaDisplay }>
-                <Link to={ linkPath }>
+            <NavLink style={ { textDecoration: 'none' } } to={ linkPath }>
+                <div className={ styles.mediaDisplay }>
+
                     { posterImg }
-                </Link>
-                <div className={ styles.mediaMain }>
-                    <h6>{ title }</h6>
-                    <p>{ mmddyyyy }</p>
+
+                    <div className={ styles.mediaMain }>
+                        <h6>{ title }</h6>
+                        <p>{ mmddyyyy }</p>
+                        <p style={ { fontSize: '13px', letterSpacing: '0.7px'} }>{ overview.slice( 0, 100 ) }...</p>
+                        <p className={ styles.rating }>{ rating }</p>
+                    </div>
+                   
                 </div>
-                <p className={ styles.rating }>{ rating }/10</p>
-            </div>
+            </NavLink>
         </div>
     )
 }
