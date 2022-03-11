@@ -129,6 +129,7 @@ const Movies = () => {
                                         rating={ movie.vote_average }
                                         option={ params.option }
                                         type='movies'
+                                        overview={movie.overview}
                                     />
                                 )
                             }
