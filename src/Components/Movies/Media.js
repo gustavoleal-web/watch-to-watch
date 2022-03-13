@@ -1,10 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
+import Modal from 'react-bootstrap/Modal';
 import styles from './css/media.module.css';
 import noImage from '../../Images/No-Image-Placeholder.png';
 
 
 const Media = ( { id, title, releaseDate, posterPath, rating, option, type, overview } ) => {
+    const [ show, setShow ] = useState( false );
+
+    const handleClose = () => setShow( false );
+    const handleShow = () => setShow( true );
+
     //since SearchedMedia component is using the movie component to render searched tv shows
     //when the use clicks on the show it will return the movie with the matching id not 
     //clicked tv show. 
@@ -35,25 +41,43 @@ const Media = ( { id, title, releaseDate, posterPath, rating, option, type, over
         mmddyyyy = null;
     }
 
+    let synopsis = overview.length === 0 ? 'No synopsis available at this time' : overview;
+
 
     return (
 
         <div className={ styles.mediaContainer }>
-            <NavLink style={ { textDecoration: 'none' } } to={ linkPath }>
-                <div className={ styles.mediaDisplay }>
 
+            <div className={ styles.mediaDisplay }>
+                <NavLink style={ { textDecoration: 'none' } } to={ linkPath }>
                     { posterImg }
+                </NavLink>
 
-                    <div className={ styles.mediaMain }>
-                        <h6>{ title }</h6>
-                        <p>{ mmddyyyy }</p>
-                        <p className={ styles.overview }>{ overview.slice( 0, 100 ) }...</p>
-                        <p className={ styles.rating }>{ rating }</p>
-                    </div>
+                <div className={ styles.mediaMain }>
+                    <h6>{ title }</h6>
+                    <p>{ mmddyyyy }</p>
 
+                    <p className={ styles.overview } onClick={ handleShow } >{ synopsis.slice( 0, 100 ) }... </p>
+
+                    <Modal size="lg" centered show={ show } onHide={ handleClose }>
+                        <Modal.Header closeButton>
+                            <Modal.Title >
+                                { title }
+                            </Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body >
+                            <p className={ styles.modalOverview }>{ synopsis }</p>
+                        </Modal.Body>
+                    </Modal>
+
+
+
+                    <p className={ styles.rating }>{ rating }</p>
                 </div>
-            </NavLink>
-        </div>
+
+            </div>
+
+        </div >
     )
 }
 
