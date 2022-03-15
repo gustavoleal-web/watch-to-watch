@@ -50,7 +50,7 @@ const Shows = () => {
         let response = await axios.get( `/${ params.option }/shows/?page=${ nextPage }` );
 
         const updatedTvList = [ ...tvShows.list, ...response.data.results.results ];
-        
+
         setTvShows( {
             ...tvShows, list: updatedTvList,
         } );
@@ -82,16 +82,17 @@ const Shows = () => {
 
                         {
                             tvShows.list.map( ( show, i ) =>
-                            
-                                    <Show id={ show.id }
-                                        title={ show.name }
-                                        releaseDate={ show.first_air_date }
-                                        posterPath={ show.poster_path }
-                                        rating={ show.vote_average }
-                                        option={ params.option }
-                                        type='shows'
-                                        key={ show.id }
-                                    />
+
+                                <Show id={ show.id }
+                                    title={ show.name }
+                                    releaseDate={ show.first_air_date }
+                                    posterPath={ show.poster_path }
+                                    rating={ show.vote_average }
+                                    option={ params.option }
+                                    type='shows'
+                                    overview={ show.overview }
+                                    key={ show.id }
+                                />
                             )
                         }
                     </InfiniteScroll>
