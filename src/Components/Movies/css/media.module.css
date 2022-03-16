@@ -10,7 +10,7 @@
 .mediaDisplay {
     display              : grid;
     grid-template-columns: 1fr 2fr 0.1fr;
-    background           : #000000;
+    background           : black;
     border-radius        : 10px;
 }
 
@@ -28,7 +28,7 @@
 }
 
 .mediaMain {
-    padding-top: 30px;
+    padding-top: 15px;
     color      : white;
 }
 
@@ -41,6 +41,7 @@ p {
 .overview {
     font-size     : 13px;
     letter-spacing: 0.7px;
+    font-family   : cursive, sans-serif;
 }
 
 .rating {
@@ -53,4 +54,9 @@ p {
     font-style    : italic;
     color         : white;
     padding-bottom: 5px;
+}
+
+.modalOverview {
+    font-family: cursive, sans-serif;
+    font-size  : 15px;
 }
