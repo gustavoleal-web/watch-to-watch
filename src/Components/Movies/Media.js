@@ -54,7 +54,11 @@ const Media = ( { id, title, releaseDate, posterPath, rating, option, type, over
                 </NavLink>
 
                 <div className={ styles.mediaMain }>
-                    <h6>{ title }</h6>
+                    <div className={ styles.titleAndRatingContainer}>
+                        <h6>{ title }</h6>
+                        <p className={ styles.rating }>{ rating }</p>
+                    </div>
+
                     <p>{ mmddyyyy }</p>
 
                     <p className={ styles.overview } onClick={ handleShow } >{ synopsis.slice( 0, 100 ) }... </p>
@@ -71,8 +75,6 @@ const Media = ( { id, title, releaseDate, posterPath, rating, option, type, over
                     </Modal>
 
 
-
-                    <p className={ styles.rating }>{ rating }</p>
                 </div>
 
             </div>
