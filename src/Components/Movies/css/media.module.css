@@ -4,12 +4,16 @@
     margin-left  : 10px;
     margin-right : 10px;
     box-shadow   : 0px 5px 8px 3px rgb(0 0 0 / 55%);
-    border-radius: 10px
+    border-radius: 10px;
+
+    max-width: 400px;
 }
+
+
 
 .mediaDisplay {
     display              : grid;
-    grid-template-columns: 1fr 2fr 0.1fr;
+    grid-template-columns: 1fr 2fr;
     background           : black;
     border-radius        : 10px;
 }
@@ -38,23 +42,34 @@ p {
     padding-left: 6px;
 }
 
+.titleAndRatingContainer {
+    display              : grid;
+    grid-template-columns: 85% 15%;
+}
+
+
+.rating {
+    /* grid-row-start: 2; */
+    /* text-align       : end; */
+    margin-bottom    : 0;
+    align-self       : center;
+    color            : rgba(123, 8, 40, 0.3);
+    font-weight      : 500;
+    font-style       : italic;
+    /* color         : white; */
+    /* padding-bottom: 5px; */
+    padding-left     : 0px;
+    padding-bottom   : 0px;
+    color            : lightcoral;
+}
+
 .overview {
     font-size     : 13px;
     letter-spacing: 0.7px;
     font-family   : cursive, sans-serif;
 }
 
-.rating {
-    grid-row-start: 2;
-    text-align    : end;
-    margin-bottom : 0;
-    align-self    : center;
-    color         : rgba(123, 8, 40, 0.3);
-    font-weight   : 600;
-    font-style    : italic;
-    color         : white;
-    padding-bottom: 5px;
-}
+
 
 .modalOverview {
     font-family: cursive, sans-serif;
