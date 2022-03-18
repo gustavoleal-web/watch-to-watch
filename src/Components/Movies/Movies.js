@@ -99,7 +99,7 @@ const Movies = () => {
 
         return (
             <Fragment>
-                <MenuOfCanvas type='movies'/>
+                <MenuOfCanvas type='movies' />
 
                 <div className={ styles.mainContainer }>
 
@@ -118,21 +118,24 @@ const Movies = () => {
                                     <b>End of the line.</b>
                                 </p> }>
 
-                            {
-                                movies.movieList.map( ( movie ) =>
-                                    <Movie
-                                        key={ movie.id }
-                                        id={ movie.id }
-                                        title={ movie.title }
-                                        releaseDate={ movie.release_date }
-                                        posterPath={ movie.poster_path }
-                                        rating={ movie.vote_average }
-                                        option={ params.option }
-                                        type='movies'
-                                        overview={movie.overview}
-                                    />
-                                )
-                            }
+                            <div className={ styles.gridContainer }>
+                                {
+                                    movies.movieList.map( ( movie ) =>
+                                        <Movie
+                                            key={ movie.id }
+                                            id={ movie.id }
+                                            title={ movie.title }
+                                            releaseDate={ movie.release_date }
+                                            posterPath={ movie.poster_path }
+                                            rating={ movie.vote_average }
+                                            option={ params.option }
+                                            type='movies'
+                                            overview={ movie.overview }
+                                        />
+                                    )
+                                }
+                            </div>
+
                         </InfiniteScroll>
                     </div>
                 </div>
