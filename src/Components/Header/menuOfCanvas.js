@@ -101,7 +101,7 @@ const MenuOfCanvas = ( { type } ) => {
             {/* have to make the height dynamic based on screen size
                 maybe 800px for mobile and 100% for desktop
             */ }
-            <Offcanvas show={ show } onHide={ handleClose } placement='start' style={ { maxHeight: '800px', overflowY: 'auto' } }>
+            <Offcanvas show={ show } onHide={ handleClose } placement='start' className={ styles.offCanvas }>
                 <Offcanvas.Header closeButton>
                     <Offcanvas.Title>{ type.toUpperCase() }</Offcanvas.Title>
                 </Offcanvas.Header>
