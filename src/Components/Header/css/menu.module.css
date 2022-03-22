@@ -14,6 +14,12 @@
     text-align: center;
 }
 
+/* max height is set so user can scroll down when dropdown is opened. */
+.offCanvas {
+    max-height: 800px;
+    overflow-y: auto;
+}
+
 .genres {
     overflow-x      : hidden;
     overflow-y      : auto;
@@ -80,4 +86,10 @@
 .dateRange {
     display        : flex;
     justify-content: space-around;
+}
+
+@media (min-width: 768px) {
+    .offCanvas {
+        max-height: 100%;
+    }
 }
