@@ -64,7 +64,8 @@ const SelectedGenre = () => {
                                 posterPath={ g.poster_path }
                                 rating={ g.vote_average }
                                 option='trending'
-                                type={ params.type } />
+                                type={ params.type } 
+                                overview={ g.overview }/>
                         )
                     }
                 </div>
