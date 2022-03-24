@@ -6,10 +6,12 @@
     box-shadow   : 0px 5px 8px 3px rgb(0 0 0 / 55%);
     border-radius: 10px;
 
+    /* 
+    this only works best for mobile - small screens 
+        need to update for large screens
+    */
     max-width: 400px;
 }
-
-
 
 .mediaDisplay {
     display              : grid;
@@ -24,8 +26,6 @@
 }
 
 .mediaDisplay img {
-    /* border-radius: 14px;
-    width        : 85%; */
     width        : 100%;
     height       : auto;
     border-radius: 10px 0 0 10px;
@@ -47,17 +47,12 @@ p {
     grid-template-columns: 85% 15%;
 }
 
-
 .rating {
-    /* grid-row-start: 2; */
-    /* text-align       : end; */
     margin-bottom    : 0;
     align-self       : center;
     color            : rgba(123, 8, 40, 0.3);
     font-weight      : 500;
     font-style       : italic;
-    /* color         : white; */
-    /* padding-bottom: 5px; */
     padding-left     : 0px;
     padding-bottom   : 0px;
     color            : lightcoral;
@@ -68,8 +63,6 @@ p {
     letter-spacing: 0.7px;
     font-family   : cursive, sans-serif;
 }
-
-
 
 .modalOverview {
     font-family: cursive, sans-serif;
