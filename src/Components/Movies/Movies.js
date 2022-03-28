@@ -1,5 +1,6 @@
 import React, { useState, useEffect, Fragment } from 'react';
 import styles from './css/movies.module.css';
+import globalStyles from './css/global.module.css';
 import axios from 'axios';
 import { default as Movie } from './Media';
 import MenuOfCanvas from '../Header/menuOfCanvas';
@@ -107,37 +108,35 @@ const Movies = () => {
                     { dates }
                     <p style={ { color: 'lightgrey', fontSize: '11px' } }>Note: Ratings are besed from TMBD users.</p>
 
-                    <div className={ styles.moviesContainer }>
-                        <InfiniteScroll
-                            dataLength={ movies.movieList.length } //This is important field to render the next data
-                            next={ fetchMoreData }
-                            hasMore={ hasMore }
-                            loader={ <h4>Loading...</h4> }
-                            endMessage={
-                                <p style={ { textAlign: 'center' } }>
-                                    <b>End of the line.</b>
-                                </p> }>
+                    <InfiniteScroll
+                        dataLength={ movies.movieList.length } //This is important field to render the next data
+                        next={ fetchMoreData }
+                        hasMore={ hasMore }
+                        loader={ <h4>Loading...</h4> }
+                        endMessage={
+                            <p style={ { textAlign: 'center' } }>
+                                <b>End of the line.</b>
+                            </p> }>
 
-                            <div className={ styles.gridContainer }>
-                                {
-                                    movies.movieList.map( ( movie ) =>
-                                        <Movie
-                                            key={ movie.id }
-                                            id={ movie.id }
-                                            title={ movie.title }
-                                            releaseDate={ movie.release_date }
-                                            posterPath={ movie.poster_path }
-                                            rating={ movie.vote_average }
-                                            option={ params.option }
-                                            type='movies'
-                                            overview={ movie.overview }
-                                        />
-                                    )
-                                }
-                            </div>
+                        <div className={ globalStyles.gridContainer }>
+                            {
+                                movies.movieList.map( ( movie ) =>
+                                    <Movie
+                                        key={ movie.id }
+                                        id={ movie.id }
+                                        title={ movie.title }
+                                        releaseDate={ movie.release_date }
+                                        posterPath={ movie.poster_path }
+                                        rating={ movie.vote_average }
+                                        option={ params.option }
+                                        type='movies'
+                                        overview={ movie.overview }
+                                    />
+                                )
+                            }
+                        </div>
 
-                        </InfiniteScroll>
-                    </div>
+                    </InfiniteScroll>
                 </div>
             </Fragment>
         )
