@@ -1,6 +1,7 @@
 import React, { useEffect, useState, Fragment } from 'react';
 import axios from 'axios';
 import { default as Show } from '../Movies/Media';
+import globalStyles from '../Movies/css/global.module.css';
 import styles from '../Movies/css/movies.module.css';
 import MenuOfCanvas from '../Header/menuOfCanvas';
 import { useParams } from 'react-router';
@@ -80,21 +81,23 @@ const Shows = () => {
                                 <b>End of the line.</b>
                             </p> }>
 
-                        {
-                            tvShows.list.map( ( show, i ) =>
+                        <div className={ globalStyles.gridContainer }>
+                            {
+                                tvShows.list.map( ( show, i ) =>
 
-                                <Show id={ show.id }
-                                    title={ show.name }
-                                    releaseDate={ show.first_air_date }
-                                    posterPath={ show.poster_path }
-                                    rating={ show.vote_average }
-                                    option={ params.option }
-                                    type='shows'
-                                    overview={ show.overview }
-                                    key={ show.id }
-                                />
-                            )
-                        }
+                                    <Show id={ show.id }
+                                        title={ show.name }
+                                        releaseDate={ show.first_air_date }
+                                        posterPath={ show.poster_path }
+                                        rating={ show.vote_average }
+                                        option={ params.option }
+                                        type='shows'
+                                        overview={ show.overview }
+                                        key={ show.id }
+                                    />
+                                )
+                            }
+                        </div>
                     </InfiniteScroll>
                 </div>
             </Fragment>
