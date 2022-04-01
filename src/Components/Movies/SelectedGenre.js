@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import Media from '../Movies/Media';
 import MenuOfCanvas from '../Header/menuOfCanvas';
 import styles from '../Movies/css/movies.module.css';
+import globalStyles from '../Movies/css/global.module.css'
 import axios from 'axios';
 import InfiniteScroll from 'react-infinite-scroll-component';
 
@@ -76,8 +77,6 @@ const SelectedGenre = () => {
 
                 <h2 className={ styles.title }> { params.genreOption }</h2>
 
-                <div className={ styles.moviesContainer }>
-
                     <InfiniteScroll
                         dataLength={ mediaByGenre.length }
                         next={ fetchMoreData }
@@ -88,7 +87,7 @@ const SelectedGenre = () => {
                                 <b>End of the line.</b>
                             </p> }>
 
-                        <div>
+                        <div className={ globalStyles.gridContainer }>
                             {
                                 mediaByGenre.map( ( g ) =>
                                     <Media
@@ -107,11 +106,7 @@ const SelectedGenre = () => {
                     </InfiniteScroll>
 
                 </div>
-            </div>
         </Fragment >
-
-
-
     }
 
     else return null
