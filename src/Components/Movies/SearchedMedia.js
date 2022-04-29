@@ -14,13 +14,14 @@ const SearchedMedia = () => {
     } )
 
     useEffect( () => {
-        const fetchMovies = async () => {
+        const fetchSearch = async () => {
             if ( params.searchName.length >= 3 ) {
                 let url = `/search/${ params.type }/?searchName=${ params.searchName }`;
 
                 try {
                     let response = await axios.get( url );
                     let responseCopy = [ ...response.data.results.results ];
+                   
 
                     //changing the keys: name, first_air_date, and release_date in show to the key names found in movies
                     //prevents the props from being undefined in the key name is different
@@ -44,7 +45,7 @@ const SearchedMedia = () => {
                 }
             }
         }
-        fetchMovies();
+        fetchSearch();
     }, [ params.type, params.searchName ] );
 
 
@@ -68,6 +69,7 @@ const SearchedMedia = () => {
                                     rating={ r.vote_average }
                                     option='trending'
                                     type={ params.type }
+                                    overview={ r.overview }
                                     key={ r.id } /> )
                         }
                     </div>
