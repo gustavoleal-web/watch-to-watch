@@ -1,7 +1,8 @@
 .mainContainer {
-    max-width: 900px;
-    margin   : auto;
+    /* max-width: 900px; */
+    margin: auto;
 }
+
 
 .search {
     max-width: 97%;
@@ -51,9 +52,9 @@
 }
 
 @media (min-width: 900px) {
-    .moviesContainer {
+    .gridContainer {
         display              : grid;
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: 1fr 1fr 1fr;
 
     }
 }
