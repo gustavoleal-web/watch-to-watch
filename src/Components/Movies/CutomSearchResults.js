@@ -1,6 +1,7 @@
 import React, { useState, useEffect, Fragment } from 'react';
 import MenuOfCanvas from '../Header/menuOfCanvas';
 import Media from '../Movies/Media';
+import globalStyles from '../Movies/css/global.module.css';
 import styles from './css/movies.module.css';
 import { useParams } from 'react-router';
 import axios from 'axios';
@@ -51,9 +52,10 @@ const CustomSearchResults = () => {
                     updatedResults = changeTvKeysToMatchMovieKeys( responseResults )
                 }
                 else {
-                    updatedResults = responseResults
+                    updatedResults = responseResults;
                 }
 
+            
                 setState( {
                     title: params.type,
                     list: updatedResults,
@@ -124,20 +126,22 @@ const CustomSearchResults = () => {
                         <b>End of the line.</b>
                     </p> }
             >
-
-                {
-                    state.list.map( item =>
-                        <Media
-                            key={ item.id }
-                            id={ item.id }
-                            title={ item.title }
-                            releaseDate={ item.release_date }
-                            posterPath={ item.poster_path }
-                            rating={ item.vote_average }
-                            option='customResults'
-                            type={ params.type }
-                        /> )
-                }
+                <div className={ globalStyles.gridContainer }>
+                    {
+                        state.list.map( item =>
+                            <Media
+                                key={ item.id }
+                                id={ item.id }
+                                title={ item.title }
+                                releaseDate={ item.release_date }
+                                posterPath={ item.poster_path }
+                                rating={ item.vote_average }
+                                option='customResults'
+                                type={ params.type }
+                                overview={ item.overview }
+                            /> )
+                    }
+                </div>
             </InfiniteScroll>
         </Fragment>
     }
